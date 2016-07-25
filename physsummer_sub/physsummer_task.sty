@@ -1,11 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{physsummer_task}[2014/08/21 Physical summer. Task package]
+\ProvidesPackage{physsummer_task}
 
-
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
 \RequirePackage{tabularx}
 \RequirePackage{makecell}
+\RequirePackage{enumitem}
 
 
 % счётчик задач
@@ -27,9 +25,9 @@
 		\cline{1-2}
 	\end{tabularx}
 
-	\vspace{-1pt}
+    \vspace{-1pt}
 
-	\addtocounter{notask}{1}
+    \addtocounter{notask}{1}
 }
 
 
@@ -55,3 +53,4 @@
 	\addtocounter{notask}{1}
 }
 
+\endinput

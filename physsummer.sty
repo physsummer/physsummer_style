@@ -1,54 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{physsummer}[2014/08/21 Physical summer package]
+\ProvidesPackage{physsummer}
 
+\RequirePackage{physsummer_sub/physsummer_fonts}
+\RequirePackage{physsummer_sub/physsummer_tikz}
+\RequirePackage{physsummer_sub/physsummer_task}
+\RequirePackage{physsummer_sub/physsummer_battle}
+\RequirePackage{physsummer_sub/physsummer_comm}
 
-\RequirePackage{physsummer_task}
-\synctex=1
-% for different compilers
-\RequirePackage{ifpdf}
-% float figures
-\RequirePackage{wrapfig}
-\RequirePackage{subfig}
-\RequirePackage{fancyhdr}
-\RequirePackage{paralist}
-\RequirePackage{mathrsfs}
-
-% if pdflatex, then
-\ifpdf
-\RequirePackage[unicode]{hyperref}
-\RequirePackage[pdftex]{graphicx}
-\RequirePackage{subfig}
-\RequirePackage{tabularx}
-\RequirePackage{multirow}
-\RequirePackage{cmlgc}
-% if xelatex, then
-\else
-% math fonts
-\RequirePackage{fouriernc}
-% xelatex specific packages
-\RequirePackage[xetex]{hyperref}
-\RequirePackage{xltxtra}	% \XeLaTeX macro
-\RequirePackage{xunicode}	% some extra unicode support
-\defaultfontfeatures{Mapping=tex-text}
-\RequirePackage{polyglossia}	% instead of babel in xelatex
-\RequirePackage{indentfirst}	%
-\RequirePackage{multibib}
-\RequirePackage{mathrsfs}
-\RequirePackage{import}
-
-\setdefaultlanguage{russian}
-% fonts
-% патриотизм
-\newfontfamily\cyrillicfont{PetersburgC}
-% \newfontfamily\cyrillicfont{Old Standard}
-% \newfontfamily\cyrillicfont{SchoolBookC}
-\newfontfamily\cyrillicfontsf{TextBookC}
-\setmonofont{Consolas}
-\fi
-
-% colors of the hyperlinks
-\hypersetup{colorlinks,%
-  citecolor=blue,%
-  urlcolor=blue,%
-  linkcolor=red
-}
+\endinput

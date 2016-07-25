@@ -1,0 +1,32 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{physsummer_fonts}
+
+% for different compilers
+\RequirePackage{ifpdf}
+
+% if pdflatex, then
+\ifpdf
+	\RequirePackage[russian]{babel}
+	\RequirePackage[utf8]{inputenc}
+	\RequirePackage[unicode]{hyperref}
+	\RequirePackage[pdftex]{graphicx}
+	\RequirePackage{cmlgc}
+\else % if xelatex, then
+	\RequirePackage{unicode-math}
+	%\usepackage{fouriernc}
+	% xelatex specific packages
+	\RequirePackage[xetex]{hyperref}
+	\RequirePackage{xltxtra}	% \XeLaTeX macro
+	\RequirePackage{xunicode}	% some extra unicode support
+	\defaultfontfeatures{Mapping = tex-text}
+	\RequirePackage{polyglossia}	% instead of babel in xelatex
+	\RequirePackage{indentfirst}	% 
+	\setdefaultlanguage[spelling = modern]{russian} 
+	\setotherlanguage{english} %% объявляет второй язык документа
+	\newfontfamily\cyrillicfont{Linux Libertine}
+	\setmainfont{Linux Libertine}
+	\setmonofont{Consolas}
+	\setmathfont{Cambria Math}
+\fi
+
+\endinput
