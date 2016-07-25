@@ -1,6 +1,20 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer_comm}
 
+\RequirePackage{fancyhdr}
+
+\newcommand{\setphysstyle}[3]{
+    \fancyhf{}%
+
+    \fancyhead[L]{\textsf{#1}}
+	\fancyhead[C]{\textsf{#2}}
+	\fancyhead[R]{\textsf{#3}}
+	\fancyfoot[C]{}
+
+    \pagestyle{fancy}
+}
+
+
 \newcommand{\nn}{\nonumber}
 \newcommand{\pt}{\partial}
 \newcommand{\unit}[1]{\textit{ #1}}
