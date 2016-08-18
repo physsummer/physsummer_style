@@ -76,8 +76,15 @@
 
 \tikzstyle{dotnode} = [draw, fill, inner sep = 0pt, minimum size = 1mm, circle]
 
-\tikzstyle{termnode} = [draw, fill = white, inner sep = 0pt, minimum size = 1.5mm,
-	circle]
+\tikzstyle{termnode} = [draw, fill = white, inner sep = 0pt, minimum size = 1.5mm, circle]
+
+\newcommand{\termcircuit}[2]{
+	\node[termnode] at ({#1}, {#2}) {};
+    \draw ({#1 + 0.12}, {#2 + 0.15}) -- ({#1 - 0.12}, {#2 - 0.15});
+}
+
+
+
 
 % обозначение угла
 \tikzset{
