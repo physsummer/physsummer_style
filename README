@@ -1,0 +1,3 @@
+Пример переменной окружения (%username% не забывай два слеша в конце):
+
+TEXINPUTS=.:/home/dimozzz/work/styles_tex/physsummer_style//:
