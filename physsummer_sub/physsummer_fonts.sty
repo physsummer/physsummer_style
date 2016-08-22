@@ -6,8 +6,9 @@
 
 % if pdflatex, then
 \ifpdf
-	\RequirePackage[russian]{babel}
 	\RequirePackage[utf8]{inputenc}
+	\RequirePackage[T2A]{fontenc}
+	\RequirePackage[russian]{babel}
 	\RequirePackage[unicode]{hyperref}
 	\RequirePackage[pdftex]{graphicx}
 	\RequirePackage{cmlgc}
@@ -16,17 +17,17 @@
 	%\usepackage{fouriernc}
 	% xelatex specific packages
 	\RequirePackage[xetex]{hyperref}
-	\RequirePackage{xltxtra}	% \XeLaTeX macro
-	\RequirePackage{xunicode}	% some extra unicode support
+        \RequirePackage{xltxtra} % \XeLaTeX macro
+	\RequirePackage{xunicode} % some extra unicode support
 	\defaultfontfeatures{Mapping = tex-text}
-	\RequirePackage{polyglossia}	% instead of babel in xelatex
-	\RequirePackage{indentfirst}	% 
-	\setdefaultlanguage[spelling = modern]{russian} 
-	\setotherlanguage{english} %% объявляет второй язык документа
+        \RequirePackage{polyglossia} % instead of babel in xelatex
+	\RequirePackage{indentfirst} %
+	\setdefaultlanguage[spelling = modern]{russian}
+        \setotherlanguage{english} %% объявляет второй язык документа
 	\newfontfamily\cyrillicfont{Linux Libertine}
-	\setmainfont{Linux Libertine}
-	\setmonofont{Consolas}
-	\setmathfont{Cambria Math}
+        \setmainfont{Linux Libertine}
+        \setmonofont{Consolas}
+        \setsansfont{CMU Sans Serif}
+        \setmathfont{Cambria Math}
 \fi
-
 \endinput
