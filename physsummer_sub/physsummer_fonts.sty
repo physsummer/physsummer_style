@@ -14,7 +14,6 @@
 	\RequirePackage{cmlgc}
 \else % if xelatex, then
 	\RequirePackage{unicode-math}
-	%\usepackage{fouriernc}
 	% xelatex specific packages
 	\RequirePackage[xetex]{hyperref}
 	\RequirePackage{xltxtra} % \XeLaTeX macro
@@ -24,6 +23,7 @@
 	\RequirePackage{indentfirst} %
 	\setdefaultlanguage[spelling = modern]{russian}
 	\setotherlanguage{english} %% объявляет второй язык документа
+        % настройка шрифтов для XeLaTeX происходит тут
 	\newfontfamily\cyrillicfont{Linux Libertine}
 	\setmainfont{Linux Libertine}
 	\setmonofont{Consolas}

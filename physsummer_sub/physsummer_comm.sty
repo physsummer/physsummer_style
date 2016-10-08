@@ -3,6 +3,7 @@
 
 \RequirePackage{fancyhdr}
 
+% колонтитул
 \setlength{\headheight}{15pt}
 \newcommand{\setphysstyle}[3]{
     \fancyhf{}%
@@ -15,21 +16,25 @@
     \pagestyle{fancy}
 }
 
-
+% общие команды, полезны всем
 \newcommand{\nn}{\nonumber}
 \newcommand{\pt}{\partial}
-\newcommand{\unit}[1]{\textit{#1}}
+\newcommand{\unit}[1]{\text{ #1}}
 \newcommand{\eps}{\epsilon}
 \newcommand{\vareps}{\varepsilon}
 \renewcommand{\phi}{\varphi}
 \newcommand{\const}{\mathrm{const}}
 
+% часто встречающиеся размерности
 \newcommand{\cels}{{^{\circ}} C}
 \newcommand{\djkgC}{\unit{Дж}/(\unit{кг} \cdot {^{\circ}} C)}
 \newcommand{\kdjkgC}{\unit{кДж}/(\unit{кг} \cdot {^{\circ}} C)}
 \newcommand{\kdjC}{\unit{кДж}/{^{\circ}} C}
 \newcommand{\djkg}{\unit{Дж}/\unit{кг}}
 \newcommand{\kdjkg}{\unit{кДж}/\unit{кг}}
+\newcommand{\kgm}{\ensuremath{\unit{кг/м}^3}}
+\newcommand{\gcm}{\ensuremath{\unit{г/см}^3}}
+\newcommand{\mc}{\ensuremath{\unit{м/с}^2}}
 
 
 \newcommand{\leftercor}{
@@ -54,7 +59,7 @@
 \noalign{\ifnum0=`}\fi\hrule \@height #1 %
 \futurelet\reserved@a\@xhline} 
 
-
+% оформления финального отчёта для Сириуса (было актуально летом 2015 года)
 \newcommand{\ordday}[1]{
 	\multirow{3}{*}{\textbf{#1}}
     \orddaycontinue
