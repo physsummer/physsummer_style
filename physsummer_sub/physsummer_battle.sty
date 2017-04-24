@@ -47,13 +47,13 @@
 	% баллы жюри
 	\addtocounter{jury}{-#3}
 	\addtocounter{jury}{-#4}
-	\def\a{t1 - \arabic{newN}};
-	\def\b{t2 - \arabic{newN}};
+	\def\a{t1-\arabic{newN}};
+	\def\b{t2-\arabic{newN}};
 	\tikzset{minimum width = 1cm};
 	% расположение всех баллов
 	\node[below = of n\arabic{oldN}, yshift = -0.5cm] (n\arabic{newN}) {\Large{#2}};
-	\node[below = of t1 - \arabic{oldN}, yshift = -0.5cm] (\a) {\Large{#3}}; 
-	\node[below = of t2 - \arabic{oldN}, yshift = -0.5cm] (\b) {\Large{#4}}; 
+	\node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (\a) {\Large{#3}}; 
+	\node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (\b) {\Large{#4}}; 
 	\node[below = of j\arabic{oldN}, yshift = -0.5cm] (j\arabic{newN}) {\Large{\arabic{jury}}};
 	% инициалы отвечающего и оппонента
 	\node[blue, above = of \a, yshift = -0.4cm] {#5};
@@ -91,15 +91,15 @@
 \newcommand{\pdsum}[3]{%
   % расстановка баллов
 	\node[below = of n\arabic{oldN}, yshift = -0.5cm] (sum) {\LARGE{Итог:}};
-	\node[below = of t1 - \arabic{oldN}, yshift = -0.5cm] (t1sum) {\LARGE{#1}}; 
-	\node[below = of t2 - \arabic{oldN}, yshift = -0.5cm] (t2sum) {\LARGE{#2}}; 
+	\node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (t1sum) {\LARGE{#1}}; 
+	\node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (t2sum) {\LARGE{#2}}; 
 	\node[below = of j\arabic{oldN}, yshift = -0.5cm] (jsum) {\LARGE{#3}};
 	% рамка
 	\draw[very thick] (n0.north west) -- (sum.north west -| n0.west) -- (sum.north west -| j0.east) -- (j0.north east);
 	\draw[very thick] (n0.north east) -- (n0.north east |- sum.north);
     \draw[very thick] (j0.north west) -- (j0.north west |- sum.north);
     % пунктир
-    \draw[gray, loosely dashed] (t1 - 0.north east) -- (t1-0.east |- t1sum.north);
+    \draw[gray, loosely dashed] (t1-0.north east) -- (t1-0.east |- t1sum.north);
 	% установка счётчиков в исходное состояние
 	\setcounter{oldN}{0}
 	\setcounter{newN}{0}
@@ -139,9 +139,9 @@
     }
     \tikzset{minimum width = 1cm};
     \addtocounter{newN}{1};
-    \def\a{t1 - \arabic{newN}};
-    \def\b{t2 - \arabic{newN}};
-    \def\c{t3 - \arabic{newN}};
+    \def\a{t1-\arabic{newN}};
+    \def\b{t2-\arabic{newN}};
+    \def\c{t3-\arabic{newN}};
     \edef\cl{\arabic{newN}};
     % баллы жюри
     \addtocounter{jury}{-#3}
@@ -149,8 +149,8 @@
     \addtocounter{jury}{-#5}
     % расположение всех баллов
     \node[below = of n\arabic{oldN}, yshift = -0.6cm] (n\arabic{newN}) {#2};
-    \node[below = of t1 - \arabic{oldN}, yshift = -0.6cm] (\a) {\Large{#3}};
-    \node[below = of t2 - \arabic{oldN},yshift=-0.6cm] (\b)  {\Large{#4}};
+    \node[below = of t1-\arabic{oldN}, yshift = -0.6cm] (\a) {\Large{#3}};
+    \node[below = of t2-\arabic{oldN},yshift=-0.6cm] (\b)  {\Large{#4}};
     \node[below = of t3-\arabic{oldN},yshift=-0.6cm] (\c) {\Large{#5}};
     \node[below=of j\arabic{oldN},yshift=-0.6cm] (j\arabic{newN}) {{\arabic{jury}}};
     % инициалы слева направо
