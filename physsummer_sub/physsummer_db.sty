@@ -1,0 +1,63 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{physsummer_db}
+
+\RequirePackage{import}
+
+\newcommand{\libproblemgroup}{}
+\newcommand{\libproblemid}{}
+
+
+\newcommand{\setcurrentproblem}[2]{
+    \renewcommand{\libproblemgroup}{#1}
+    \renewcommand{\libproblemid}{#2}
+}
+
+% где всё лежит
+% можно делать \renewcommand на ../../../problems, либо нужен лучший способ
+\newcommand{\libproblempath}{problems}
+
+
+% извлечение текста текущей задачи
+\newcommand{\libproblemtext}{
+    \subimport{\libproblempath/\libproblemgroup/}{\libproblemid}
+}
+
+
+% извлечение рисунка текущей задачи
+% сюда можно добавить параметр на случай, если рисунков несколько
+\newcommand{\libproblemfig}{
+    \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig}
+}
+
+% вставка отформатированной задачи
+\newcommand{\libproblem}[3][default]{
+    \setcurrentproblem{#2}{#3}
+    \subimport{\libproblempath/#2/}{#3-#1}
+}
+
+\newcommand{\libproblemtask}{
+    \task{
+        \libproblemtext
+    }
+}
+
+\newcommand{\libproblemtaskpic}[1][4cm]{
+    \taskpic[#1]{
+        \libproblemtext
+    }{
+        \libproblemfig
+    }
+}
+
+
+% ссылка на рисунок
+\newcommand{\ifnumbered}[2]{
+    \iftoggle{taskpicflag}{#2}{#1~\ref{fig:\libproblemid}}
+}
+
+% обычная ссылка на рисунок
+\newcommand{\seefig}{
+    (\ifnumbered{рис.}{см. рис.})
+}
+
+\endinput
