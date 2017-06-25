@@ -2,6 +2,7 @@
 \ProvidesPackage{physsummer_db}
 
 \RequirePackage{import}
+\RequirePackage{xspace}
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
@@ -56,8 +57,7 @@
 }
 
 % обычная ссылка на рисунок
-\newcommand{\seefig}{
-    (\ifnumbered{рис.}{см. рис.})
-}
+\newcommand{\seefig}{(см. рис.)\xspace}
+%\newcommand{\seefig}{(\ifnumbered{рис.}{см. рис.})}
 
 \endinput
