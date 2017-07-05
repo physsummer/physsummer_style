@@ -3,15 +3,30 @@
 
 % for different compilers
 \RequirePackage{ifpdf}
+\RequirePackage{ifluatex}
 
-% if pdflatex, then
 \ifpdf
-	\RequirePackage[utf8]{inputenc}
-	\RequirePackage[T2A]{fontenc}
-	\RequirePackage[russian]{babel}
-	\RequirePackage[unicode]{hyperref}
-	\RequirePackage[pdftex]{graphicx}
-	\RequirePackage{cmlgc}
+	\ifluatex % if LuaLaTex, then
+		\RequirePackage{unicode-math}
+		\RequirePackage{luatextra} % LuaLaTeX fontspec и макросы
+		\RequirePackage{polyglossia}  
+		\setdefaultlanguage{russian} 
+		\setotherlanguage{english}
+		\defaultfontfeatures{Renderer=Basic, Ligatures=TeX} % для работы лигатур
+		% настройка шрифтов для LuaLaTeX
+		\newfontfamily\cyrillicfont{Linux Libertine}
+		\setmainfont{Linux Libertine}
+		\setsansfont{Consolas}
+		\setsansfont{Linux Biolinum O}
+		\setmathfont{Cambria Math}
+	\else % if pdflatex, then
+		\RequirePackage[utf8]{inputenc}
+		\RequirePackage[T2A]{fontenc}
+		\RequirePackage[russian]{babel}
+		\RequirePackage[unicode]{hyperref}
+		\RequirePackage[pdftex]{graphicx}
+		\RequirePackage{cmlgc}
+	\fi
 \else % if xelatex, then
 	\RequirePackage{unicode-math}
 	% xelatex specific packages
@@ -23,7 +38,7 @@
 	\RequirePackage{indentfirst} %
 	\setdefaultlanguage[spelling = modern]{russian}
 	\setotherlanguage{english} %% объявляет второй язык документа
-        % настройка шрифтов для XeLaTeX происходит тут
+	% настройка шрифтов для XeLaTeX происходит тут
 	\newfontfamily\cyrillicfont{Linux Libertine}
 	\setmainfont{Linux Libertine}
 	\setmonofont{Consolas}

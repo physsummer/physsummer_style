@@ -26,7 +26,7 @@
 % страницы (с учётом всевозможных отступов)
 
 \newcommand{\task}[1]{
-        \toggletrue{taskflag}
+    \toggletrue{taskflag}
 	\begin{tabularx}{\textwidth}{|c|X|}
 		\cline{1-2}
 		\makecell*[{{p{0.5cm}}}]{ \centering \arabic{notask}} &
@@ -49,7 +49,7 @@
 % страницы и ширины картинки
 
 \newcommand{\taskpic}[3][4cm]{
-          \toggletrue{taskpicflag}
+    \toggletrue{taskpicflag}
 	\begin{tabularx}{\textwidth}{|c|X|c|}
 		\cline{1-3}
 		\makecell*[{{p{0.5cm}}}]{ \centering \arabic{notask}} &
@@ -59,12 +59,12 @@
 	\end{tabularx}
 
 	\vspace{-1pt}
-        \togglefalse{taskpicflag}
+    \togglefalse{taskpicflag}
 	\addtocounter{notask}{1}
 }
 
 \newcommand{\ctfg}[1]{%
-  \iftoggle{taskpicflag}{(см. рис.)}{(см. рис.~\ref{#1})}%
+    \iftoggle{taskpicflag}{(см. рис.)}{(см. рис.~\ref{#1})}%
 }
 
 \newenvironment{ltask}[1][]{
@@ -78,5 +78,8 @@
 
 \newlist{enumtask}{enumerate}{2}
 \setlist[enumtask]{label*=\arabic*., topsep = 0pt, itemsep = -1ex}
+
+\newlist{enumcyr}{enumerate}{2}
+\setlist[enumcyr]{label = \asbuk*), ref = \asbuk*, topsep = 0pt, itemsep = -1ex}
 
 \endinput
