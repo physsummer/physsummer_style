@@ -33,7 +33,15 @@
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
     \setcurrentproblem{#2}{#3}
-    \subimport{\libproblempath/#2/}{#3-#1}
+    \IfFileExists{\libproblempath/#2/#3-#1} {
+        \subimport{\libproblempath/#2/}{#3-#1}
+    }{ % file doesn't exists
+        \IfFileExists{\libproblempath/#2/#3-fig} { % default behavior, figure present
+            \libproblemtaskpic
+        } { % default behavior, no figure
+            \libproblemtask
+        }
+    }
 }
 
 \newcommand{\libproblemtask}{
