@@ -160,4 +160,18 @@
 	\draw #1 -- #2
 }
 
+% pattern для отрисовки воды
+\pgfdeclarepatternformonly{water}
+{ \pgfqpoint{0pt}{0pt} }
+{ \pgfqpoint{6pt}{6pt} }
+{ \pgfqpoint{6pt}{6pt} }
+{
+	\pgfsetlinewidth{0.3pt}
+	\pgfpathmoveto{ \pgfqpoint{0pt}{0pt} }
+	\pgfpathlineto{ \pgfqpoint{2pt}{0pt} }
+	\pgfpathmoveto{ \pgfqpoint{3pt}{3pt} }
+	\pgfpathlineto{ \pgfqpoint{6pt}{3pt} }
+	\pgfusepath{ stroke }
+}
+
 \endinput
