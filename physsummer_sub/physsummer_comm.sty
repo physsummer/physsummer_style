@@ -228,5 +228,9 @@
     {\normalfont\fontfamily{cmvtt}\selectfont #1}
 }
 
+\newif\ifteacher
+\newcommand{\teachermode}{\teachertrue}
+\newcommand{\teachermodeoff}{\teacherfalse}
+\newcommand{\ans}[1]{\ifteacher#1\fi}
 
 \endinput

@@ -20,6 +20,7 @@
 
 % извлечение текста текущей задачи
 \newcommand{\libproblemtext}{
+    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi%
     \subimport{\libproblempath/\libproblemgroup/}{\libproblemid}
 }
 
@@ -35,7 +36,7 @@
     \setcurrentproblem{#2}{#3}
     \IfFileExists{\libproblempath/#2/#3-#1} {
         \subimport{\libproblempath/#2/}{#3-#1}
-    }{ % file doesn't exists
+    }{ % file doesn't exist
         \IfFileExists{\libproblempath/#2/#3-fig} { % default behavior, figure present
             \libproblemtaskpic
         } { % default behavior, no figure
