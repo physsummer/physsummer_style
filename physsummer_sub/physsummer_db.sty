@@ -81,6 +81,13 @@
     \end{center}
 }
 
+\newcommand{\libproblemtaskdoublepic}{
+    \libproblemtaskpic
+    \begin{center}
+        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
+    \end{center}
+}
+
 % ссылка на рисунок
 \newcommand{\ifnumbered}[2]{
     \iftoggle{taskpicflag}{#2}{#1~\ref{fig:\libproblemid}}
