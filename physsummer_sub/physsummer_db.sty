@@ -14,8 +14,23 @@
 }
 
 % где всё лежит
-% можно делать \renewcommand на ../../../problems, либо нужен лучший способ
 \newcommand{\libproblempath}{problems_db}
+% если этот перебор не работает, делай \renewcommand{\libproblempath}{правильный-путь}
+\IfFileExists{../problems_db/db.stamp}
+  {\renewcommand{\libproblempath}{../problems_db}}
+  {\IfFileExists{../../problems_db/db.stamp}
+    {\renewcommand{\libproblempath}{../../problems_db}}
+    {\IfFileExists{../../../problems_db/db.stamp}
+      {\renewcommand{\libproblempath}{../../../problems_db}}
+      {\IfFileExists{../../../../problems_db/db.stamp}
+        {\renewcommand{\libproblempath}{../../../../problems_db}}
+        {\IfFileExists{../../../../../problems_db/db.stamp}
+          {\renewcommand{\libproblempath}{../../../../../problems_db}}
+          {}
+        }
+      }
+    }
+  }
 
 
 % извлечение текста текущей задачи
@@ -63,6 +78,13 @@
     \libproblemtask
     \begin{center}
         \libproblemfig
+    \end{center}
+}
+
+\newcommand{\libproblemtaskdoublepic}{
+    \libproblemtaskpic
+    \begin{center}
+        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
     \end{center}
 }
 

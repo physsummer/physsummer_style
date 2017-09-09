@@ -215,14 +215,6 @@
 }
 
 \newcommand{\ruindex}[1]{_\textup{\scriptsize{#1}}}
-\tikzset{
-    >=stealth,
-    meter/.style = {
-        generic circle IEC,
-        draw,
-        fill = white
-    }
-}
 
 \newcommand{\textvtt}[1]{
     {\normalfont\fontfamily{cmvtt}\selectfont #1}
@@ -231,6 +223,10 @@
 \newif\ifteacher
 \newcommand{\teachermode}{\teachertrue}
 \newcommand{\teachermodeoff}{\teacherfalse}
-\newcommand{\ans}[1]{\ifteacher#1\fi}
+
+
+
+\newcommand{\ans}[1]{\ifteacher#1\fi} %К удалению!
+\newcommand{\teacher}[1]{\ifteacher#1\fi}
 
 \endinput
