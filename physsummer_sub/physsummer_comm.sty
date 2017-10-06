@@ -174,7 +174,7 @@
 }
 
 \newcommand{\sidebyside}[4]{
-    \begin{figure}[ht]
+    \begin{figure}[htb]
         \hfill
         \begin{minipage}{#2\textwidth}
             \centering
@@ -195,7 +195,7 @@
 }
 
 \newcommand{\drawsidebyside}[4]{
-    \begin{figure}[ht]
+    \begin{figure}[htb]
         \hfill
         \begin{minipage}{0.5\textwidth}
             \centering
@@ -215,14 +215,6 @@
 }
 
 \newcommand{\ruindex}[1]{_\textup{\scriptsize{#1}}}
-\tikzset{
-    >=stealth,
-    meter/.style = {
-        generic circle IEC,
-        draw,
-        fill = white
-    }
-}
 
 \newcommand{\textvtt}[1]{
     {\normalfont\fontfamily{cmvtt}\selectfont #1}

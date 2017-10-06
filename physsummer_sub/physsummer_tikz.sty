@@ -130,6 +130,7 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
+        fill=white,
         info=center:A
     }
 } 
@@ -141,17 +142,19 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
+        fill=white,
         info=center:V
     }
 } 
 
 % кружок
-\tikzset{circuit declare symbol = galvanometer}
+\tikzset{circuit declare symbol = meter}
 \tikzset{
-    set galvanometer graphic = {
+    set meter graphic = {
         draw,
         generic circle IEC,
-        minimum size = 5mm
+        minimum size = 5mm,
+        fill=white
     }
 } 
 
