@@ -63,13 +63,9 @@
 	\addtocounter{notask}{1}
 }
 
-\newcommand{\ctfg}[1]{%
-    \iftoggle{taskpicflag}{(см. рис.)}{(см. рис.~\ref{#1})}%
-}
-
 \newenvironment{ltask}[1][]{
 	\bigskip
-	\noindent \textbf{Задача. #1}
+	\noindent \textbf{Задача #1}
     \bigskip
 }
 
