@@ -165,7 +165,7 @@
         \centering
         \vspace{-20pt}
         #3
-        \vspace{-20pt}
+%        \vspace{-20pt}
         \vbox{~}
         \caption{}
         \vspace{-20pt}
@@ -174,7 +174,7 @@
 }
 
 \newcommand{\sidebyside}[4]{
-    \begin{figure}[ht]
+    \begin{figure}[htb]
         \hfill
         \begin{minipage}{#2\textwidth}
             \centering
@@ -195,7 +195,7 @@
 }
 
 \newcommand{\drawsidebyside}[4]{
-    \begin{figure}[ht]
+    \begin{figure}[htb]
         \hfill
         \begin{minipage}{0.5\textwidth}
             \centering
@@ -228,5 +228,8 @@
 
 \newcommand{\ans}[1]{\ifteacher#1\fi} %К удалению!
 \newcommand{\teacher}[1]{\ifteacher#1\fi}
+\newcommand{\answer}[1]{\teacher{
+
+Ответ: #1}}
 
 \endinput

@@ -32,6 +32,8 @@
     }
   }
 
+\newtoggle{unnumberedpic}
+
 
 % извлечение текста текущей задачи
 \newcommand{\libproblemtext}{
@@ -61,40 +63,63 @@
 }
 
 \newcommand{\libproblemtask}{
+    \toggletrue{unnumberedpic}
     \task{
         \libproblemtext
     }
+    \togglefalse{unnumberedpic}
 }
 
 \newcommand{\libproblemtaskpic}[1][4cm]{
+    \toggletrue{unnumberedpic}
     \taskpic[#1]{
         \libproblemtext
     }{
         \libproblemfig
     }
+    \togglefalse{unnumberedpic}
 }
 
 \newcommand{\libproblemtaskfigbelow}{
+    \toggletrue{unnumberedpic}
     \libproblemtask
     \begin{center}
         \libproblemfig
     \end{center}
+    \togglefalse{unnumberedpic}
 }
 
 \newcommand{\libproblemtaskdoublepic}{
+    \toggletrue{unnumberedpic}
     \libproblemtaskpic
     \begin{center}
         \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
     \end{center}
+    \toggletrue{unnumberedpic}
+}
+
+\newcommand{\figrefname}[1]{\libproblemgroup:\libproblemid:#1}
+
+\newcommand{\libproblemtasktwobelow}{
+    \toggletrue{unnumberedpic}
+    \libproblemtask
+    \togglefalse{unnumberedpic}
+    \drawsidebyside{\figrefname{1}}{
+        \libproblemfig
+    }{\figrefname{2}}{
+        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
+    }
 }
 
 % ссылка на рисунок
-\newcommand{\ifnumbered}[2]{
-    \iftoggle{taskpicflag}{#2}{#1~\ref{fig:\libproblemid}}
+\newcommand{\ifnumbered}[2]{%
+    \iftoggle{unnumberedpic}{#2}{#1~\ref{fig:\figrefname{}}}\xspace%
 }
 
 % обычная ссылка на рисунок
-\newcommand{\seefig}{(см. рис.)\xspace}
-%\newcommand{\seefig}{(\ifnumbered{рис.}{см. рис.})}
+\newcommand{\seefig}{(\ifnumbered{рис.}{см. рис.}\xspace)}
+
+\newcommand{\seefigref}{\ifnumbered{рис.}{см. рис.}}
+\newcommand{\figref}{\ifnumbered{}{}}
 
 \endinput

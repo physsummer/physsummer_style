@@ -3,6 +3,7 @@
 
 \RequirePackage{tikz}
 \RequirePackage{pgfplots}
+\RequirePackage{pgfmath}
 \RequirePackage{wrapfig}
 % \RequirePackage{subfig}
 \RequirePackage{subcaption}
@@ -11,7 +12,9 @@
 
 % основные библиотеки tikz
 \usetikzlibrary{
-	arrows,
+  arrows,
+  arrows.meta,
+  bending,
 	calc,
 	patterns,
 	intersections,
@@ -21,10 +24,10 @@
 	decorations.markings,
 	shapes,
 	positioning,
+        through,
     quotes,
     angles
-}
-\usepackage[american voltages]{circuitikz}
+  }
 
 % библиотеки для электричества
 \usetikzlibrary{circuits.ee, circuits.ee.IEC}
@@ -128,6 +131,7 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
+        fill=white,
         info=center:A
     }
 } 
@@ -139,6 +143,7 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
+        fill=white,
         info=center:V
     }
 } 
@@ -149,7 +154,8 @@
     set meter graphic = {
         draw,
         generic circle IEC,
-        minimum size = 5mm
+        minimum size = 5mm,
+        fill=white
     }
 } 
 
