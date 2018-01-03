@@ -3,6 +3,7 @@
 
 \RequirePackage{import}
 \RequirePackage{xspace}
+\RequirePackage{xargs}
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
@@ -35,18 +36,24 @@
 \newtoggle{unnumberedpic}
 
 
-% извлечение текста текущей задачи
-\newcommand{\libproblemtext}{
+% извлечение текста задачи
+% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
+% \libproblemtext[region][2013-10-2]
+\newcommandx{\libproblemtext}[2][1=\libproblemgroup,2=\libproblemid]{
     \ifteacher{\textvtt{[\libproblemgroup/\libproblemid]\,}}\fi%
-    \subimport{\libproblempath/\libproblemgroup/}{\libproblemid}
+    \subimport{\libproblempath/#1/}{#2}
 }
 
 
-% извлечение рисунка текущей задачи
+% извлечение рисунка задачи
+% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
+% \libproblemfig[region][2013-10-2]
 % сюда можно добавить параметр на случай, если рисунков несколько
-\newcommand{\libproblemfig}{
-    \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig}
+\newcommandx{\libproblemfig}[2][1=\libproblemgroup, 2=\libproblemid]{
+    \subimport{\libproblempath/#1/}{#2-fig}
 }
+
+
 
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
@@ -62,7 +69,7 @@
     }
 }
 
-\newcommand{\libproblemtask}{
+\newcommandx{\libproblemtask}{
     \toggletrue{unnumberedpic}
     \task{
         \libproblemtext
