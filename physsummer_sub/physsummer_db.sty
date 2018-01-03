@@ -40,7 +40,7 @@
 % по умолчанию извлекается из текущей, иначе надо вызывать в формате:
 % \libproblemtext[region][2013-10-2]
 \newcommandx{\libproblemtext}[2][1=\libproblemgroup,2=\libproblemid]{
-    \ifteacher{\textvtt{[\libproblemgroup/\libproblemid]\,}}\fi%
+    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi%
     \subimport{\libproblempath/#1/}{#2}
 }
 
