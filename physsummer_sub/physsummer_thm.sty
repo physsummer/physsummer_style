@@ -1,22 +1,45 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer_thm}
 
-\RequirePackage{amsthm}
+\RequirePackage[skins]{tcolorbox}
+\tcbuselibrary{theorems}
 
-\newtheorem{conjecture}{Гипотеза}[section]
-\theoremstyle{definition}
-\newtheorem{theorem}{Теорема}[section]
-\newtheorem*{theorem*}{Theorem}
-\newtheorem{lemma}{Лемма}[section]
-\newtheorem{corollary}{Следствие}[section]
-\newtheorem{proposition}{Утверждение}[section]
-\newtheorem{fact}{Факт}[section]
-\newtheorem{exercise}{Упражнение}[section]
-\newtheorem{example}{Пример}[section]
-\newtheorem{definition}{Определение}[section]
-\newtheorem{remark}{Замечание}[section]
-\newtheorem{algorithm}{Алгоритм}[section]
-\newtheorem{remark_lect}{Замечание (для преподавателя)}[section]
 
+\tcbset{%
+    theo/.style={%
+        enhanced,
+        colframe = #1!80!black,
+        colback = #1!2,
+        arc = 0pt,
+        attach boxed title to top left = {
+            yshift = -2mm,
+            xshift = 1cm
+        },
+        colbacktitle = #1!20,
+        coltitle = black,
+        fonttitle = \bfseries,
+        boxed title style = {arc = 0pt}
+    }
+} 
+
+\newtcbtheorem[number within = section]{theorem}{Теорема}{theo = {green}}{th}
+\newtcbtheorem[use counter from = theorem, number within = section]{definition}{Определение}
+    {theo = blue}{def}
+\newtcbtheorem[use counter from = theorem, number within = section]{conjecture}{Гипотеза}
+    {theo = blue}{conj}
+\newtcbtheorem[use counter from = theorem, number within = section]{lemma}{Лемма}
+    {theo = blue}{lm}
+\newtcbtheorem[use counter from = theorem, number within = section]{corollary}{Следствие}
+    {theo = blue}{cor}
+\newtcbtheorem[use counter from = theorem, number within = section]{proposition}{Утверждение}
+    {theo = blue}{prop}  
+\newtcbtheorem[use counter from = theorem, number within = section]{exercise}{Упражнение}
+    {theo = blue}{exer}  
+\newtcbtheorem[use counter from = theorem, number within = section]{example}{Пример}
+    {theo = blue}{ex}  
+\newtcbtheorem[use counter from = theorem, number within = section]{remark}{Замечание}
+    {theo = blue}{rm}  
+\newtcbtheorem[use counter from = theorem, number within = section]{remark_lect}
+    {Замечание (для преподавателя)}{theo = {blue}}{rmlec}  
 
 \endinput
