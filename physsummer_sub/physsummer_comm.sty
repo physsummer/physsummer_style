@@ -40,13 +40,6 @@
 \newcommand{\omm}{\unit{Ом $\cdot$ м}}
 
 
-\newcommand{\leftercor}{
-	\begin{tabular}{|l}
-		$\Leftarrow$ \\
-    	$\Rightarrow$
-    \end{tabular}
-}
-
 \newcommand{\lesson}[1]{
 	\newpage
 	\begin{center}
@@ -54,83 +47,6 @@
 	\end{center}
 }
 
-\newcolumntype{?}[1]{!{\vrule width #1}}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-
-\makeatletter
-\def\hlinewd#1{%
-\noalign{\ifnum0=`}\fi\hrule \@height #1 %
-\futurelet\reserved@a\@xhline} 
-
-% оформления финального отчёта для Сириуса (было актуально летом 2015 года)
-\newcommand{\ordday}[1]{
-	\multirow{3}{*}{\textbf{#1}}
-    \orddaycontinue
-}
-
-\newcommand{\orddaycontinue}[9]{
-	& {#1} & {#2} & {#3}\\
-	\cline{2 - 4}
-	& {#4} & {#5} & {#6}\\
-    \cline{2 - 4}
-	& {#7} & {#8} & {#9}\\
-    \hlinewd{2pt}
-}
-
-\newcommand{\fullday}[2]{
-	\multirow{3}{*}{\textbf{#1}} & \multicolumn{3}{c?{2pt}}{\multirow{3}{*}{\textbf{#2}}} \\
-	                             & \multicolumn{3}{c?{2pt}}{}                             \\
-	                             & \multicolumn{3}{c?{2pt}}{}                             \\
-    \hlinewd{2pt}
-}
-
-\newcommand{\firstcommonday}[8]{
-	\multirow{3}{*}{\textbf{#1}} & \multicolumn{3}{c?{2pt}}{{#2}}\\
-	\cline{2 - 4}
-	& {#3} & {#4} & {#5}\\
-    \cline{2 - 4}
-	& {#6} & {#7} & {#8}\\
-    \hlinewd{2pt}
-  }
-
-\newcommand{\secondcommonday}[8]{
-	\multirow{3}{*}{\textbf{#1}} & {#2} & {#3} & {#4}\\
-	\cline{2 - 4}
-	& multicolumn{3}{c?{2pt}}{{#5}}\\
-	\cline{2 - 4}
-	& {#6} & {#7} & {#8}\\
-    \hlinewd{2pt}
-}
-
-\newcommand{\thirdcommonday}[8]{
-	\multirow{3}{*}{\textbf{#1}} & {#2} & {#3} & {#4}\\
-	\cline{2 - 4}
-  	& {#5} & {#6} & {#7}\\
-    \cline{2 - 4}
-	& multicolumn{3}{c?{2pt}}{{#8}}\\
-    \hlinewd{2pt}
-}
-
-\newcommand{\fulldaytwogroup}[2]{
-	\multirow{3}{*}{\textbf{#1}} & \multicolumn{2}{c?{2pt}}{\multirow{3}{*}{\textbf{#2}}} \\
-	& \multicolumn{2}{c?{2pt}}{}                             \\
-	& \multicolumn{2}{c?{2pt}}{}                             \\
-	\hlinewd{2pt}
-}
-
-\newcommand{\orddaytwogroup}[1]{
-	\multirow{3}{*}{\textbf{#1}}
-	\orddaycontinuetwogroup
-}
-
-\newcommand{\orddaycontinuetwogroup}[6]{
-	& {#1} & {#2}\\
-	\cline{2 - 3}
-	& {#3} & {#4}\\
-	\cline{2 - 3}
-	& {#5} & {#6}\\
-	\hlinewd{2pt}
-}
 
 % команды, использумые для архива задач с России и региона (by Илья
 % Барыгин)
@@ -231,6 +147,7 @@
 \newcommand{\teacher}[1]{\ifteacher#1\fi}
 \newcommand{\answer}[1]{\teacher{
 
-Ответ: #1}}
+    Ответ: #1}
+}
 
 \endinput
