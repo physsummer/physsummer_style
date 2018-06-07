@@ -42,4 +42,13 @@
 \newtcbtheorem[use counter from = theorem, number within = section]{remark_lect}
     {Замечание (для преподавателя)}{theo = {blue}}{rmlec}
 
+
+\newenvironment{proof}{
+    \textbf{Доказательство.}
+}{
+    \hfill
+    $\square$
+    \vspace{0.01cm}
+}
+    
 \endinput
