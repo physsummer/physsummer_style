@@ -40,7 +40,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{theorem}[1][]{
     enhanced,
     theo = {blue},
-    title = {Теорема \thetcbcounter\ #1}
+    title = {Теорема \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@theorem\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -48,7 +49,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{definition}[1][]{
     enhanced,
     theo = {blue},
-    title = {Определение \thetcbcounter\ #1}
+    title = {Определение \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@definition\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -57,7 +59,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{conjecture}[1][]{
     enhanced,
     theo = {blue},
-    title = {Гипотеза \thetcbcounter\ #1}
+    title = {Гипотеза \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@conjecture\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -66,7 +69,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{lemma}[1][]{
     enhanced,
     theo = {blue},
-    title = {Лемма \thetcbcounter\ #1}
+    title = {Лемма \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@lemma\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -75,7 +79,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{corollary}[1][]{
     enhanced,
     theo = {blue},
-    title = {Следствие \thetcbcounter\ #1}
+    title = {Следствие \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@corollary\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -84,7 +89,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{proposition}[1][]{
     enhanced,
     theo = {blue},
-    title = {Утверждение \thetcbcounter\ #1}
+    title = {Утверждение \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@proposition\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -93,7 +99,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{exercise}[1][]{
     enhanced,
     theo = {blue},
-    title = {Упражнение \thetcbcounter\ #1}
+    title = {Упражнение \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@exercise\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -101,7 +108,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{example}[1][]{
     enhanced,
     theo = {blue},
-    title = {Пример \thetcbcounter\ #1}
+    title = {Пример \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@example\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -110,7 +118,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{remark}[1][]{
     enhanced,
     theo = {blue},
-    title = {Замечание \thetcbcounter\ #1}
+    title = {Замечание \thetcbcounter\ #1},
+    before upper = {\protected@edef\@currentlabel{\csname p@remark\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
@@ -120,7 +129,8 @@
 \renewtcolorbox[use counter = theorem, number within = section]{remark_lect}[1][]{
   enhanced,
   theo = {blue},
-  title = {Замечание (для преподавателя) \thetcbcounter\ #1}
+  title = {Замечание (для преподавателя) \thetcbcounter\ #1},
+  before upper = {\protected@edef\@currentlabel{\csname p@remark_lect\endcsname\csname thetcbcounter\endcsname}}
 }
 \makeatother
 
