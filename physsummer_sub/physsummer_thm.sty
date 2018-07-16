@@ -1,7 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer_thm}
 
-\RequirePackage[skins]{tcolorbox}
+\RequirePackage[skins, many]{tcolorbox}
+\RequirePackage{etoolbox}
 \tcbuselibrary{theorems}
 
 
@@ -22,25 +23,106 @@
     }
 } 
 
-\newtcbtheorem[number within = section]{theorem}{Теорема}{theo = {green}}{th}
-\newtcbtheorem[use counter from = theorem, number within = section]{definition}{Определение}
-    {theo = blue}{def}
-\newtcbtheorem[use counter from = theorem, number within = section]{conjecture}{Гипотеза}
-    {theo = blue}{conj}
-\newtcbtheorem[use counter from = theorem, number within = section]{lemma}{Лемма}
-    {theo = blue}{lm}
-\newtcbtheorem[use counter from = theorem, number within = section]{corollary}{Следствие}
-    {theo = blue}{cor}
-\newtcbtheorem[use counter from = theorem, number within = section]{proposition}{Утверждение}
-    {theo = blue}{prop}
-\newtcbtheorem[use counter from = theorem, number within = section]{exercise}{Упражнение}
-    {theo = blue}{exer}
-\newtcbtheorem[use counter from = theorem, number within = section]{example}{Пример}
-    {theo = blue}{ex}
-\newtcbtheorem[use counter from = theorem, number within = section]{remark}{Замечание}
-    {theo = blue}{rm}
-\newtcbtheorem[use counter from = theorem, number within = section]{remark_lect}
-    {Замечание (для преподавателя)}{theo = {blue}}{rmlec}
+
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{definition}{Определение}[section]
+\newtheorem{conjecture}{Гипотеза}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{corollary}{Следствие}[section]
+\newtheorem{proposition}{Утверждение}[section]
+\newtheorem{exercise}{Упражнение}[section]
+\newtheorem{example}{Пример}[section]
+\newtheorem{remark}{Замечание}[section]
+\newtheorem{remark_lect}{Замечание (для преподавателя)}[theorem]
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{theorem}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Теорема \thetcbcounter\ #1}
+}
+\makeatother
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{definition}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Определение \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{conjecture}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Гипотеза \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{lemma}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Лемма \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{corollary}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Следствие \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{proposition}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Утверждение \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{exercise}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Упражнение \thetcbcounter\ #1}
+}
+\makeatother
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{example}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Пример \thetcbcounter\ #1}
+}
+\makeatother
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{remark}[1][]{
+    enhanced,
+    theo = {blue},
+    title = {Замечание \thetcbcounter\ #1}
+}
+\makeatother
+
+
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{remark_lect}[1][]{
+  enhanced,
+  theo = {blue},
+  title = {Замечание (для преподавателя) \thetcbcounter\ #1}
+}
+\makeatother
 
 
 \newenvironment{proof}{
