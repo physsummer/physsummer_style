@@ -115,23 +115,29 @@
 
 \newcommandx{\drawsidebyside}[6][5 = 0.48, 6 = 0.48]{
     \begin{figure}[htb]
-        \hfill
         \begin{minipage}{#5\textwidth}
             \centering
             #2
-            \caption{}
-            \label{fig:#1}
         \end{minipage}%
-        \hfill
         \begin{minipage}{#6\textwidth}
             \centering
             #4
+        \end{minipage}
+        \hfill%
+        \begin{minipage}[t]{#5\textwidth}
+            \centering
+            \caption{}
+            \label{fig:#1}
+        \end{minipage}%
+        \begin{minipage}[t]{#6\textwidth}
+            \centering
             \caption{}
             \label{fig:#3}
         \end{minipage}
-        \hfill\hspace*{0cm}
     \end{figure}
 }
+
+
 
 \newcommand{\ruindex}[1]{_\textup{\scriptsize{#1}}}
 
