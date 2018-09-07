@@ -37,9 +37,9 @@
 % основные используемые стили
 % стиль для стрелки
 \tikzset{
-    >=stealth,
-	% платформа: пол или потолок  
-	interface/.style = {
+    >=latex,
+    % платформа: пол или потолок  
+    interface/.style = {
         postaction = {
             draw,
             decorate,
@@ -51,8 +51,8 @@
             }
         }
     },
-	% пружина  
-	spring/.style = {
+    % пружина  
+    spring/.style = {
         decorate,
         decoration = {
             coil,
@@ -62,7 +62,7 @@
         thick
     },
 	% заряд, вершина, просто точка
-	dot/.style = {
+    dot/.style = {
         inner sep = 0mm,
         minimum size = 0.18cm,
         fill,
@@ -78,7 +78,7 @@
 		}
     },
 	% стрелка в середине отрезка  
-	marrow/.style = {
+    marrow/.style = {
         postaction = {
             draw,
             decorate,
