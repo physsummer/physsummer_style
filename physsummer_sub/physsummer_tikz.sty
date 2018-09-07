@@ -5,16 +5,15 @@
 \RequirePackage{pgfplots}
 \RequirePackage{pgfmath}
 \RequirePackage{wrapfig}
-% \RequirePackage{subfig}
 \RequirePackage{subcaption}
 \RequirePackage{tkz-euclide}
 \usetkzobj{all}
 
 % основные библиотеки tikz
 \usetikzlibrary{
-  arrows,
-  arrows.meta,
-  bending,
+    arrows,
+    arrows.meta,
+    bending,
 	calc,
 	patterns,
 	intersections,
@@ -24,10 +23,10 @@
 	decorations.markings,
 	shapes,
 	positioning,
-        through,
+    through,
     quotes,
     angles
-  }
+}
 
 % библиотеки для электричества
 \usetikzlibrary{circuits.ee, circuits.ee.IEC}
@@ -38,7 +37,7 @@
 % основные используемые стили
 % стиль для стрелки
 \tikzset{
-    >=latex,
+    >=stealth,
 	% платформа: пол или потолок  
 	interface/.style = {
         postaction = {
@@ -74,7 +73,7 @@
 		decorate, 
 		decoration = {
 			snake, 
-			amplitude = .4, 
+			amplitude = 0.4, 
 			segment length = 10
 		}
     },
@@ -93,7 +92,6 @@
 
 
 \tikzstyle{dotnode} = [draw, fill, inner sep = 0pt, minimum size = 1mm, circle]
-
 \tikzstyle{termnode} = [draw, fill = white, inner sep = 0pt, minimum size = 1.5mm, circle]
 
 \newcommand{\termcircuit}[2]{
@@ -104,35 +102,6 @@
 
 
 
-% обозначение угла
-\tikzset{
-	arcnode/.style = {
-    	decoration = {
-        	markings,
-            raise = 2mm,
-            mark = at position 0.5 with {
-                \node[inner sep = 0] {#1};
-            }
-        },
-      	postaction = {decorate}
-	}
-}
-
-% команда для отметки угла: проводит дугу между двумя лучами,
-% проведёнными между точками #2--#3 и #2--#4
-% первый аргумент - необязательный, стиль линии
-% #2,#3,#4 - точки
-% #5 - радиус дуги для обозначения угла
-% #6 - обозначение угла, например, $\alpha$
-\newcommand*\marktheangle[6][]{
-	\draw[thick, arcnode = {#6}, #1] let \p2 = ($(#3)-(#2)$),
-    \p3 = ($(#4)-(#2)$),
-    \n2 = {atan2(\x2,\y2)},
-    \n3 = {atan2(\x3,\y3)}%
-    	in ($(\n2:#5)+(#2)$) arc (\n2:\n3:#5);
-}
-
-
 % амперметр
 \tikzset{circuit declare symbol = ammeter}
 \tikzset{
@@ -140,8 +109,8 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
-        fill=white,
-        info=center:A
+        fill = white,
+        info = center:A
     }
 } 
 
@@ -152,8 +121,8 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
-        fill=white,
-        info=center:V
+        fill = white,
+        info = center:V
     }
 } 
 
@@ -164,7 +133,7 @@
         draw,
         generic circle IEC,
         minimum size = 5mm,
-        fill=white
+        fill = white
     }
 } 
 
@@ -177,17 +146,17 @@
 
 % pattern для отрисовки воды
 \pgfdeclarepatternformonly{water}
-{ \pgfqpoint{0pt}{0pt} }
-{ \pgfqpoint{6pt}{6pt} }
-{ \pgfqpoint{6pt}{6pt} }
-{
-	\pgfsetlinewidth{0.3pt}
-	\pgfpathmoveto{ \pgfqpoint{0pt}{0pt} }
-	\pgfpathlineto{ \pgfqpoint{2pt}{0pt} }
-	\pgfpathmoveto{ \pgfqpoint{3pt}{3pt} }
-	\pgfpathlineto{ \pgfqpoint{6pt}{3pt} }
-	\pgfusepath{ stroke }
-}
+    {\pgfqpoint{0pt}{0pt}}
+    {\pgfqpoint{6pt}{6pt}}
+    {\pgfqpoint{6pt}{6pt}}
+    {
+        \pgfsetlinewidth{0.3pt}
+        \pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+        \pgfpathlineto{\pgfqpoint{2pt}{0pt}}
+        \pgfpathmoveto{\pgfqpoint{3pt}{3pt}}
+        \pgfpathlineto{\pgfqpoint{6pt}{3pt}}
+        \pgfusepath{stroke}
+    }
 
 % формат чисел в графиках \begin{axis}...\end{axis}
 \tikzset{/pgf/number format/use comma}
