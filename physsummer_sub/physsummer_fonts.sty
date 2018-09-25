@@ -10,6 +10,7 @@
 		\RequirePackage{unicode-math}
 		\RequirePackage{luatextra} % LuaLaTeX fontspec и макросы
 		\RequirePackage{polyglossia}  
+		\usepackage{indentfirst}
 		\setdefaultlanguage{russian} 
 		\setotherlanguage{english}
 		\defaultfontfeatures{Renderer=Basic, Ligatures=TeX} % для работы лигатур
@@ -19,6 +20,7 @@
 		\setmonofont{Consolas}
 		\setsansfont{Linux Biolinum O}
 		\setmathfont{Cambria Math}
+		\usepackage[unicode]{hyperref}
 	\else % if pdflatex, then
 		\RequirePackage[utf8]{inputenc}
 		\RequirePackage[T2A]{fontenc}
