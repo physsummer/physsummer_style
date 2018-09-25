@@ -51,7 +51,19 @@
             }
         }
     },
-    % пружина  
+    perpinterface/.style = {
+        postaction = {
+            draw,
+            decorate,
+            decoration = {
+                ticks,
+                raise = 0.07cm,
+                amplitude = 0.07cm,
+                segment length = 1mm
+            }
+        }
+    },
+    % пружина
     spring/.style = {
         decorate,
         decoration = {
@@ -70,14 +82,14 @@
     },
     % граница воды
     water edge/.style = {
-		decorate, 
+		decorate,
 		decoration = {
-			snake, 
-			amplitude = 0.4, 
+			snake,
+			amplitude = 0.4,
 			segment length = 10
 		}
     },
-	% стрелка в середине отрезка  
+	% стрелка в середине отрезка
     marrow/.style = {
         postaction = {
             draw,
