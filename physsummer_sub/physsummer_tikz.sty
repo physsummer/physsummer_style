@@ -150,6 +150,8 @@
 
 
 \newcommand{\platform}[2]{
+	\draw[very thick, draw = none, fill = white] 
+		#1 -- ($#1!0.15cm!90:#2$) -- ($#2!0.15cm!-90:#1$) -- #2;
 	\draw[very thick, draw = none, pattern = north west lines] 
 		#1 -- ($#1!0.15cm!90:#2$) -- ($#2!0.15cm!-90:#1$) -- #2;
 	\draw[very thick] #1 -- #2
