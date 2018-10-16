@@ -25,7 +25,8 @@
 	positioning,
     through,
     quotes,
-    angles
+    angles,
+    dateplot
 }
 
 % библиотеки для электричества
@@ -81,6 +82,7 @@
     },
     % граница воды
     water edge/.style = {
+    	draw,
 		decorate,
 		decoration = {
 			snake,
@@ -149,12 +151,12 @@
 } 
 
 
-\newcommand{\platform}[2]{
-	\draw[very thick, draw = none, fill = white] 
-		#1 -- ($#1!0.15cm!90:#2$) -- ($#2!0.15cm!-90:#1$) -- #2;
-	\draw[very thick, draw = none, pattern = north west lines] 
-		#1 -- ($#1!0.15cm!90:#2$) -- ($#2!0.15cm!-90:#1$) -- #2;
-	\draw[very thick] #1 -- #2
+\newcommand{\platform}[3][fill = none]{
+	\draw [draw = none, #1 ] 
+		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
+	\fill [pattern = north west lines] 
+		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
+	\draw [very thick] #2 -- #3
 }
 
 % pattern для отрисовки воды
