@@ -100,6 +100,25 @@
                 mark = at position 0.6 with {\arrow{latex}}
             }
         }
+    },
+    platf/.style = {
+        /utils/exec = \csname tikz@options\endcsname,
+        decoration = {
+            show path construction,
+            lineto code = {
+                \fill (\tikzinputsegmentfirst) --
+                    ($(\tikzinputsegmentfirst)!0.15cm!90:(\tikzinputsegmentlast)$) --
+                    ($(\tikzinputsegmentlast)!0.15cm!-90:(\tikzinputsegmentfirst)$) --
+                    (\tikzinputsegmentlast);
+                \draw (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+            }
+        },
+        decorate
+    },
+    platform/.style = {
+        very thick,
+        pattern = north west lines,
+        platf
     }
 }
 
@@ -111,7 +130,6 @@
 	\node[termnode] at ({#1}, {#2}) {};
     \draw ({#1 + 0.12}, {#2 + 0.15}) -- ({#1 - 0.12}, {#2 - 0.15});
 }
-
 
 
 
@@ -148,16 +166,16 @@
         minimum size = 5mm,
         fill = white
     }
-} 
-
-
-\newcommand{\platform}[3][fill = none]{
-	\draw [draw = none, #1 ] 
-		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
-	\fill [pattern = north west lines] 
-		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
-	\draw [very thick] #2 -- #3
 }
+
+
+%\newcommand{\platform}[3][fill = none]{
+%	\draw [draw = none, #1 ] 
+%		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
+%	\fill [pattern = north west lines] 
+%		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
+%	\draw [very thick] #2 -- #3
+%}
 
 % pattern для отрисовки воды
 \pgfdeclarepatternformonly{water}
