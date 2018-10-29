@@ -39,19 +39,6 @@
 % стиль для стрелки
 \tikzset{
     >=latex,
-    % платформа: пол или потолок  
-    interface/.style = { %%% К удалению
-        postaction = {
-            draw,
-            decorate,
-            decoration = {
-                border,
-                angle = 45,
-                amplitude = 0.2cm,
-                segment length = 1mm
-            }
-        }
-    },
     perpinterface/.style = {
         postaction = {
             draw,
