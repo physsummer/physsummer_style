@@ -40,7 +40,7 @@
 \tikzset{
     >=latex,
     % платформа: пол или потолок  
-    interface/.style = {
+    interface/.style = { %%% К удалению
         postaction = {
             draw,
             decorate,
@@ -102,23 +102,23 @@
         }
     },
     platf/.style = {
-        /utils/exec = \csname tikz@options\endcsname,
         decoration = {
             show path construction,
             lineto code = {
-                \fill (\tikzinputsegmentfirst) --
+                \fill[#1] (\tikzinputsegmentfirst) --
                     ($(\tikzinputsegmentfirst)!0.15cm!90:(\tikzinputsegmentlast)$) --
                     ($(\tikzinputsegmentlast)!0.15cm!-90:(\tikzinputsegmentfirst)$) --
                     (\tikzinputsegmentlast);
-                \draw (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+                \draw[#1] (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
             }
         },
         decorate
     },
     platform/.style = {
-        very thick,
-        pattern = north west lines,
-        platf
+        platf = {very thick, pattern = north west lines}
+    },
+    emplatform/.style = {
+        platf = {draw = none, fill = white}
     }
 }
 
@@ -168,14 +168,6 @@
     }
 }
 
-
-%\newcommand{\platform}[3][fill = none]{
-%	\draw [draw = none, #1 ] 
-%		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
-%	\fill [pattern = north west lines] 
-%		#2 -- ($#2!0.15cm!90:#3$) -- ($#3!0.15cm!-90:#2$) -- #3;
-%	\draw [very thick] #2 -- #3
-%}
 
 % pattern для отрисовки воды
 \pgfdeclarepatternformonly{water}
