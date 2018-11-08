@@ -14,15 +14,16 @@
     arrows,
     arrows.meta,
     bending,
-	calc,
-	patterns,
-	intersections,
-	decorations.pathreplacing,
-	decorations.pathmorphing,
-	decorations.text,
-	decorations.markings,
-	shapes,
-	positioning,
+    calc,
+    patterns,
+    intersections,
+    decorations.pathreplacing,
+    decorations.pathmorphing,
+    decorations.text,
+    decorations.markings,
+    shapes,
+    snakes,
+    positioning,
     through,
     quotes,
     angles,
@@ -72,12 +73,12 @@
     	draw,
 		decorate,
 		decoration = {
-			snake,
-			amplitude = 0.4,
-			segment length = 10
-		}
+            snake,
+            amplitude = 0.4,
+            segment length = 10
+        }
     },
-	% стрелка в середине отрезка
+    % стрелка в середине отрезка
     marrow/.style = {
         postaction = {
             draw,
@@ -114,7 +115,7 @@
 \tikzstyle{termnode} = [draw, fill = white, inner sep = 0pt, minimum size = 1.5mm, circle]
 
 \newcommand{\termcircuit}[2]{
-	\node[termnode] at ({#1}, {#2}) {};
+    \node[termnode] at ({#1}, {#2}) {};
     \draw ({#1 + 0.12}, {#2 + 0.15}) -- ({#1 - 0.12}, {#2 - 0.15});
 }
 

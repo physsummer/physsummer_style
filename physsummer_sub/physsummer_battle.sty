@@ -14,24 +14,24 @@
 % двойной физбой: заголовок протокола
 % \pdtitle{название команды 1}{название команды 2}
 \newcommand{\pdtitle}[2]{%
-	\tikzset{node distance = 0pt, minimum height = 1cm, >=angle 90};
-	\tikzset{
+    \tikzset{node distance = 0pt, minimum height = 1cm, >=angle 90};
+    \tikzset{
         call/.style = {
-			very thick,
+            very thick,
             black!60,
             decoration = {
                 random
-				steps,
+                steps,
                 segment length = 5pt,
                 amplitude = 0.5pt
             },
             decorate
         }
     } 
-	\node[draw, thick, minimum width = 0.1\textwidth, rectangle] (n0) {\large{\textbf{№}}}; 
-	\node[draw, thick, minimum width = 0.35\textwidth, rectangle, right = of n0] (t1-0) {\large{\textbf{#1}}};
-	\node[draw, thick, minimum width = 0.35\textwidth, rectangle, right = of t1-0] (t2-0) {\large{\textbf{#2}}};
-	\node[draw, thick, minimum width = 0.2\textwidth, rectangle, right = of t2-0] (j0) {\large{\textbf{Жюри}}};
+    \node[draw, thick, minimum width = 0.1\textwidth, rectangle] (n0) {\large{\textbf{№}}}; 
+    \node[draw, thick, minimum width = 0.35\textwidth, rectangle, right = of n0] (t1-0) {\large{\textbf{#1}}};
+    \node[draw, thick, minimum width = 0.35\textwidth, rectangle, right = of t1-0] (t2-0) {\large{\textbf{#2}}};
+    \node[draw, thick, minimum width = 0.2\textwidth, rectangle, right = of t2-0] (j0) {\large{\textbf{Жюри}}};
 }
 
 % двойной физбой: разбор задачи
@@ -43,67 +43,67 @@
 % ->| --- команда 1 вызывала команду 2, но получила проверку корректности
 % |<- --- команда 2 вызывала команду 1, но получила проверку корректности
 \newcommand{\pdcall}[6]{
-	\addtocounter{newN}{1};
-	% баллы жюри
-	\addtocounter{jury}{-#3}
-	\addtocounter{jury}{-#4}
-	\def\a{t1-\arabic{newN}};
-	\def\b{t2-\arabic{newN}};
-	\tikzset{minimum width = 1cm};
-	% расположение всех баллов
-	\node[below = of n\arabic{oldN}, yshift = -0.5cm] (n\arabic{newN}) {\Large{#2}};
-	\node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (\a) {\Large{#3}}; 
-	\node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (\b) {\Large{#4}}; 
-	\node[below = of j\arabic{oldN}, yshift = -0.5cm] (j\arabic{newN}) {\Large{\arabic{jury}}};
+    \addtocounter{newN}{1};
+    % баллы жюри
+    \addtocounter{jury}{-#3}
+    \addtocounter{jury}{-#4}
+    \def\a{t1-\arabic{newN}};
+    \def\b{t2-\arabic{newN}};
+    \tikzset{minimum width = 1cm};
+    % расположение всех баллов
+    \node[below = of n\arabic{oldN}, yshift = -0.5cm] (n\arabic{newN}) {\Large{#2}};
+    \node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (\a) {\Large{#3}}; 
+    \node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (\b) {\Large{#4}}; 
+    \node[below = of j\arabic{oldN}, yshift = -0.5cm] (j\arabic{newN}) {\Large{\arabic{jury}}};
 	% инициалы отвечающего и оппонента
-	\node[blue, above = of \a, yshift = -0.4cm] {#5};
-	\node[blue, above = of \b, yshift = -0.4cm] {#6};
-	% рисование стрелки
-	\def\calllr{->}
-	\def\callrl{<-}
-	\def\calllor{->|}
-	\def\callrol{|<-}
-	\begingroup
-	\def\tmp{#1}%
-	\ifx\tmp\calllr
-		\draw[call, *->] (\a.east) -- (\b.west); 
+    \node[blue, above = of \a, yshift = -0.4cm] {#5};
+    \node[blue, above = of \b, yshift = -0.4cm] {#6};
+    % рисование стрелки
+    \def\calllr{->}
+    \def\callrl{<-}
+    \def\calllor{->|}
+    \def\callrol{|<-}
+    \begingroup
+    \def\tmp{#1}%
+    \ifx\tmp\calllr
+        \draw[call, *->] (\a.east) -- (\b.west); 
     \else
         \ifx\tmp\callrl
-    		\draw[call, <-*] (\a.east) -- (\b.west); 
-		\else
+            \draw[call, <-*] (\a.east) -- (\b.west); 
+        \else
             \ifx\tmp\calllor
-				\draw[call, *->, rounded corners = 0.1cm] (\a.20) -- (\b.160) -- (\b.200) -- (\a.340);
+                \draw[call, *->, rounded corners = 0.1cm] (\a.20) -- (\b.160) -- (\b.200) -- (\a.340);
             \else
                 \ifx\tmp\callrol
-					\draw[call, *->, rounded corners = 0.1cm] (\b.160) -- (\a.20) -- (\a.340) -- (\b.200);
+                    \draw[call, *->, rounded corners = 0.1cm] (\b.160) -- (\a.20) -- (\a.340) -- (\b.200);
                 \fi
             \fi
         \fi
     \fi
-	\endgroup
-	\setcounter{jury}{12}
-	\addtocounter{oldN}{1};
+    \endgroup
+    \setcounter{jury}{12}
+    \addtocounter{oldN}{1};
 }
 
 
 % двойной физбой: подведение итогов
 % \pdsum{сумма 1}{сумма 2}{сумма жюри};
 \newcommand{\pdsum}[3]{%
-  % расстановка баллов
-	\node[below = of n\arabic{oldN}, yshift = -0.5cm] (sum) {\LARGE{Итог:}};
-	\node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (t1sum) {\LARGE{#1}}; 
-	\node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (t2sum) {\LARGE{#2}}; 
-	\node[below = of j\arabic{oldN}, yshift = -0.5cm] (jsum) {\LARGE{#3}};
+    % расстановка баллов
+    \node[below = of n\arabic{oldN}, yshift = -0.5cm] (sum) {\LARGE{Итог:}};
+    \node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (t1sum) {\LARGE{#1}}; 
+    \node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (t2sum) {\LARGE{#2}}; 
+    \node[below = of j\arabic{oldN}, yshift = -0.5cm] (jsum) {\LARGE{#3}};
 	% рамка
-	\draw[very thick] (n0.north west) -- (sum.north west -| n0.west) -- (sum.north west -| j0.east) -- (j0.north east);
-	\draw[very thick] (n0.north east) -- (n0.north east |- sum.north);
+    \draw[very thick] (n0.north west) -- (sum.north west -| n0.west) -- (sum.north west -| j0.east) -- (j0.north east);
+    \draw[very thick] (n0.north east) -- (n0.north east |- sum.north);
     \draw[very thick] (j0.north west) -- (j0.north west |- sum.north);
     % пунктир
     \draw[gray, loosely dashed] (t1-0.north east) -- (t1-0.east |- t1sum.north);
 	% установка счётчиков в исходное состояние
-	\setcounter{oldN}{0}
-	\setcounter{newN}{0}
-	\setcounter{jury}{12}
+    \setcounter{oldN}{0}
+    \setcounter{newN}{0}
+    \setcounter{jury}{12}
 }
 
 
@@ -152,7 +152,7 @@
     \node[below = of t1-\arabic{oldN}, yshift = -0.6cm] (\a) {\Large{#3}};
     \node[below = of t2-\arabic{oldN},yshift=-0.6cm] (\b)  {\Large{#4}};
     \node[below = of t3-\arabic{oldN},yshift=-0.6cm] (\c) {\Large{#5}};
-    \node[below=of j\arabic{oldN},yshift=-0.6cm] (j\arabic{newN}) {{\arabic{jury}}};
+    \node[below = of j\arabic{oldN},yshift=-0.6cm] (j\arabic{newN}) {{\arabic{jury}}};
     % инициалы слева направо
     \node[blue, above = of \a, yshift = -0.4cm] {#6};
     \node[blue, above = of \b, yshift = -0.4cm] {#7};
