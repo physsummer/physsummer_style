@@ -4,6 +4,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xargs}
 \RequirePackage{physics}
+\RequirePackage{todonotes}
 
 % колонтитул
 \setlength{\headheight}{15pt}
@@ -170,6 +171,26 @@
     \checktags{
         \vspace{0.2cm}
         \textbf{Ключевые слова: #1}
+    }
+}
+
+\newcommand{\newauthor}[3]{
+    \newcounter{#1comment}
+    \setcounter{#1comment}{1}
+    \expandafter\newcommand\csname #1comment\endcsname[1]{%
+        \ifdefined
+            \DONOTINSERTCOMMENTS
+            \relax
+        \else
+        \par\noindent
+        \ifteacher{
+            \todo[inline, size = \scriptsize, backgroundcolor = {#3}]{
+                \arabic{#1comment}:
+                {##1} - \textbf{#2}
+            }
+            \addtocounter{#1comment}{1}
+        }
+        \fi
     }
 }
 
