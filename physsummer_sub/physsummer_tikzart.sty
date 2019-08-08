@@ -1,0 +1,52 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{physsummer_tikzart}
+
+
+% Вагон электрички
+% Размер картинки .4 * .24, привязка к левому нижнему углу
+% В параметрах можно писать сдвиги, повороты, растяжения, и т.д. 
+\newcommand{\tikzartTrain}[1]{
+	\begin{scope}[#1]
+		\filldraw 
+			(.05, 0.03) circle (.03)
+			(.13, 0.03) circle (.03)
+			(.35, 0.03) circle (.03)
+			(.27, 0.03) circle (.03);
+		\draw [rounded corners = 1pt, fill = black!15] 
+			(0, 0.04) rectangle  ++ (.4, .2);
+		\draw [fill = white] 
+			(.05, .13) rectangle ++ (.06, .07)
+			(.17, .13) rectangle ++ (.06, .07)
+			(.29, .13) rectangle ++ (.06, .07);
+		\draw [ultra thin] 
+			(.05, .09) to ++ (.3, 0)
+			(.05, .1) to ++ (.3, 0);
+	\end{scope}
+}
+
+% <<Голова>> электрички
+% Размер картинки .5 * .24, привязка к левому нижнему углу
+% В параметрах можно писать сдвиги, повороты, растяжения, и т.д.
+\newcommand{\tikzartTrainHead}[1]{
+\begin{scope}[#1]
+	\filldraw 
+		(.05, 0.03) circle (.03)
+		(.15, 0.03) circle (.03)
+		(.4, 0.03) circle (.03);
+	\draw [rounded corners = 1pt, fill = white]
+		(.1, .24) to (.3, .24) to (.5, .13) to ++ (0, -.04);
+	\draw [rounded corners = 1pt, fill = black!15] 
+		(0, .04) to ++ (.5, 0) to ++ (0, .09)
+		to ++ (-.05, .01) to ++ (-.15, 0) to ++ (0, .1) 
+		to ++ (-.3, 0) to (0, .04); 
+	\draw [fill = white] 
+		(.05, .13) rectangle ++ (.06, .07)
+		(.17, .13) rectangle ++ (.06, .07);
+	\draw [ultra thin] 
+		(.05, .09) to ++ (.37, 0)
+		(.05, .1) to ++ (.37, 0);
+\end{scope}
+}
+
+
+\endinput
