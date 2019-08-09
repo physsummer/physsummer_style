@@ -108,6 +108,15 @@
     },
     emplatform/.style = {
         platf = {draw = none, fill = white}
+    },
+    mark position/.style args = {#1(#2)}{
+        postaction = {
+            decorate,
+            decoration = {
+                markings,
+                mark = at position #1 with \coordinate (#2);
+            }
+        }
     }
 }
 
