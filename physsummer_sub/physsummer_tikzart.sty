@@ -1,12 +1,46 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer_tikzart}
 
-
-% Вагон электрички
-% Размер картинки .4 * .24, привязка к левому нижнему углу
-% В параметрах можно писать сдвиги, повороты, растяжения, и т.д. 
-\newcommand{\tikzartTrain}[1]{
-	\begin{scope}[#1]
+\tikzset{
+	%% Кролик (см rayon/2017-08-3)
+	tikzart-bunny/.pic = {
+		\draw[thick] (0, 0) .. controls (-1.1, 0) and (-0.4, 0.2) .. (-0.3, 0.2)
+			coordinate (BLegLeft)% нижняя лапка
+			to[in = -70, out = 140] ++(130 : 0.5) coordinate (BArmBottom) % верхняя лапка
+			.. controls ($(BArmBottom) + (-90 : 0.2)$) and
+			($(BArmBottom) + (-0.25, 0.07) + (-90 : 0.2)$) .. ($(BArmBottom) + (-0.25, 0.07)$)
+			.. controls ($(BArmBottom) + (-0.25, 0.07) + (90 : 0.1)$)
+			and ($(BArmBottom) + (105 : 0.3) + (-170 : 0.1)$)
+			.. ($(BArmBottom) + (105 : 0.3)$) coordinate (BArmTop)
+			to[out = 110, in = -110 ] ++(80 : 0.15) coordinate (BHeadBottom)
+			.. controls ($(BHeadBottom) + (-0.2, 0)$)
+			and ($(BHeadBottom) + (70 : 0.5) + (-0.6, -0.1) $)
+			.. ($(BHeadBottom) + (70 : 0.5)$) coordinate (BHeadTop)
+			.. controls ($(BHeadTop) + (70:0.4)$)
+			and ($(BHeadTop) + (25 : 0.8) + (-0.2, -.05)$)
+			.. ($(BHeadTop) + (25 : 0.8)$) coordinate (BEarTop)
+			to[out = -110, in = 20] ++(-140:0.5) coordinate (BEar)
+			to[out = 10, in = 160]  ++(0:0.5)
+			to[out = -130, in = -10] ++(-0.6, -0.25) coordinate (BEarBottom)
+			to[out = -110, in = 80] ++(0, -0.15) coordinate (BBackTop)
+			.. controls ($(BBackTop) + (0.3, 0)$)
+			and ($(BBackTop) + (-45:0.9) + (100:0.3)$)
+			.. ($(BBackTop) + (-45:0.9)$) coordinate (BTailTop)
+			.. controls ($(BTailTop) + (20:0.4)$)
+			and ($(BTailTop) + (-110:0.3) + (-30:0.5)$)
+			.. ($(BTailTop) + (-110:0.3)$)
+			to[out = -150, in = 30 ] ++(-150:0.1) coordinate (BLegRight)
+			.. controls ($(BLegRight) + (-90:.1)$)
+			and (0.25, 0) .. (0, 0);
+		\draw[fill = black] (BHeadTop) ++(-120:0.2) circle (0.04);
+		\draw (BLegLeft) to[out = 0, in = 170] ++(0.15, 0) .. controls
+			($(BLegLeft) + (0.15, 0) + (170 : 0.1)$) and
+			($(BLegLeft) + (0.15, 0) + (60:0.5) + (-0.5, 0.1)$)
+			.. ($(BLegLeft) + (0.15, 0) + (60:0.5)$);
+	},
+	%% Вагон поезда (см. rayon/2010-09-3)
+	% Размер картинки .4 * .24, привязка к левому нижнему углу
+	tikzart-train/.pic = {
 		\filldraw 
 			(.05, 0.03) circle (.03)
 			(.13, 0.03) circle (.03)
@@ -21,31 +55,27 @@
 		\draw [ultra thin] 
 			(.05, .09) to ++ (.3, 0)
 			(.05, .1) to ++ (.3, 0);
-	\end{scope}
-}
-
-% <<Голова>> электрички
-% Размер картинки .5 * .24, привязка к левому нижнему углу
-% В параметрах можно писать сдвиги, повороты, растяжения, и т.д.
-\newcommand{\tikzartTrainHead}[1]{
-\begin{scope}[#1]
-	\filldraw 
-		(.05, 0.03) circle (.03)
-		(.15, 0.03) circle (.03)
-		(.4, 0.03) circle (.03);
-	\draw [rounded corners = 1pt, fill = white]
-		(.1, .24) to (.3, .24) to (.5, .13) to ++ (0, -.04);
-	\draw [rounded corners = 1pt, fill = black!15] 
-		(0, .04) to ++ (.5, 0) to ++ (0, .09)
-		to ++ (-.05, .01) to ++ (-.15, 0) to ++ (0, .1) 
-		to ++ (-.3, 0) to (0, .04); 
-	\draw [fill = white] 
-		(.05, .13) rectangle ++ (.06, .07)
-		(.17, .13) rectangle ++ (.06, .07);
-	\draw [ultra thin] 
-		(.05, .09) to ++ (.37, 0)
-		(.05, .1) to ++ (.37, 0);
-\end{scope}
+	},
+	%% Первый вагон поезда (см. rayon/2010-09-3)
+	% Размер картинки .5 * .24, привязка к левому нижнему углу
+	tikzart-trainhead/.pic = {
+		\filldraw 
+			(.05, 0.03) circle (.03)
+			(.15, 0.03) circle (.03)
+			(.4, 0.03) circle (.03);
+		\draw [rounded corners = 1pt, fill = white]
+			(.1, .24) to (.3, .24) to (.5, .13) to ++ (0, -.04);
+		\draw [rounded corners = 1pt, fill = black!15] 
+			(0, .04) to ++ (.5, 0) to ++ (0, .09)
+			to ++ (-.05, .01) to ++ (-.15, 0) to ++ (0, .1) 
+			to ++ (-.3, 0) to (0, .04); 
+		\draw [fill = white] 
+			(.05, .13) rectangle ++ (.06, .07)
+			(.17, .13) rectangle ++ (.06, .07);
+		\draw [ultra thin] 
+			(.05, .09) to ++ (.37, 0)
+			(.05, .1) to ++ (.37, 0);
+	}
 }
 
 
