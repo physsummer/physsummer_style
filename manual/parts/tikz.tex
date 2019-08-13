@@ -1,19 +1,26 @@
 \section{Рисование картинок \texttt{(physsummer-tikz)}}
 
-В пакете собран инструментарий для рисования картинок при помощи \texttt{tikz}.
+В пакете собран инструментарий для рисования картинок при помощи \tikzt.
+
+\dzcomment{
+    Если при рисовании картинки вас тянет чего-то посчитать, например значение синуса какого-то угла, то
+    скорее всего вы делаете что-то не так, и существует стандартное решение в \tikzt, которое сделает все
+    за вас.
+}
+
 
 \subsection{Некоторые стандартные возможности \texttt{tikz}}
 
 \subsubsection{Углы}
 
-Ниже приведен пример отрисовки углов. Для задания угла необходимо имееть три точки, задаваемые при помощи
+Ниже приведен пример отрисовки углов. Для задания угла необходимо иметь три точки, задаваемые при помощи
 \texttt{coordinate} или \texttt{node}.
 
 На третьем рисунке приведен пример того, что можно получить координату точки, где должна появиться
 подпись угла, что может быть полезно, если необходимо залить область под подписью.
 
 \begin{minipage}{0.28\linewidth}
-    \begin{tikzpicture}[mstyle, shift = {(-1, 0)}]
+    \begin{tikzpicture}[mstyle]
         \draw (2, 0) coordinate (a) -- (0, 0) coordinate (o)
             -- (60:2) coordinate (b);
         \pic[pic text = $\alpha$, draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
@@ -26,9 +33,9 @@
         
         \draw (2, -12) coordinate (a1) -- ++(-2, 0) coordinate (o1)
             -- ++(60:2) coordinate (b1);
-        \pic (ver) [pic text = , style = double, draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
+        \pic (ver) [pic text = , draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
             {angle = a1--o1--b1};
-        \node[circle, inner sep = 0, fill = red!40] at (ver) {$\gamma$};
+        \node[circle, inner sep = 2pt, fill = red!40] at (ver) {$\gamma$};
     \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.72\linewidth}
@@ -58,19 +65,89 @@
                 -- ++(60:2) coordinate (b1);
             \pic (ver) [
                 pic text = ,
-                style = double,
                 draw = blue,
                 angle eccentricity = 1.8,
                 angle radius = 0.5cm]
                 {angle = a1--o1--b1};
-            \node[circle, inner sep = 0, fill = red!40]
+            \node[circle, inner sep = 2pt, fill = red!40]
                 at (ver) {$\gamma$};
         \end{tikzpicture}    
     \end{lstlisting}
 \end{minipage}
 
 
+\subsubsection{Пересечения  и касательные}
+
+В \tikzt существуют встроенные средства для поиска пересечений кривых \texttt{name intersections}. Для
+использования данной функции необходимо задать имена кривых при помощи атрибута
+\texttt{name path}. После вызова функции точки пересечения получат имена \texttt{intersection-$i$}.
+
+Во втором примере мы сразу проименовали точку пересечения, как \texttt{e}.
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \draw[thick, name path = ell] (0, 0) ellipse (2 and 1.5);
+        \draw[name path = l1] (-2, -2) -- (2, 2);
+        \path[name intersections = {of = ell and l1}];
+
+        \node[above = 5pt] at (intersection-1) {$A$};
+        \node[below = 5pt] at (intersection-2) {$B$};
+        \draw[line width = 3pt, red] (intersection-1) -- (intersection-2);
+
+        \draw[blue, thick, name path = line1] (-2, -3) -- (2, -5);
+        \draw[blue, thick, name path = line2] (2, -3) -- (-2, -5);
+        \path[name intersections = {of = line1 and line2, by = e}];
+        \fill[red] (e) circle (0.07) node[above = 5pt, black] {$E$};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \draw[thick, name path = ell] (0, 0) ellipse (2 and 1.5);
+            \draw[name path = l1] (-2, -2) -- (2, 2);
+            \path[name intersections = {of = ell and l1}];
+
+            \node[above = 5pt] at (intersection-1) {$A$};
+            \node[below = 5pt] at (intersection-2) {$B$};
+            \draw[line width = 3pt, red] (intersection-1) --
+                (intersection-2);
+
+            \draw[blue, thick, name path = line1] (-2, -3) -- (2, -5);
+            \draw[blue, thick, name path = line2] (2, -3) -- (-2, -5);
+            \path[name intersections = {of = line1 and line2, by = e}];
+            \fill[red] (e) circle (0.07)
+                node[above = 5pt, black] {$E$};
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
 
 
-\subsection{Возможности пакета}
+Похожим образом работает механизм построения касательных (работает только с ограниченным набором кривых),
+с той лишь разницей, что вместо именования кривой она должна быть задана при помощи \texttt{node}.
 
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \node[circle, draw, thick, minimum size = 2cm] (d1) at (0, 0) {};
+        
+        \coordinate (c) at (2, -2);
+        \draw[very thick, red] (tangent cs:node = d1, point = {(c)}, solution = 1)
+            node[above right, black] {$A$} -- (c) node[right, black] {$C$} --
+            (tangent cs:node = d1, point = {(c)}, solution = 2) node[below, black] {$B$}; 
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \node[circle, draw, thick, minimum size = 2cm] (d1)
+                at (0, 0) {};
+
+            \coordinate (c) at (2, -2);
+            \draw[very thick, red]
+                (tangent cs:node = d1, point = {(c)}, solution = 1)
+                node[above right, black] {$A$}
+                -- (c) node[right, black] {$C$}
+                -- (tangent cs:node = d1, point = {(c)}, solution = 2)
+                node[below, black] {$B$};
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}

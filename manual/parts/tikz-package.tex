@@ -1,0 +1,134 @@
+\subsection{Возможности пакета}
+
+\subsubsection{Поверхности и физические объекты}
+
+В пакете представлен набор шаблонов, которые могут оказаться полезными при подготовке рисунков к
+физическим задачам.
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \node at (0, 0.5) {};
+        \draw[platform] (3, 0) -- (0, 0);
+
+        \draw[thick, perpinterface] (1, -1) arc (90:-90:1);
+
+
+        \draw[platform] (0, -5) -- (0, -4);
+        \draw[spring] (0, -4.5) -- ++(3, 0);
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \draw[platform] (3, 0) -- (0, 0);
+                % "мохнатая платформа"
+                % корректно работает только в случае прямой линии
+
+            \draw[thick, perpinterface] (1, -1) arc (90:-90:1);
+                % "мохнатая кривая поверхность"
+
+
+            
+            \draw[platform] (0, -5) -- (0, -4);
+            \draw[spring] (0, -4.5) -- ++(3, 0); % пружина
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \node at (0, 0.5) {};
+        \draw[water edge] (0, 0) -- ++(3, 0);
+
+        \draw[marrow, thick] (0, -1.2) -- ++(3, 0);
+
+        \draw[very thick, blue, mark position = 0.25(a), mark position = 0.6(b), mark position = 0.75(c)]
+            (0, -6) arc (180:0:1) arc (-180:0:1);
+        \fill[red] (a) circle (0.07) node[above, black] {$A$};
+        \fill[red] (b) circle (0.07) node[below left, black] {$B$};
+        \fill[red] (c) circle (0.07) node[above, black] {$C$};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \draw[water edge] (0, 0) -- ++(3, 0); % граница воды
+
+
+            \draw[marrow, thick] (0, -1.2) -- ++(3, 0);
+            % стрелка на середине отрезка
+
+            \draw[
+                very thick,
+                blue,
+                mark position = 0.25(a),
+                mark position = 0.6(b),
+                mark position = 0.75(c)]
+                % отметить точки на позициях
+                % 0.25, 0.6, 0.75 длины от начала
+                (0, -6) arc (180:0:1) arc (-180:0:1);
+            \fill[red] (a) circle (0.07) node[above, black] {$A$};
+            \fill[red] (b) circle (0.07) node[below left, black] {$B$};
+            \fill[red] (c) circle (0.07) node[above, black] {$C$};
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+Следующий паттерн для отрисовки воды может быть полезен, если обычная заливка плохо отображается на печати.
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \node at (0, 1) {};
+        \fill[pattern = water] (0, 0) {[rounded corners = 3pt] -- (0, -2.5) -- (2, -2.5)} -- (2, 0)
+            decorate[water edge]{-- cycle};
+        \draw[very thin, water edge] (2, 0) -- (0, 0);
+        
+        \draw[very thick, rounded corners = 3pt] (0, 0.5) -- (0, -2.5) -- (2, -2.5) -- (2, 0.5);
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \fill[pattern = water] (0, 0)
+                {[rounded corners = 3pt] -- (0, -2.5) -- (2, -2.5)}
+                -- (2, 0) decorate[water edge]{-- cycle};
+            \draw[very thin, water edge] (2, 0) -- (0, 0);
+
+            \draw[very thick, rounded corners = 3pt] (0, 0.5) --
+                (0, -2.5) -- (2, -2.5) -- (2, 0.5);
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+\subsubsection{Электрические схемы}
+
+Пакет поддерживает библиотеку \texttt{circuit.ee.IEC} и несовместим с библиотекой \texttt{circuittikz}. В
+пакете представлены шаблоны для вольтместра и амперметра.
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle, circuit ee IEC]
+        \def\l{1.7}
+        \draw (0, 0) node[contact] (A) {} to[voltmeter] ++(0, \l) node[contact] (B) {};
+        \draw (A) to[voltmeter] ++(\l, 0) to[ammeter] ++(0, \l) to[battery] ++ (-\l, 0);
+        \draw (A) -- ++(-0.5 * \l, 0) node[contact] {};
+        \draw (B) -- ++(-0.5 * \l, 0) node[contact] {};
+        \draw (-0.5 * \l, 0.5 * \l) node {$U$};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}[circuit ee IEC]
+            \def\l{1.7}
+            \draw (0, 0) node[contact] (A) {}
+                to[voltmeter] ++(0, \l) node[contact] (B) {};
+            \draw (A) to[voltmeter] ++(\l, 0)
+                to[ammeter] ++(0, \l) to[battery] ++ (-\l, 0);
+            \draw (A) -- ++(-0.5 * \l, 0) node[contact] {};
+            \draw (B) -- ++(-0.5 * \l, 0) node[contact] {};
+            \draw (-0.5 * \l, 0.5 * \l) node {$U$};
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}

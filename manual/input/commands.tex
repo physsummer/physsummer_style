@@ -1,20 +1,32 @@
+\newcommand{\tikzt}{\texttt{tikz} }
+
+
 \definecolor{do}{RGB}{150, 50, 200}
+\definecolor{dob}{RGB}{60, 20, 80}
+
+\def\beginlstdelim#1#2#3{%
+    \def\endlstdelim{\textcolor{black!55}{#2}\egroup}%
+    \textcolor{black!55}{#1}\bgroup\color{#3}\aftergroup\endlstdelim%
+}
 
 \lstdefinestyle{texlang}{
-    classoffset = 0,
     language = {[LaTeX]TeX},
+    deletetexcs = {\fill, \def},
+    moretexcs = [2]{
+        \draw, \coordinate, \pic,
+        \path, \node, \fill, \def
+    },
     texcsstyle = *\color{do},
+    texcsstyle = *[2]\color{blue},
     keywordstyle = \color{black},
-    classoffset = 1,
-    moretexcs = {\draw, \coordinate, \pic},
-    texcsstyle = *\color{blue},
-    classoffset = 0,
-    moredelim = **[s][\color{green!50!black}]{[}{]},
+    moredelim = **[is][\beginlstdelim{[}{]}{green!50!black}]{[}{]},
+    moredelim = [s][\color{red!55!black}]{$}{$},
     breaklines = true,
     breakindent = 0pt,
     tabsize = 4,
     columns = flexible,
 }
+
 
 
 \lstdefinestyle{listtext}{
