@@ -1,1 +1,76 @@
-Да и так все понятно.
+\section{Рисование картинок \texttt{(physsummer-tikz)}}
+
+В пакете собран инструментарий для рисования картинок при помощи \texttt{tikz}.
+
+\subsection{Некоторые стандартные возможности \texttt{tikz}}
+
+\subsubsection{Углы}
+
+Ниже приведен пример отрисовки углов. Для задания угла необходимо имееть три точки, задаваемые при помощи
+\texttt{coordinate} или \texttt{node}.
+
+На третьем рисунке приведен пример того, что можно получить координату точки, где должна появиться
+подпись угла, что может быть полезно, если необходимо залить область под подписью.
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle, shift = {(-1, 0)}]
+        \draw (2, 0) coordinate (a) -- (0, 0) coordinate (o)
+            -- (60:2) coordinate (b);
+        \pic[pic text = $\alpha$, draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
+            {angle = a--o--b};
+        
+        \draw (2, -6) coordinate (a1) -- ++(-2, 0) coordinate (o1)
+            -- ++(60:2) coordinate (b1);
+        \pic[pic text = $\beta$, style = double, draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
+            {angle = a1--o1--b1};
+        
+        \draw (2, -12) coordinate (a1) -- ++(-2, 0) coordinate (o1)
+            -- ++(60:2) coordinate (b1);
+        \pic (ver) [pic text = , style = double, draw = blue, angle eccentricity = 1.8, angle radius = 0.5cm]
+            {angle = a1--o1--b1};
+        \node[circle, inner sep = 0, fill = red!40] at (ver) {$\gamma$};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}
+        \begin{tikzpicture}
+            \draw (2, 0) coordinate (a) -- (0, 0) coordinate (o)
+                -- (60:2) coordinate (b);
+            \pic[
+                pic text = $\alpha$,
+                draw = blue,
+                angle eccentricity = 1.8,
+                angle radius = 0.5cm]
+                {angle = a--o--b};
+
+            \draw (2, -6) coordinate (a1) -- ++(-2, 0) coordinate (o1)
+                -- ++(60:1.2) coordinate (b1);
+            \pic[
+                pic text = $\beta$,
+                style = double,
+                draw = blue,
+                angle eccentricity = 1.8,
+                angle radius = 0.5cm]
+                {angle = a1--o1--b1};
+
+            \draw (2, -12) coordinate (a1)
+                -- ++(-2, 0) coordinate (o1)
+                -- ++(60:2) coordinate (b1);
+            \pic (ver) [
+                pic text = ,
+                style = double,
+                draw = blue,
+                angle eccentricity = 1.8,
+                angle radius = 0.5cm]
+                {angle = a1--o1--b1};
+            \node[circle, inner sep = 0, fill = red!40]
+                at (ver) {$\gamma$};
+        \end{tikzpicture}    
+    \end{lstlisting}
+\end{minipage}
+
+
+
+
+\subsection{Возможности пакета}
+

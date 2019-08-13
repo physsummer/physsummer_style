@@ -1,0 +1,56 @@
+\definecolor{do}{RGB}{150, 50, 200}
+
+\lstdefinestyle{texlang}{
+    classoffset = 0,
+    language = {[LaTeX]TeX},
+    texcsstyle = *\color{do},
+    keywordstyle = \color{black},
+    classoffset = 1,
+    moretexcs = {\draw, \coordinate, \pic},
+    texcsstyle = *\color{blue},
+    classoffset = 0,
+    moredelim = **[s][\color{green!50!black}]{[}{]},
+    breaklines = true,
+    breakindent = 0pt,
+    tabsize = 4,
+    columns = flexible,
+}
+
+
+\lstdefinestyle{listtext}{
+    style = texlang,
+    backgroundcolor = \color{blue!10},
+    basicstyle = \small\ttfamily,
+    identifierstyle = \color{black},
+    stringstyle = \color{red},
+    gobble = 7,
+    texcl = true,
+    commentstyle = \small \color{red!70!black}
+}
+
+\lstset{style = listtext}
+
+
+\makeatletter
+\tikzset{
+    auto centering/.style = {
+        execute at end picture = {
+            \node[
+                fit = (current bounding box),
+                minimum width = #1 - 2 * \tikz@framexsep,
+                inner sep = 0] {};
+        }
+    },
+    auto centering/.default = \linewidth,
+}
+\makeatother
+
+\tikzset{
+    mstyle/.style = {
+        auto centering,
+        background rectangle/.style = {fill = olive!15},
+        show background rectangle,
+        inner frame xsep = 0pt,
+        inner frame ysep = 5pt
+    }
+}
