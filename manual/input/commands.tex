@@ -1,5 +1,9 @@
+\usepackage[thinlines]{easytable}
 \newcommand{\tikzt}{\texttt{tikz} }
 
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\vspace{-5pt}}m{#1}}
+\newcolumntype{S}[1]{>{\centering\let\newline\\\arraybackslash\vspace{0pt}}m{#1}}
 
 \definecolor{do}{RGB}{150, 50, 200}
 \definecolor{dob}{RGB}{60, 20, 80}
@@ -11,10 +15,16 @@
 
 \lstdefinestyle{texlang}{
     language = {[LaTeX]TeX},
-    deletetexcs = {\fill, \def},
+    deletetexcs = {\fill},
+    moretexcs = {
+        \task
+    },
     moretexcs = [2]{
         \draw, \coordinate, \pic,
-        \path, \node, \fill, \def
+        \path, \node, \fill,
+        \setphysstyle,
+        \pdtitle, \pdcall, \pdsum,
+        \pttitle, \ptcall, \ptsum
     },
     texcsstyle = *\color{do},
     texcsstyle = *[2]\color{blue},
@@ -24,20 +34,30 @@
     breaklines = true,
     breakindent = 0pt,
     tabsize = 4,
-    columns = flexible,
+    keepspaces,
+    columns = flexible
 }
-
 
 
 \lstdefinestyle{listtext}{
     style = texlang,
+    style = cyril,
     backgroundcolor = \color{blue!10},
     basicstyle = \small\ttfamily,
     identifierstyle = \color{black},
     stringstyle = \color{red},
-    gobble = 7,
     texcl = true,
     commentstyle = \small \color{red!70!black}
+}
+
+
+
+
+\lstdefinestyle{listtable}{
+    style = listtext,
+    belowcaptionskip = 0pt,
+    belowskip = 0pt,
+    aboveskip = 10pt
 }
 
 \lstset{style = listtext}

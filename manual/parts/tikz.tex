@@ -39,7 +39,7 @@
     \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.72\linewidth}
-    \begin{lstlisting}
+    \begin{lstlisting}[gobble = 7]
         \begin{tikzpicture}
             \draw (2, 0) coordinate (a) -- (0, 0) coordinate (o)
                 -- (60:2) coordinate (b);
@@ -101,7 +101,7 @@
     \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.72\linewidth}
-    \begin{lstlisting}
+    \begin{lstlisting}[gobble = 7]
         \begin{tikzpicture}
             \draw[thick, name path = ell] (0, 0) ellipse (2 and 1.5);
             \draw[name path = l1] (-2, -2) -- (2, 2);
@@ -123,7 +123,7 @@
 
 
 Похожим образом работает механизм построения касательных (работает только с ограниченным набором кривых),
-с той лишь разницей, что вместо именования кривой она должна быть задана при помощи \texttt{node}.
+с той лишь разницей, что вместо именования кривой, она должна быть задана при помощи \texttt{node}.
 
 \begin{minipage}{0.28\linewidth}
     \begin{tikzpicture}[mstyle]
@@ -136,7 +136,7 @@
     \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.72\linewidth}
-    \begin{lstlisting}
+    \begin{lstlisting}[gobble = 7]
         \begin{tikzpicture}
             \node[circle, draw, thick, minimum size = 2cm] (d1)
                 at (0, 0) {};
@@ -148,6 +148,52 @@
                 -- (c) node[right, black] {$C$}
                 -- (tangent cs:node = d1, point = {(c)}, solution = 2)
                 node[below, black] {$B$};
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+\subsubsection{Функции и циклы}
+
+\tikzt предоставляет широкие возможности из классических языков программирования: условиные оператор,
+циклы, создание функций. В данном размеле мы продемонстрируем пример использования двух последних
+конструкций.
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \tikzset{
+            big-pic/.pic = {
+                \foreach \a in {0, 1, ..., 100}{
+                    \draw[red!\a!black, rotate around = {4 * \a:(0, 0)}] (-1, 0.5) -- (1, 0.5);
+                }
+                \fill (0, 0) circle (0.05);
+                \draw[->, very thick] (0, 0) -- (400:0.5);
+            }
+        }
+        
+        \pic {big-pic};
+        \pic[shift = {(0, -3)}, yscale = -1] {big-pic};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \tikzset{
+                big-pic/.pic = {
+                    \foreach \a in {0, 1, ..., 100}{
+                        \draw[
+                            red!\a!black,
+                            rotate around = {4 * \a:(0, 0)}]
+                            (-1, 0.5) -- (1, 0.5);
+                    }
+                    \fill (0, 0) circle (0.05);
+                    \draw[->, very thick] (0, 0) -- (400:0.5);
+                }
+            }
+
+            \pic {big-pic};
+            \pic[shift = {(0, -3)}, yscale = -1] {big-pic};
         \end{tikzpicture}
     \end{lstlisting}
 \end{minipage}

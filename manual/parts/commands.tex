@@ -1,19 +1,105 @@
 \section{Часто используемые команды \texttt{(physsummer-comm)}}
 
-В данном разделе мы рассмотрим набор часто используемых комманд, предоставляемых пакетом.
+В данном разделе мы рассмотрим набор часто используемых команд, предоставляемых пакетом.
+
+\subsection{Колонтитул}
 
 Установка верхнего колонтитула:
-
-\begin{lstlisting}[keepspaces, extendedchars = \true, gobble = 3]
-    \setphysstyle{1}{2}{3}
+\begin{lstlisting}[gobble = 3, extendedchars = \true]
+    \setphysstyle{ЛФШ}{Мануал}{\texttt{physsummer}}
 \end{lstlisting}
 
+Данная команда применена к текущему документу.
 
-%\newcommand{\nn}{\nonumber}
-%\newcommand{\pt}{\partial}
-%\newcommand{\unit}[1]{\text{ #1}}
-%\newcommand{\eps}{\epsilon}
-%\newcommand{\vareps}{\varepsilon}
-%\renewcommand{\phi}{\varphi}
-%\newcommand{\const}{\mathrm{const}}
-%\newcommand{\avg}[1]{\left\langle {#1} \right\rangle}
+\subsection{Математика}
+
+\def\arraystretch{-500}
+
+Часть команд из данного раздела предоставлена настоящим пакетом, часть пакетом \texttt{physics} и другими
+(для дополнительных сведений см. мануал пакета \texttt{physics}).
+
+\noindent
+\begin{tabular}{C{0.28\linewidth} C{0.685\linewidth}}
+    \vspace{-10pt}$\avg{\frac{a}{b}}$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\avg{\frac{a}{b}}$ % среднее значение
+        \end{lstlisting} \\
+    $\dd{x}, \dd[3]{x}$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\dd{x}, \dd[3]{x}$ %  дифференциал
+        \end{lstlisting} \\
+    \vspace{-10pt}$\dv{x}{t}, \dv[2]{x}{t}, \dv*{x}{t}$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\dv{x}{t}, \dv[2]{x}{t}, \dv*{x}{t}$  % производная
+        \end{lstlisting} \\
+    \vspace{-10pt}$\pdv{x}{t}, \pdv[2]{x}{t}, \pdv{f}{x}{y}$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\dv{x}{t}, \dv[2]{x}{t}, \pdv{f}{x}{y}$
+            % частная производная
+        \end{lstlisting} \\
+    $\norm{a}$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\norm{a}$  % норма
+        \end{lstlisting} \\
+    $\const$ &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\const$ % констанста
+        \end{lstlisting} \\
+\end{tabular}
+
+
+
+\subsection{Размерности}
+
+\noindent
+\begin{tabular}{C{0.28\linewidth} C{0.685\linewidth}}
+    C &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            $\unit{C}$  % команда размерности
+        \end{lstlisting} \\
+    $\cels$ &
+              \begin{lstlisting}[style = listtable, gobble = 16]
+                  $\cels$  % градусы Цельсия
+              \end{lstlisting} \\
+    $\djkgC$ &
+               \begin{lstlisting}[style = listtable, gobble = 17]
+                   $\djkgC$  % удельная теплоемкость
+               \end{lstlisting} \\
+    $\kdjkgC$ &
+                \begin{lstlisting}[style = listtable, gobble = 18]
+                    $\kdjkgC$  % удельная теплоемкость
+                \end{lstlisting} \\
+    $\kdjC$ &
+              \begin{lstlisting}[style = listtable, gobble = 16]
+                  $\kdjC$  % теплоемкость
+              \end{lstlisting} \\
+    $\djkg$ &
+              \begin{lstlisting}[style = listtable, gobble = 16]
+                  $\djkg$  % удельная теплота
+              \end{lstlisting} \\
+    $\kdjkg$ &
+               \begin{lstlisting}[style = listtable, gobble = 17]
+                   $\kdjkg$  % удельная теплота
+               \end{lstlisting} \\
+    $\kgm$ &
+             \begin{lstlisting}[style = listtable, gobble = 15]
+                 $\kgm$  % плотность
+             \end{lstlisting} \\
+    $\gcm$ &
+             \begin{lstlisting}[style = listtable, gobble = 15]
+                 $\gcm$  % плотность
+             \end{lstlisting} \\
+    $\mc$ &
+            \begin{lstlisting}[style = listtable, gobble = 14]
+                $\mc$  % скорость
+            \end{lstlisting} \\
+    $\mcsq$ &
+              \begin{lstlisting}[style = listtable, gobble = 16]
+                  $\mcsq$  % ускорение
+              \end{lstlisting} \\
+    $\omm$ &
+             \begin{lstlisting}[style = listtable, gobble = 15]
+                 $\kdjkgC$  % удельное сопротивление
+             \end{lstlisting} \\
+\end{tabular}
+
