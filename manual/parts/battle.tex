@@ -19,7 +19,35 @@
     \pdsum{результат команды I}{результат команды II}{результат жюри}
 \end{lstlisting}
 
-Ниже приведен пример протокола.
+
+
+В пакете реализовано четыре типа вызова, представленные ниже.
+
+\vspace{0.2cm}
+
+\noindent
+\begin{tabular}{S{0.82\linewidth} S{0.145\linewidth}}
+    команда I вызывает команду II &
+        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+            $->$
+        \end{lstlisting} \\
+    команда II вызывает команду I &
+        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+            $<-$
+        \end{lstlisting} \\
+    команда I вызывает команду II, но получила проверку корректности &
+        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+            $->|$
+        \end{lstlisting} \\
+    команда II вызывает команду I, но получила проверку корректности &
+        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+            $|<-$
+        \end{lstlisting}
+\end{tabular}
+
+
+
+Далее приведен пример протокола.
 
 %что-то не так
 \begin{lstlisting}[gobble = 3]
@@ -57,10 +85,14 @@
 \end{lstlisting}
 
 \begin{lstlisting}[gobble = 3]
-    \ptcall{тип вызова}{номер задачи}{баллы команды I}{баллы команды II}{баллы команды III}
+    \ptcall{#1}{номер задачи}{баллы команды I}{баллы команды II}{баллы команды III}
         {игрок I}{игрок II}{игрок III}
 \end{lstlisting}
 
 \begin{lstlisting}[gobble = 3]
     \ptsum{результат команды I}{результат команды II}{результат команды III}{результат жюри}
 \end{lstlisting}
+
+Вместо типа вызова (поскольку в тройном физбое порядок определён после конкурса капитанов) <<\#1>>
+показывает, есть ли проверка корректности если вызов обычный~--- аргумент пустой, если была проверка~---
+можно написать любой аргумент, например, какую-нибудь букву.

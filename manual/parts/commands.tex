@@ -19,7 +19,7 @@
 (для дополнительных сведений см. мануал пакета \texttt{physics}).
 
 \noindent
-\begin{tabular}{C{0.28\linewidth} C{0.685\linewidth}}
+\begin{tabular}{S{0.28\linewidth} S{0.685\linewidth}}
     \vspace{-10pt}$\avg{\frac{a}{b}}$ &
         \begin{lstlisting}[style = listtable, gobble = 10]
             $\avg{\frac{a}{b}}$ % среднее значение
@@ -52,7 +52,7 @@
 \subsection{Размерности}
 
 \noindent
-\begin{tabular}{C{0.28\linewidth} C{0.685\linewidth}}
+\begin{longtable}{S{0.28\linewidth} S{0.685\linewidth}}
     C &
         \begin{lstlisting}[style = listtable, gobble = 10]
             $\unit{C}$  % команда размерности
@@ -101,5 +101,35 @@
              \begin{lstlisting}[style = listtable, gobble = 15]
                  $\kdjkgC$  % удельное сопротивление
              \end{lstlisting} \\
-\end{tabular}
+\end{longtable}
 
+
+\subsection{Счетчики}
+
+В пакете используется ряд счетчиков. Для пользователя могут оказаться полезными счетчики:
+\texttt{notask}~--- номер задачи, \texttt{trownumber}~--- нумерация колонок в таблицах (также см. раздел
+\ref{sec:tables}).
+
+\begin{lstlisting}[keepspaces, gobble = 3]
+    \setcounter{notask}{1}
+    \task{Задача 1.}
+    \task{Задача 2.}
+    
+    \setcounter{notask}{1}
+    \task{Снова задача 1.}
+\end{lstlisting}
+
+\setcounter{notask}{1}
+\noindent
+\task{Задача 1.}
+\noindent
+\task{Задача 2.}
+
+\setcounter{notask}{1}
+\noindent
+\task{Снова задача 1.}
+
+\vspace{0.5cm}
+
+Кроме того пакетом используется ряд внутренних счетчиков, для корректной работы пакета не используйте их:
+\texttt{oldN}, \texttt{newN}, \texttt{jury}.
