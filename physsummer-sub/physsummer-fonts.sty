@@ -6,47 +6,47 @@
 \RequirePackage{ifluatex}
 
 \ifpdf
-	\ifluatex % if LuaLaTex, then
-		\RequirePackage{unicode-math}
-		\RequirePackage{luatextra} % LuaLaTeX fontspec и макросы
-		\RequirePackage{polyglossia}  
-		\usepackage{indentfirst}
-		\setdefaultlanguage{russian} 
-		\setotherlanguage{english}
-		\defaultfontfeatures{Renderer=Basic, Ligatures=TeX} % для работы лигатур
-		% настройка шрифтов для LuaLaTeX
-		\newfontfamily\cyrillicfont{Linux Libertine}
-		\setmainfont{Linux Libertine}
-		\setmonofont{Consolas}
-		\setsansfont{Linux Biolinum O}
-		\setmathfont{Cambria Math}
-		\setmathfont[range={\leqslant,\geqslant}]{Latin Modern Math}
-		\usepackage[unicode]{hyperref}
-	\else % if pdflatex, then
-		\RequirePackage[utf8]{inputenc}
-		\RequirePackage[T2A]{fontenc}
-		\RequirePackage[russian]{babel}
-		\RequirePackage[unicode]{hyperref}
-		\RequirePackage[pdftex]{graphicx}
-		\RequirePackage{cmlgc}
-	\fi
+    \ifluatex % if LuaLaTex, then
+        \RequirePackage{unicode-math}
+        \RequirePackage{luatextra} % LuaLaTeX fontspec и макросы
+        \RequirePackage{polyglossia}  
+        \usepackage{indentfirst}
+        \setdefaultlanguage{russian} 
+        \setotherlanguage{english}
+        \defaultfontfeatures{Renderer = Basic, Ligatures = TeX} % для работы лигатур
+        % настройка шрифтов для LuaLaTeX
+        \newfontfamily\cyrillicfont{Linux Libertine}
+        \setmainfont{Linux Libertine}
+        \setmonofont{Consolas}
+        \setsansfont{Linux Biolinum O}
+        \setmathfont{Cambria Math}
+        \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
+        \usepackage[unicode]{hyperref}
+    \else % if pdflatex, then
+        \RequirePackage[utf8]{inputenc}
+        \RequirePackage[T2A]{fontenc}
+        \RequirePackage[russian]{babel}
+        \RequirePackage[unicode]{hyperref}
+        \RequirePackage[pdftex]{graphicx}
+        \RequirePackage{cmlgc}
+    \fi
 \else % if xelatex, then
-	\RequirePackage{unicode-math}
-	% xelatex specific packages
-	\RequirePackage[xetex]{hyperref}
-	\RequirePackage{xltxtra} % \XeLaTeX macro
-	\RequirePackage{xunicode} % some extra unicode support
-	\defaultfontfeatures{Mapping = tex-text}
-	\RequirePackage{polyglossia} % instead of babel in xelatex
-	\RequirePackage{indentfirst} %
-	\setdefaultlanguage[spelling = modern]{russian}
-	\setotherlanguage{english} %% объявляет второй язык документа
-	% настройка шрифтов для XeLaTeX происходит тут
-	\newfontfamily\cyrillicfont{Linux Libertine}
-	\setmainfont{Linux Libertine}
-	\setmonofont{Consolas}
-	\setsansfont{Linux Biolinum O}
-	\setmathfont{Cambria Math}
-	\setmathfont[range={\leqslant,\geqslant}]{Latin Modern Math}
+    \RequirePackage{unicode-math}
+    % xelatex specific packages
+    \RequirePackage[xetex]{hyperref}
+    \RequirePackage{xltxtra} % \XeLaTeX macro
+    \RequirePackage{xunicode} % some extra unicode support
+    \defaultfontfeatures{Mapping = tex-text}
+    \RequirePackage{polyglossia} % instead of babel in xelatex
+    \RequirePackage{indentfirst} %
+    \setdefaultlanguage[spelling = modern]{russian}
+    \setotherlanguage{english} %% объявляет второй язык документа
+    % настройка шрифтов для XeLaTeX происходит тут
+    \newfontfamily\cyrillicfont{Linux Libertine}
+    \setmainfont{Linux Libertine}
+    \setmonofont{Consolas}
+    \setsansfont{Linux Biolinum O}
+    \setmathfont{Cambria Math}
+    \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
 \fi
 \endinput

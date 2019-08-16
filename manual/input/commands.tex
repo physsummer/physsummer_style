@@ -1,5 +1,4 @@
 \usepackage[thinlines]{easytable}
-\newcommand{\tikzt}{\texttt{tikz} }
 
 
 \newcolumntype{S}[1]{>{\centering\let\newline\\\arraybackslash\vspace{-5pt}}m{#1}}
@@ -16,12 +15,13 @@
     language = {[LaTeX]TeX},
     deletetexcs = {\fill},
     moretexcs = {
-        \task
+        \task, \setphysstyle,
+        \newauthor, \dovcomment,
+        \hlinewd
     },
     moretexcs = [2]{
         \draw, \coordinate, \pic,
         \path, \node, \fill,
-        \setphysstyle,
         \pdtitle, \pdcall, \pdsum,
         \pttitle, \ptcall, \ptsum
     },
@@ -30,6 +30,7 @@
     keywordstyle = \color{black},
     moredelim = **[is][\beginlstdelim{[}{]}{green!50!black}]{[}{]},
     moredelim = [s][\color{red!55!black}]{$}{$},
+    moredelim = [s][\color{red!55!black}]{$$}{$$},
     breaklines = true,
     breakindent = 0pt,
     tabsize = 4,

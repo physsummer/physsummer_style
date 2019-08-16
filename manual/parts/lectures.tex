@@ -1,6 +1,171 @@
 \section{Конспекты \texttt{(physsummer-thm, physsummer-tables)}}
 
-Да и так все понятно.
+\subsection{Теоремы, утверждения, и т.д.}
+
+Работа с теоремами отсуществляется при помощи пакета \texttt{tcolorbox}. Если вы хотите использовать
+дополнительные инструменты, то рекомендется обратить внимание на совместимость с этим пакетом.
+
+\begin{lstlisting}[gobble = 3]
+    \begin{theorem}
+        Пусть $X_1, X_2, \dots, X_n$~--- независимые случайные величины
+        с мат. ожиданиями $\mathbb{E}[X_i] = \mu_i$ и дисперсиями
+        $Var[X_i] = \sigma_i^2$. Тогда для любого $a > 0$:
+        $$
+            \Pr[\abs{\sum\limits_{i = 1}^{n} X_i - \sum\limits_{i = 1}^{n} \mu_i} \ge a] \le 
+            \frac{\sum\limits_{i = 1}^n \sigma_i^2}{a^2}.
+        $$
+    \end{theorem}
+\end{lstlisting}
+
+\begin{theorem}
+    Пусть $X_1, X_2, \dots, X_n$~--- независимые случайные величины с мат. ожиданием $\mathbb{E}[X_i] =
+    \mu_i$ и дисперсией $Var[X_i] = \sigma_i^2$. Тогда для любого $a > 0$:
+    $$
+        \Pr[\abs{\sum\limits_{i = 1}^{n} X_i - \sum\limits_{i = 1}^{n} \mu_i} \ge a] \le
+        \frac{\sum\limits_{i = 1}^n \sigma_i^2}{a^2}.
+    $$
+\end{theorem}
+
+Пакет предоставляет следующие окружения: \texttt{definition}, \texttt{conjecture}, \texttt{lemma},
+\texttt{corollary}, \texttt{prorosition}, \texttt{exersice}, \texttt{example}, \texttt{remark},
+\texttt{remark\_lect} и \texttt{proof}. Работа с данными окружениями осуществляется аналогично работе с
+окружением \texttt{theorem}.
+
+
+\subsection{Авторские комментарии}
+\label{sec:authors}
+
+При помощи команды:
+\begin{lstlisting}[gobble = 3]
+    \newauthor{сокращенное имя}{подпись}{цвет фона комментариев}
+\end{lstlisting}
+
+После вызова данной команды пользвателю открывается возможность комментирования при помощи команды:
+
+\begin{lstlisting}[gobble = 3]
+    \#1comment{текст комментария}
+\end{lstlisting}
+
+При этом в качестве параметра \#1 используется сокращенное имя комментатора.
+
+
+\begin{lstlisting}[gobble = 3]
+    \newauthor{dov}{Довлатов}{red!15}
+
+    \dovcomment{
+        Всю жизнь я дул в подзорную трубу и удивлялся, что нету музыки.
+    }
+\end{lstlisting}
+
+\vspace{0.2cm}
+
+\todo[inline, size = \small, backgroundcolor = {red!15}]{
+    1: Всю жизнь я дул в подзорную трубу и удивлялся, что нету музыки. --~\textbf{Довлатов}
+}
+
+    
+Комментарии нумеруются для каждого автора отдельно. Для комментариев заводится счетчик
+\texttt{\#1comment}.
+
+
+
 
 \subsection{Таблицы}
 \label{sec:tables}
+
+Для более эффективной реализации таблиц подключен пакет \texttt{tabularx}.
+
+
+В настоящем пакете реализован ряд дополнительных типов колонок.
+
+\vspace{0.4cm}
+
+\noindent
+\begin{longtable}{L{0.82\linewidth} S{0.145\linewidth}}
+    Колонка занимает всю, предоставленную ширину, применяется только в \texttt{tabularx}. В случае
+    нескольких колонок указанного типа, создаются равной ширины. Выравнивание влево. &
+        \begin{lstlisting}[style = listtable, gobble = 6, keepspaces = \false]
+            X
+        \end{lstlisting} \\
+    Аналогично \texttt{X}, но с выравниванием по центру. &
+        \begin{lstlisting}[style = listtable, gobble = 6, keepspaces = \false]
+            Y
+        \end{lstlisting} \\
+    Колонка занимает ширину \#1. Выравнивание влево. &
+        \begin{lstlisting}[style = listtable, gobble = 8, keepspaces = \false]
+            L{#1}
+        \end{lstlisting} \\
+    Колонка занимает ширину \#1. Выравнивание по центру. &
+        \begin{lstlisting}[style = listtable, gobble = 8, keepspaces = \false]
+            C{#1}
+        \end{lstlisting} \\
+    Колонка занимает ширину \#1. Выравнивание вправо. &
+        \begin{lstlisting}[style = listtable, gobble = 8, keepspaces = \false]
+            R{#1}
+        \end{lstlisting} \\
+    Колонка занимает ширину \#1. Выравнивание вправо. Текстом автоматически заполняется номером колонки
+    (счетчик \texttt{trownumber}).  &
+        \begin{lstlisting}[style = listtable, gobble = 8, keepspaces = \false]
+            N{#1}
+        \end{lstlisting} \\
+\end{longtable}
+
+Также в пакете реализована отрисовка линий указанной толщины при помощи команд:
+\begin{lstlisting}[style = listtable, gobble = 3]
+    \hlinewd{#1} % горизонтальная линия
+    ?{#1}        % вертикальная линия
+\end{lstlisting}
+
+Ниже приведен пример испольвания. Стоит обратить внимание, что таблицы плохо взаимодействуют с отступами,
+возможно полезной окажется команда \texttt{noindent}. Для изменения вертикальных отступов в таблице можно
+задаться пареметр \texttt{arraystretch}.
+
+
+\begin{lstlisting}[style = listtable, gobble = 3]
+    \def\arraystretch{1.5}
+
+    \noindent
+    \begin{tabular}{?{2pt}N{0.1\linewidth}|C{0.41\linewidth}|R{0.41\linewidth}?{2pt}}
+        \hlinewd{2pt}
+        & текст по центру & текст справа \\
+        \hline
+        & $\frac{a}{b}$ & $\pdv{P}{x}$ \\
+        \hlinewd{2pt}
+    \end{tabular}
+
+    \vspace{0.5cm}
+
+    \noindent
+    \begin{tabularx}{\linewidth}{|X?{2pt}Y?{2pt}c|}
+        \hline
+        1 & 2 & 3 \\
+        \hline
+        $\vec{F} = m \vec{a}$ & $\var{Q} = c m \Delta T$ &  $U = I R$ \\
+        \hline
+    \end{tabularx}
+\end{lstlisting}
+
+\vspace{0.5cm}
+\def\arraystretch{1.5}
+
+\noindent
+\begin{tabular}{?{2pt}N{0.1\linewidth}|C{0.41\linewidth}|R{0.41\linewidth}?{2pt}}
+    \hlinewd{2pt}
+        & текст по центру & текст справа \\
+    \hline
+        & $\frac{a}{b}$ & $\pdv{P}{x}$ \\
+    \hlinewd{2pt}
+\end{tabular}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{tabularx}{\linewidth}{|X?{2pt}Y?{2pt}c|}
+    \hline
+    1 & 2 & 3 \\
+  \hline
+   $\vec{F} = m \vec{a}$ & $\var{Q} = c m \Delta T$ &  $U = I R$ \\
+    \hline
+\end{tabularx}
+
+\def\arraystretch{-500}
