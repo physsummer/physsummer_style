@@ -42,6 +42,7 @@
 	% Размер картинки 0.4 * 0.24, привязка к левому нижнему углу
     % Зачем этот файл здесь?
     % А где ему ещё быть?
+    % Казалось бы одноразовые картинки, но пусть будет здесь.
 	tikzart-train/.pic = {
         \filldraw (0.05, 0.03) circle (0.03);
         \filldraw (0.13, 0.03) circle (0.03);
@@ -73,7 +74,57 @@
         
         \draw[ultra thin] (0.05, 0.09) -- ++(0.37, 0);
         \draw[ultra thin] (0.05, 0.1) -- ++(0.37, 0);
-	}
+	},
+    % координаты нижнего угла дула (5, 1.1)
+    tikzart-gun/.pic = {
+        \coordinate (a) at (0.8, 1);
+        \coordinate (b) at (1.05, 0.9);
+        \coordinate (f) at (1.1, 1.22);
+        \coordinate (p) at (0.95, 1.2);
+        \path[name path = line_1] (a) -- (f);
+        \path[name path = arc_1] (p) arc (170:210:0.2);
+        \path[name path = arc_2] (p) arc (140:180:0.45);
+        \path[name path = line_3] (a) -- (-0.4, 0.9) -- (-0.7, 0.2) -- (0.65, 0.65) -- (b)
+            to[rounded corners = 3pt] (4, 1) -- (4, 1.1) -- (1.1, 1.1) to[rounded corners = 1pt] (f) --
+            cycle;
+        \path[name intersections = {of = line_1 and arc_1}];
+        \coordinate (f1) at (intersection-1);
+        \path[name intersections = {of = line_1 and arc_2}];
+        \coordinate (f2) at (intersection-1);
+        \draw[fill = black!70] (f2) to[bend left, rounded corners = 1pt] (p) to[bend right] (f1) --
+            cycle;
+        \shade[left color = black!15!white, right color = black!90!white, opacity = 0.9] (a) --
+            (-0.4, 0.9) -- (-0.7, 0.2) -- (0.65, 0.65) -- (b) to[rounded corners = 3pt] (4, 1) --
+            (4, 1.1) -- (1.1, 1.1) to[rounded corners = 1pt] (f) -- cycle;
+        \shade[left color = black!40, right color = black!90, opacity = 0.6] (1.1, 1.16) -- (5, 1.16) --
+            (5, 1.07) -- (4, 1.07) -- (4, 1.1) -- (1.1, 1.1) -- cycle;
+        \coordinate (st) at ({-0.4 + 0.1}, 0.9);
+        \coordinate (en) at ({-0.7 + 0.1}, 0.2);
+        \path[name path = line_4] ($(st)!1.3!(en)$) -- ($(en)!1.3!(st)$);
+        \path[name intersections = {of = line_3 and line_4}];
+        \fill[brown] (-0.4, 0.9) -- (intersection-1) -- (intersection-2) -- (-0.7, 0.2) -- cycle;
+        \draw (intersection-1) -- (intersection-2);
+        \draw[thick] (a) -- (-0.4, 0.9) -- (-0.7, 0.2) -- (0.65, 0.65) -- (b) to[rounded corners = 3pt]
+            (4, 1) -- (4, 1.1) -- (1.1, 1.1) to[rounded corners = 1pt] (f) -- cycle;
+        \draw (1.1, 1.16) -- (5, 1.16) -- (5, 1.07) -- (4, 1.07) -- (4, 1.1) -- (1.1, 1.1) -- cycle;
+        \path[name path = line_2] (0.65, 0.65) -- (b) -- (4, 1);
+        \path[name path = arc_3] (0.9, 0.9) ellipse (0.42 and 0.2);
+        \path[name intersections = {of = line_2 and arc_3}];
+        \draw (intersection-2) to[bend left] (intersection-1);
+        \coordinate (pn) at (1.07, 0.8);
+        \path[name path = arc_4] (pn) arc (250:100:0.2);
+        \path[name path = arc_5] (pn) arc (250:100:0.5);
+        \path[name intersections = {of = line_2 and arc_4}];
+        \coordinate (pn1) at (intersection-1);
+        \path[name intersections = {of = line_2 and arc_5}];
+        \coordinate (pn2) at (intersection-1);
+        \draw[fill = black] (pn1) to[bend right] (pn) to[bend left] (pn2);
+        \fill[black] (4.85, 1.16) -- (4.95, 1.16) to[rounded corners = 2pt] (4.94, 1.26) -- cycle;
+        \fill[fill = white] (1.2, 1.11) rectangle (1.3, 1.24);
+        \shade[left color = black!50, right color = black!90, opacity = 0.9] (1.2, 1.11)
+            rectangle (1.3, 1.24);
+        \draw (1.2, 1.11) rectangle (1.3, 1.24);
+    }
 }
 
 
