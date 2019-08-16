@@ -1,1 +1,115 @@
-Да и так все понятно.
+\section{Задачи \texttt{(physsummer-task)}}
+
+Указанные в настоящем разделе команды зависят от пакета \texttt{tabularx}. При подключении дополнительных
+инструментов обратите внимание на совместимость.
+
+Пакет предоставляет две основные команды для набора задач.
+
+\begin{lstlisting}[gobble = 4]
+    \task{
+        текст задачи
+        \tags{ключевые слова}
+        \answer{ответ задачи}
+    }
+
+    \taskpic[ширина картинки]{ % ширина является необязательным аргументом
+        текст задачи           % и по умолчанию она равна 4 см
+    }{
+        картинка
+    }
+\end{lstlisting}
+
+Команды \texttt{tags} и \texttt{answer} отображаются только в режиме учителя (см. раздел
+\ref{sec:teacher}).
+
+
+        
+\subsection{Списки внутри задач}
+
+Стандартный набор окружений \texttt{itemize} и \texttt{enumerate} не рекомендуется использовать в
+задачах из-за больших отступов по умолчанию. Вместо этого пакет предоставляет следующие окружения,
+которые реализованы посредством пакета \texttt{enumitem}.
+
+\begin{lstlisting}[gobble = 3]
+    \task{
+        Список с маркерами:
+        \begin{itemtask}
+            \item $\vec{F} = m \vec{a}$;
+            \item $PV = \nu RT$.
+        \end{itemtask}
+        Нумерованный список.
+        \begin{enumtask} % 
+            \item $\vec{F} = m \vec{a}$.
+            \item $PV = \nu RT$.
+        \end{enumtask}
+        Список с русскими буквами:
+        \begin{enumcyr}
+            \item $\vec{F} = m \vec{a}$;
+            \item $PV = \nu RT$.
+        \end{enumcyr}
+    }
+\end{lstlisting}
+
+\noindent
+\task{
+    Список с маркерами:
+    \begin{itemtask}
+        \item $\vec{F} = m \vec{a}$;
+        \item $PV = \nu RT$.
+    \end{itemtask}
+    Нумерованный список.
+    \begin{enumtask}
+            \item $\vec{F} = m \vec{a}$.
+            \item $PV = \nu RT$.
+    \end{enumtask}
+    Список с русскими буквами:
+    \begin{enumcyr}
+        \item $\vec{F} = m \vec{a}$;
+        \item $PV = \nu RT$.
+    \end{enumcyr}
+}
+
+\vspace{0.3cm}
+
+Как видно в этом примере, в конце задачи присутствует пустая строка. К сожалению, это проблема
+совместимости таблиц и списков в \LaTeX. Для того, чтобы избежать этого в пакете присутсвует команда
+\texttt{lastline}, позволяющая исправить эту ситуацию. Также можно обратить внимание на стандартную
+команду \texttt{normalbaselineskip}.
+
+\begin{lstlisting}[gobble = 3]
+    \task{
+        Задача со списками.
+        \begin{itemtask}
+            \item $\vec{F} = m \vec{a}$;
+            \item $PV = \nu RT$.
+        \end{itemtask}\lastline
+        И еще список.
+        \begin{enumtask}
+            \item $\vec{F} = m \vec{a}$.
+            \item $PV = \nu RT$.
+        \end{enumtask}\lastline
+    }
+\end{lstlisting}
+
+\noindent
+\task{
+    Задача со списками.
+    \begin{itemtask}
+        \item $\vec{F} = m \vec{a}$;
+        \item $PV = \nu RT$.
+    \end{itemtask}\lastline
+    И еще список.
+    \begin{enumtask}
+            \item $\vec{F} = m \vec{a}$.
+            \item $PV = \nu RT$.
+    \end{enumtask}\lastline
+}
+
+\setcounter{notask}{1}
+
+\subsection{Частые ошибки}
+
+В некоторых случаях таблицы недопускают пустых строк, поэтому может возникать ошибка компиляции, если в
+тексте задачи присутствует пустая строка. В таком случае для переноса строки рекомендуется использовать
+команду \texttt{newline} или \texttt{\textbackslash\textbackslash}. Данной ошибки не должно возникать при
+работе с базой задач (см. раздел \ref{sec:db}).

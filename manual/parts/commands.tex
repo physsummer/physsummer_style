@@ -129,8 +129,64 @@
 \noindent
 \task{Снова задача 1.}
 
+\setcounter{notask}{1}
+
 \vspace{0.5cm}
 
 Кроме того пакетом используется ряд внутренних счетчиков, для корректной работы пакета не используйте их:
 \texttt{oldN}, \texttt{newN}, \texttt{jury}. Также присутствуют счетчики для комментариев (см. раздел
 \ref{sec:authors}).
+
+
+\subsection{Режим <<учителя>>}
+\label{sec:teacher}
+
+Путем добавления одной из двух команд.
+
+\begin{lstlisting}[gobble = 3]
+    \teachermode     % включение режима учителя
+    \teachermodeoff  % выключение режима учителя
+\end{lstlisting}
+
+Работа некоторых команд может изменяться в зависимости от режима. Например, ответы к задачам показываются
+только в режиме учителя.
+
+
+\subsection{Работа с картинками}
+
+\noindent
+\begin{tabular}{S{0.48\linewidth} S{0.485\linewidth}}
+    Отрисовка картинки по центру страницы &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \drawfig{метка}{картинка}
+        \end{lstlisting} \\
+    Отрисовка картинки по центру страницы из файла &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \figcap{файл}{ширина}
+            % ширина задается долей от textwidth
+        \end{lstlisting} \\
+    Отрисовка картинки внутри текста &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \drawwrap{метка}{ширина}{картинка}
+            % ширина задается долей от textwidth
+        \end{lstlisting} \\
+    Отрисовка картинки внутри текста из файла &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \wrapfigcap{файл}{ширина}
+            % ширина задается долей от textwidth
+        \end{lstlisting} \\
+    Отрисовка картинок на одном уровне из файлов &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \sidebyside{файл1}{ширина1}
+                {файл2}{ширина2}
+            % ширины задаются долей от textwidth
+        \end{lstlisting} \\
+    Отрисовка картинок на одном уровне &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \drawsidebyside{метка1}{картинка1}
+                {метка2}{картинка2}
+                {ширина1}{ширина2}
+            % ширины задаются долей от textwidth
+            % ширины имеют значение по умолчанию 0.48
+        \end{lstlisting} \\
+\end{tabular}

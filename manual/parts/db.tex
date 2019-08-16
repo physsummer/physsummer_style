@@ -1,1 +1,140 @@
-Да и так все понятно.
+\section{Работа с <<базой>> задач \texttt{(physsummer-db)}}
+\label{sec:db}
+
+\subsection{<<База>> задач}
+\label{sec:db-description}
+
+Базой в данном случае мы будем называть папку, где хранятся условия задач, организованную специальным
+способом. По умолчанию данная папка называется \texttt{problems\_db}, опишем ее структуру.
+
+\begin{lstlisting}[gobble = 3]
+    problems_db/
+        db.stamp
+        zadachnik1/
+            zadacha-1.tex
+            zadacha-2.tex
+            zadacha-2-fig.tex
+        zadachnik2/
+            zadacha-1.tex
+            zadacha-2.tex
+            info
+        zadachnik3/
+            zadacha-1-default.tex
+            zadacha-1.tex
+            zadacha-1-fig.tex
+            zadacha-1-fig2.tex
+            zadacha-2.tex
+\end{lstlisting}
+
+В корневой папке находится файл \texttt{db.stamp}, который необходим для корректной работы некоторых
+команд. Также в корневая папка содержит подпапки, с группами задач.
+
+Задача без рисунка описывается одним файлом, в файле должен присутствовать только текст задачи, без
+команды \texttt{task}.
+
+Задача с рисунком двумя или более файлами. В простом случае нужен файл с текстом задачи:
+\texttt{zadacha.tex}, и файл с картинкой имеющий такое же имя, но с суффиксом \texttt{fig}:
+\texttt{zadacha-fig.tex}. Если картинок более одной, то они долны иметь суффиксы \texttt{fig} с номерами
+(см. пример).
+
+В более сложном случае необходим файл с суффиксом \texttt{default}, в котором описывается расположение
+текста, а также размер и расположение рисунков (см. раздел \ref{sec:db-default}).
+
+\subsection{Настройка и использование базы}
+
+Путь к базе указывается при помощи переменной \texttt{libproblempath} и по умолчанию значение этой
+переменной указывает на текущую папку или на одну из папой не более, чем на четыре уровня выше текущей, в
+которой был найден файл \texttt{db.stamp}. Если база задач находится в другом месте, то необходимо
+вручную задать значение данной переменной при помощи следующей команды.
+
+\begin{lstlisting}[gobble = 3]
+    \renewcommand{\libproblempath}{правильный путь}
+\end{lstlisting}
+
+Ниже приведен пример использования задач из базы. Использована база из примера в разделе
+\ref{sec:db-description}.
+
+
+\begin{lstlisting}[gobble = 3]
+    \begin{document}
+        \libproblem{zadachnik-3}{zadacha-1}
+        \libproblem{zadachnik-1}{zadacha-1}
+        \libproblem{zadachnik-1}{zadacha-2}
+    \end{document}
+\end{lstlisting}
+
+
+
+
+\subsection{Компоновка задачи: файл \texttt{default}}
+\label{sec:db-default}
+
+Компоновка задачи с картинкой по умолчанию, выделяет $4\unit{см}$ для картинки. Для изменения компоновки
+необходимо создать файл с суффиксом \texttt{default}.
+
+В базовых случаях данный файл должен содержать одну единственную строку с одной из следующих команд.
+
+\noindent
+\begin{tabular}{S{0.48\linewidth} S{0.485\linewidth}}
+    Изменение ширины картинки &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemtaskpic[ширина картинки]
+        \end{lstlisting} \\
+    Отрисовка картинки под задачей &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemtaskfigbelow
+        \end{lstlisting} \\
+    Расположение первой картинки на стандартном месте, а второй под задачей &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemtaskdoublepic
+        \end{lstlisting} \\
+    Расположение двух картинок под задачей &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemtasktwobelow
+        \end{lstlisting}
+\end{tabular}
+
+
+В более сложных случаях может оказаться полезной одна из следующих команд.
+
+\noindent
+\begin{tabular}{S{0.48\linewidth} S{0.485\linewidth}}
+    Извлечение картинки задачи &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemfig[задачник][задача]
+            % по умолчанию текущая задача
+        \end{lstlisting} \\
+    Извлечение картинки задачи &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemtext[задачник][задача]
+            % по умолчанию текущая задача
+        \end{lstlisting} \\
+    Текущий задачник &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemgroup
+        \end{lstlisting} \\
+    Текущая задача &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \libproblemid
+        \end{lstlisting} \\
+    Создание метки для рисунка &
+        \begin{lstlisting}[style = listtable, gobble = 10]
+            \figrefname{#1}
+            % сокращение для следующей команды
+            \libproblemgroup:\libproblemid:#1
+        \end{lstlisting} \\
+\end{tabular}
+
+Ниже приведен пример файла \texttt{default} со сложно нестандартной компоновкой.
+
+\begin{lstlisting}
+    \libproblemtaskpic % вставить текст задачи с первой картинкой
+        % на стандартном месте
+    \drawsidebyside{\figrefname{2}}{ % нарисовать две картинки на одном уровне
+        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
+        % использовать вторую картинку
+    }{\figrefname{3}}{
+        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig3}
+        % использовать третью картинку
+    }
+\end{lstlisting}

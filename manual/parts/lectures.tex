@@ -18,8 +18,8 @@
 \end{lstlisting}
 
 \begin{theorem}
-    Пусть $X_1, X_2, \dots, X_n$~--- независимые случайные величины с мат. ожиданием $\mathbb{E}[X_i] =
-    \mu_i$ и дисперсией $Var[X_i] = \sigma_i^2$. Тогда для любого $a > 0$:
+    Пусть $X_1, X_2, \dots, X_n$~--- независимые случайные величины с мат. ожиданиями $\mathbb{E}[X_i] =
+    \mu_i$ и дисперсиями $Var[X_i] = \sigma_i^2$. Тогда для любого $a > 0$:
     $$
         \Pr[\abs{\sum\limits_{i = 1}^{n} X_i - \sum\limits_{i = 1}^{n} \mu_i} \ge a] \le
         \frac{\sum\limits_{i = 1}^n \sigma_i^2}{a^2}.
@@ -65,7 +65,7 @@
 
     
 Комментарии нумеруются для каждого автора отдельно. Для комментариев заводится счетчик
-\texttt{\#1comment}.
+\texttt{\#1comment}. Комментарии оборажаются только в режиме учителя.
 
 
 
@@ -81,7 +81,7 @@
 \vspace{0.4cm}
 
 \noindent
-\begin{longtable}{L{0.82\linewidth} S{0.145\linewidth}}
+\begin{longtable}{C{0.82\linewidth} S{0.145\linewidth}}
     Колонка занимает всю, предоставленную ширину, применяется только в \texttt{tabularx}. В случае
     нескольких колонок указанного типа, создаются равной ширины. Выравнивание влево. &
         \begin{lstlisting}[style = listtable, gobble = 6, keepspaces = \false]
@@ -116,9 +116,11 @@
     ?{#1}        % вертикальная линия
 \end{lstlisting}
 
+\vspace{0.2cm}
+
 Ниже приведен пример испольвания. Стоит обратить внимание, что таблицы плохо взаимодействуют с отступами,
 возможно полезной окажется команда \texttt{noindent}. Для изменения вертикальных отступов в таблице можно
-задаться пареметр \texttt{arraystretch}.
+задать параметр \texttt{arraystretch}.
 
 
 \begin{lstlisting}[style = listtable, gobble = 3]

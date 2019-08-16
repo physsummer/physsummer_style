@@ -1,6 +1,3 @@
-\usepackage[thinlines]{easytable}
-
-
 \newcolumntype{S}[1]{>{\centering\let\newline\\\arraybackslash\vspace{-5pt}}m{#1}}
 
 \definecolor{do}{RGB}{150, 50, 200}
@@ -15,9 +12,26 @@
     language = {[LaTeX]TeX},
     deletetexcs = {\fill},
     moretexcs = {
-        \task, \setphysstyle,
+        \task, \taskpic,
+        \setphysstyle,
         \newauthor, \dovcomment,
-        \hlinewd
+        \hlinewd, \lastline,
+        \answer, \tags,
+        \teachermode, \teachermodeoff,
+        \libproblempath, \libproblem,
+        \libproblemtaskpic,
+        \libproblemtaskfigbelow,
+        \libproblemtaskdoublepic,
+        \libproblemtasktwobelow,
+        \libproblemfig,
+        \libproblemtext,
+        \libproblemgroup,
+        \libproblemid,
+        \drawsidebyside,
+        \figrefname, \subimport,
+        \drawfig, \figcap,
+        \wrapfigcap, \drawwrap,
+        \sidebyside
     },
     moretexcs = [2]{
         \draw, \coordinate, \pic,
