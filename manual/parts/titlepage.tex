@@ -24,6 +24,14 @@
     \pic[scale = 1.6, rotate = 40] at (-5, -8) {tikzart-bunny};
     \pic[scale = 1.6, rotate = -10, xscale = -1] at (6, 1) {tikzart-bunny};
     \pic[scale = 1.6, rotate = 30, xscale = -1] at (8, 9) {tikzart-bunny};
+
+    \draw[platform] (\paperwidth / 2, -12.52) -- ++(-\paperwidth, 0);
+
+    \foreach \i in {0, 1, ..., 4}{
+        \pic[scale = 4] at (-5 + 1.8 * \i, -12.5) {tikzart-train};
+        \draw (-3.2 + 1.8 * \i, -12.2) -- ++(-0.2, 0);
+    }
+    \pic[scale = 4] at (-5 + 1.8 * 5, -12.5) {tikzart-trainhead};
 \end{tikzpicture}
 
 
