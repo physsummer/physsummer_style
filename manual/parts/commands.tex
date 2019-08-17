@@ -19,7 +19,7 @@
 (для дополнительных сведений см. мануал пакета \texttt{physics}).
 
 \noindent
-\begin{tabular}{S{0.28\linewidth} S{0.685\linewidth}}
+\begin{tabular}{C{0.28\linewidth} C{0.685\linewidth}}
     \vspace{-10pt}$\avg{\frac{a}{b}}$ &
         \begin{lstlisting}[style = listtable, gobble = 10]
             $\avg{\frac{a}{b}}$ % среднее значение
@@ -34,7 +34,7 @@
         \end{lstlisting} \\
     \vspace{-10pt}$\pdv{x}{t}, \pdv[2]{x}{t}, \pdv{f}{x}{y}$ &
         \begin{lstlisting}[style = listtable, gobble = 10]
-            $\dv{x}{t}, \dv[2]{x}{t}, \pdv{f}{x}{y}$
+            $\pv{x}{t}, \pv[2]{x}{t}, \pdv{f}{x}{y}$
             % частная производная
         \end{lstlisting} \\
     $\norm{a}$ &
@@ -51,8 +51,10 @@
 
 \subsection{Размерности}
 
+\def\arraystretch{-500}
+
 \noindent
-\begin{longtable}{S{0.28\linewidth} S{0.685\linewidth}}
+\begin{longtable}{S{0.28\linewidth} C{0.685\linewidth}}
     C &
         \begin{lstlisting}[style = listtable, gobble = 10]
             $\unit{C}$  % команда размерности
@@ -99,7 +101,7 @@
               \end{lstlisting} \\
     $\omm$ &
              \begin{lstlisting}[style = listtable, gobble = 15]
-                 $\kdjkgC$  % удельное сопротивление
+                 $\omm$  % удельное сопротивление
              \end{lstlisting} \\
 \end{longtable}
 
