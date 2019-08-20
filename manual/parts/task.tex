@@ -71,18 +71,16 @@
 
 \vspace{0.3cm}
 
-Как видно в этом примере, в конце задачи присутствует пустая строка. К сожалению, это проблема
-совместимости таблиц и списков в \LaTeX. Для того, чтобы избежать этого в пакете присутствует команда
-\texttt{lastline}, позволяющая исправить эту ситуацию. Также можно обратить внимание на стандартную
-команду \texttt{normalbaselineskip}.
+Обратите внимание, что существуют проблемы совместимости списков и таблиц в \LaTeX, будьте осторожны при
+использовании. Будет полезным иметь ввиду параметры \texttt{before} и \texttt{after}, которые можно
+задавоть в списках, также возможно окажется полезным стандартный параметр \texttt{normalbaselineskip}.
 
 \begin{lstlisting}[gobble = 3]
     \task{
-        Задача со списками.
-        \begin{itemtask}
+        \begin{itemtask}[after = \newline текст]
             \item $\vec{F} = m \vec{a}$;
             \item $PV = \nu RT$.
-        \end{itemtask}\lastline
+        \end{itemtask}\lastlinу
         И еще список.
         \begin{enumtask}
             \item $\vec{F} = m \vec{a}$.
@@ -94,15 +92,15 @@
 \noindent
 \task{
     Задача со списками.
-    \begin{itemtask}
+    \begin{itemtask}[after = \newline текст]
         \item $\vec{F} = m \vec{a}$;
         \item $PV = \nu RT$.
-    \end{itemtask}\lastline
+    \end{itemtask}
     И еще список.
     \begin{enumtask}
             \item $\vec{F} = m \vec{a}$.
             \item $PV = \nu RT$.
-    \end{enumtask}\lastline
+    \end{enumtask}
 }
 
 \setcounter{notask}{1}
