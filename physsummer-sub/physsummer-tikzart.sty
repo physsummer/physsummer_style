@@ -2,48 +2,48 @@
 \ProvidesPackage{physsummer-tikzart}
 
 \tikzset{
-	%% Кролик (см rayon/2017-08-3)
-	tikzart-bunny/.pic = {
-		\draw[thick] (0, 0) .. controls (-1.1, 0) and (-0.4, 0.2) .. (-0.3, 0.2)
-			coordinate (BLegLeft)% нижняя лапка
-			to[in = -70, out = 140] ++(130 : 0.5) coordinate (BArmBottom) % верхняя лапка
-			.. controls ($(BArmBottom) + (-90 : 0.2)$) and
-			($(BArmBottom) + (-0.25, 0.07) + (-90 : 0.2)$) .. ($(BArmBottom) + (-0.25, 0.07)$)
-			.. controls ($(BArmBottom) + (-0.25, 0.07) + (90 : 0.1)$)
-			and ($(BArmBottom) + (105 : 0.3) + (-170 : 0.1)$)
-			.. ($(BArmBottom) + (105 : 0.3)$) coordinate (BArmTop)
-			to[out = 110, in = -110 ] ++(80 : 0.15) coordinate (BHeadBottom)
-			.. controls ($(BHeadBottom) + (-0.2, 0)$)
-			and ($(BHeadBottom) + (70 : 0.5) + (-0.6, -0.1) $)
-			.. ($(BHeadBottom) + (70 : 0.5)$) coordinate (BHeadTop)
-			.. controls ($(BHeadTop) + (70:0.4)$)
-			and ($(BHeadTop) + (25 : 0.8) + (-0.2, -.05)$)
-			.. ($(BHeadTop) + (25 : 0.8)$) coordinate (BEarTop)
-			to[out = -110, in = 20] ++(-140:0.5) coordinate (BEar)
-			to[out = 10, in = 160]  ++(0:0.5)
-			to[out = -130, in = -10] ++(-0.6, -0.25) coordinate (BEarBottom)
-			to[out = -110, in = 80] ++(0, -0.15) coordinate (BBackTop)
-			.. controls ($(BBackTop) + (0.3, 0)$)
-			and ($(BBackTop) + (-45:0.9) + (100:0.3)$)
-			.. ($(BBackTop) + (-45:0.9)$) coordinate (BTailTop)
-			.. controls ($(BTailTop) + (20:0.4)$)
-			and ($(BTailTop) + (-110:0.3) + (-30:0.5)$)
-			.. ($(BTailTop) + (-110:0.3)$)
-			to[out = -150, in = 30 ] ++(-150:0.1) coordinate (BLegRight)
-			.. controls ($(BLegRight) + (-90:.1)$)
-			and (0.25, 0) .. (0, 0);
-		\draw[fill = black] (BHeadTop) ++(-120:0.2) circle (0.04);
-		\draw (BLegLeft) to[out = 0, in = 170] ++(0.15, 0) .. controls
-			($(BLegLeft) + (0.15, 0) + (170 : 0.1)$) and
-			($(BLegLeft) + (0.15, 0) + (60:0.5) + (-0.5, 0.1)$)
-			.. ($(BLegLeft) + (0.15, 0) + (60:0.5)$);
-	},
-	%% Вагон поезда (см. rayon/2010-09-3)
-	% Размер картинки 0.4 * 0.24, привязка к левому нижнему углу
+    %% Кролик (см rayon/2017-08-3)
+    tikzart-bunny/.pic = {
+        \draw[thick] (0, 0) .. controls (-1.1, 0) and (-0.4, 0.2) .. (-0.3, 0.2)
+            coordinate (BLegLeft)% нижняя лапка
+            to[in = -70, out = 140] ++(130 : 0.5) coordinate (BArmBottom) % верхняя лапка
+            .. controls ($(BArmBottom) + (-90 : 0.2)$) and
+            ($(BArmBottom) + (-0.25, 0.07) + (-90 : 0.2)$) .. ($(BArmBottom) + (-0.25, 0.07)$)
+            .. controls ($(BArmBottom) + (-0.25, 0.07) + (90 : 0.1)$)
+            and ($(BArmBottom) + (105 : 0.3) + (-170 : 0.1)$)
+            .. ($(BArmBottom) + (105 : 0.3)$) coordinate (BArmTop)
+            to[out = 110, in = -110 ] ++(80 : 0.15) coordinate (BHeadBottom)
+            .. controls ($(BHeadBottom) + (-0.2, 0)$)
+            and ($(BHeadBottom) + (70 : 0.5) + (-0.6, -0.1) $)
+            .. ($(BHeadBottom) + (70 : 0.5)$) coordinate (BHeadTop)
+            .. controls ($(BHeadTop) + (70:0.4)$)
+            and ($(BHeadTop) + (25 : 0.8) + (-0.2, -.05)$)
+            .. ($(BHeadTop) + (25 : 0.8)$) coordinate (BEarTop)
+            to[out = -110, in = 20] ++(-140:0.5) coordinate (BEar)
+            to[out = 10, in = 160] ++(0:0.5)
+            to[out = -130, in = -10] ++(-0.6, -0.25) coordinate (BEarBottom)
+            to[out = -110, in = 80] ++(0, -0.15) coordinate (BBackTop)
+            .. controls ($(BBackTop) + (0.3, 0)$)
+            and ($(BBackTop) + (-45:0.9) + (100:0.3)$)
+            .. ($(BBackTop) + (-45:0.9)$) coordinate (BTailTop)
+            .. controls ($(BTailTop) + (20:0.4)$)
+            and ($(BTailTop) + (-110:0.3) + (-30:0.5)$)
+            .. ($(BTailTop) + (-110:0.3)$)
+            to[out = -150, in = 30 ] ++(-150:0.1) coordinate (BLegRight)
+            .. controls ($(BLegRight) + (-90:.1)$)
+            and (0.25, 0) .. (0, 0);
+        \draw[fill = black] (BHeadTop) ++(-120:0.2) circle (0.04);
+        \draw (BLegLeft) to[out = 0, in = 170] ++(0.15, 0) .. controls
+            ($(BLegLeft) + (0.15, 0) + (170 : 0.1)$) and
+            ($(BLegLeft) + (0.15, 0) + (60:0.5) + (-0.5, 0.1)$)
+            .. ($(BLegLeft) + (0.15, 0) + (60:0.5)$);
+    },
+    %% Вагон поезда (см. rayon/2010-09-3)
+    % Размер картинки 0.4 * 0.24, привязка к левому нижнему углу
     % Зачем этот файл здесь?
     % А где ему ещё быть?
     % Казалось бы одноразовые картинки, но пусть будет здесь.
-	tikzart-train/.pic = {
+    tikzart-train/.pic = {
         \filldraw (0.05, 0.03) circle (0.03);
         \filldraw (0.13, 0.03) circle (0.03);
         \filldraw (0.35, 0.03) circle (0.03);
@@ -56,10 +56,10 @@
         
         \draw[ultra thin] (0.05, 0.09) -- ++(0.3, 0);
         \draw[ultra thin] (0.05, 0.1) -- ++(0.3, 0);
-	},
-	%% Первый вагон поезда (см. rayon/2010-09-3)
-	% Размер картинки 0.5 * 0.24, привязка к левому нижнему углу
-	tikzart-trainhead/.pic = {
+    },
+    %% Первый вагон поезда (см. rayon/2010-09-3)
+    % Размер картинки 0.5 * 0.24, привязка к левому нижнему углу
+    tikzart-trainhead/.pic = {
         \filldraw (0.05, 0.03) circle (0.03);
         \filldraw (0.15, 0.03) circle (0.03);
         \filldraw (0.4, 0.03) circle (0.03);
@@ -74,7 +74,7 @@
         
         \draw[ultra thin] (0.05, 0.09) -- ++(0.37, 0);
         \draw[ultra thin] (0.05, 0.1) -- ++(0.37, 0);
-	},
+    },
     % координаты нижнего угла дула (5, 1.1)
     tikzart-gun/.pic = {
         \coordinate (a) at (0.8, 1);
@@ -146,61 +146,43 @@
             \fill[shift = {(0, 11.81)}, rotate = \a] (-3.5, 0.06) rectangle (3.5, -0.06);
         }
     },
-	tikzart-fire/.pic={
-		\fill [black] 
-			(0,0) .. controls (.3, 0) and (.6, .1) .. (.7, .3)
-				  .. controls (.8, .5) and (.85, .6) .. (.8, .9)
-				  .. controls (.75, 1.1) and (.7, 1.2) .. (.6, 1.4)
-				  .. controls (.65, 1.2) and (.6, 1.05) .. (.5, .9)
-				  .. controls (.5, 1.2) and (.2, 1.3) .. (.1,1.6)
-				  .. controls (.05, 1.75) and (.1, 2) .. (.2, 2.1)
-				  .. controls (-.1, 2) and (-.2, 1.85) .. (-.3, 1.7)
-				  .. controls (-.4, 1.5) and (-.45, 1.3) .. (-.4, 1.1)
-				  .. controls (-.5, 1.2) and (-.51, 1.4) .. (-.5, 1.5)
-				  .. controls (-.75, 1.2) and (-.8, .7) .. (-.7, .5)
-				  .. controls (-.6, .28) and (-.4, 0) .. (0,0);
-		\fill [white]
-			(0,0) .. controls (.3, 0) and (.52, .34) .. (.37, .61)
-				  .. controls (.4, .54) and (.32, .32) .. (.25, .25)
-				  .. controls (.3, .35) and (.25, .5) .. (.2, .6)
-				  .. controls (.1, .8) and (-.05, 1) .. (0, 1.2)
-				  .. controls (-.32, 1) and (-.3, .72) .. (-.2, .47)
-				  .. controls (-.3, .51) and (-.31, .6) .. (-.33, .7)
-				  .. controls (-.4, .6) and (-.4, .5) .. (-.4, .4)
-				  .. controls (-.35, .18) and (-.2, 0) .. (0,0);
-	},
-	% Пёсель
-	% Нижняя левая точка (0, 0), смотрит налево, размеры (2.56, 2.01)
-	tikzart-dog/.pic = {
-		\draw[thin, scale = 0.25, fill = black]
-			(D) ++(4.34, 5.55)
-			++(120 : 0.15)
-			to ++(120 : 2.35)
-			to[out = 120, in = 0] ++(-0.3, 0.3)
-			to[out = 180, in = 60] ++(-0.3, -0.6)
-			to[out = 150, in = 0] ++(-0.3, 0.2)
-			to[out = 180, in = 80] ++(-0.4, -0.8)
-			arc(90 : 180 : 0.75)
-			to ++(210 : 1)
-			to[out = 210, in = 180] ++(1.75, -0.8)
-			to ++(-80 : 1.5)
-			to[out = -80, in = 150] ++(1/ 3, -1 / 3)
-			to ++(-94 : 2.65)
-			to[out = -94, in = -100] ++(1, 0)
-			to ++(80 : 2.65)
-			to ++(5 : 2.5)
-			to[out = -90, in = 150] ++(0.75, -1)
-			to ++(-30 : 1.2)
-			to ++(-100 : 1.25)
-			to[out = -100, in = -100] ++(1, 0)
-			to ++(80 : 1.7)
-			to ++(135 : 1)
-			to[out = 60, in = -45] ++(-0.25, 2.25)
-			to[out = 30, in = 240] ++(2, 2)
-			to[out = 60, in = 60] ++(-1 / 3, 0.25)
-			to[out = 230, in = 10] ++(-2, -1.7)
-			to ++(-3.45, 0) to[out = 180, in = -60] cycle;
-	}
+    tikzart-fire/.pic = {
+        \fill[black] (0, 0) .. controls (0.3, 0) and (0.6, 0.1) .. (0.7, 0.3)
+            .. controls (0.8, 0.5) and (0.85, 0.6) .. (0.8, 0.9)
+            .. controls (0.75, 1.1) and (0.7, 1.2) .. (0.6, 1.4)
+            .. controls (0.65, 1.2) and (0.6, 1.05) .. (0.5, 0.9)
+            .. controls (0.5, 1.2) and (0.2, 1.3) .. (0.1, 1.6)
+            .. controls (0.05, 1.75) and (0.1, 2) .. (0.2, 2.1)
+            .. controls (-0.1, 2) and (-0.2, 1.85) .. (-0.3, 1.7)
+            .. controls (-0.4, 1.5) and (-0.45, 1.3) .. (-0.4, 1.1)
+            .. controls (-0.5, 1.2) and (-0.51, 1.4) .. (-0.5, 1.5)
+            .. controls (-0.75, 1.2) and (-0.8, 0.7) .. (-0.7, 0.5)
+            .. controls (-0.6, 0.28) and (-0.4, 0) .. (0, 0);
+            \fill[white] (0, 0) .. controls (0.3, 0) and (0.52, 0.34) .. (0.37, 0.61)
+            .. controls (0.4, 0.54) and (0.32, 0.32) .. (0.25, 0.25)
+            .. controls (0.3, 0.35) and (0.25, 0.5) .. (0.2, 0.6)
+            .. controls (0.1, 0.8) and (-0.05, 1) .. (0, 1.2)
+            .. controls (-0.32, 1) and (-0.3, 0.72) .. (-0.2, 0.47)
+            .. controls (-0.3, 0.51) and (-0.31, 0.6) .. (-0.33, 0.7)
+            .. controls (-0.4, 0.6) and (-0.4, 0.5) .. (-0.4, 0.4)
+            .. controls (-0.35, 0.18) and (-0.2, 0) .. (0, 0);
+    },
+    % Пёсель
+    % Нижняя левая точка (0, 0), смотрит налево, размеры (2.56, 2.01)
+    tikzart-dog/.pic = {
+        \draw[thin, scale = 0.25, fill = black] (4.34, 5.55) ++(120 : 0.15) -- ++(120 : 2.35)
+            to[out = 120, in = 0] ++(-0.3, 0.3) to[out = 180, in = 60] ++(-0.3, -0.6)
+            to[out = 150, in = 0] ++(-0.3, 0.2) to[out = 180, in = 80] ++(-0.4, -0.8)
+            arc (90 : 180 : 0.75) -- ++(210 : 1)
+            to[out = 210, in = 180] ++(1.75, -0.8) -- ++(-80 : 1.5)
+            to[out = -80, in = 150] ++(1 / 3, -1 / 3) -- ++(-94 : 2.65)
+            to[out = -94, in = -100] ++(1, 0) -- ++(80 : 2.65) -- ++(5 : 2.5)
+            to[out = -90, in = 150] ++(0.75, -1) -- ++(-30 : 1.2) -- ++(-100 : 1.25)
+            to[out = -100, in = -100] ++(1, 0) -- ++(80 : 1.7) -- ++(135 : 1)
+            to[out = 60, in = -45] ++(-0.25, 2.25) to[out = 30, in = 240] ++(2, 2)
+            to[out = 60, in = 60] ++(-1 / 3, 0.25) to[out = 230, in = 10] ++(-2, -1.7)
+            -- ++(-3.45, 0) to[out = 180, in = -60] cycle;
+    }
 }
 
 
