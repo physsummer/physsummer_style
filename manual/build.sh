@@ -1,9 +1,12 @@
 dir=pdf
+file=manual
+compiler=xelatex
+
 mkdir $dir
-pdflatex --output-directory $dir manual.tex
-cp manual.bib $dir
+$compiler --output-directory $dir $file.tex
+cp $file.bib $dir
 cd $dir
-biber manual
+biber $file
 cd ..
-pdflatex --output-directory $dir manual.tex
-pdflatex --output-directory $dir manual.tex
+$compiler --output-directory $dir $file.tex
+$compiler --output-directory $dir $file.tex
