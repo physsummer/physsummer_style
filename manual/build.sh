@@ -1,6 +1,6 @@
 dir=pdf
 file=manual
-compiler=xelatex
+compiler=pdflatex
 
 mkdir $dir
 $compiler --output-directory $dir $file.tex
