@@ -7,11 +7,18 @@
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
+\newcommand{\libexperimentgroup}{}
+\newcommand{\libexperimentid}{}
 
 
 \newcommand{\setcurrentproblem}[2]{
     \renewcommand{\libproblemgroup}{#1}
     \renewcommand{\libproblemid}{#2}
+}
+
+\newcommand{\setcurrentexperiment}[2]{
+    \renewcommand{\libexperimentgroup}{#1}
+    \renewcommand{\libexperimentid}{#2}
 }
 
 % где всё лежит
@@ -33,6 +40,25 @@
     }
   }
 
+
+\newcommand{\libexperimentpath}{experiments_db}
+% если этот перебор не работает, делай \renewcommand{\libexperimentpath}{правильный-путь}
+\IfFileExists{../experiments_db/db.exp.stamp}
+  {\renewcommand{\libexperimentpath}{../experiments_db}}
+  {\IfFileExists{../../experiments_db/db.exp.stamp}
+    {\renewcommand{\libexperimentpath}{../../experiments_db}}
+    {\IfFileExists{../../../experiments_db/db.exp.stamp}
+      {\renewcommand{\libexperimentpath}{../../../experiments_db}}
+      {\IfFileExists{../../../../experiments_db/db.exp.stamp}
+        {\renewcommand{\libexperimentpath}{../../../../experiments_db}}
+        {\IfFileExists{../../../../../experiments_db/db.exp.stamp}
+          {\renewcommand{\libexperimentpath}{../../../../../experiments_db}}
+          {}
+        }
+      }
+    }
+  }
+  
 \newtoggle{unnumberedpic}
 
 
@@ -66,6 +92,33 @@
         } { % default behavior, no figure
             \libproblemtask
         }
+    }
+}
+
+
+\newcommandx{\libexperimenttext}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
+    \ifteacher{\texttt{[\libexperimentgroup/\libexperimentid]}}\fi
+    \message{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\libexperimentpath/#1}
+    \subimport{\libexperimentpath/#1/}{#2}
+}
+
+
+\newcommandx{\libexperimentcriteria}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
+    \criteriainit{
+        \subimport{\libexperimentpath/#1/}{#2-crit}
+    }
+}
+
+\newcommand{\libexperiment}[3][default]{
+    \setcurrentexperiment{#2}{#3}
+    \IfFileExists{\libexperimentpath/#2/#3-#1} {
+        \subimport{\libexperimentpath/#2/}{#3-#1}
+    }{ % file doesn't exist
+        \exptask{
+            \libexperimenttext
+        }
+
+        \libexperimentcriteria
     }
 }
 
