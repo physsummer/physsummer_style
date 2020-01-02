@@ -8,10 +8,10 @@
 \RequirePackage{xparse}
 
 
-\newif\ifexpcriteria
-\newcommand{\expcriteriamode}{\expcriteriatrue}
-\newcommand{\expcriteriamodeoff}{\expcriteriafalse}
-\newcommand{\expcriteriatablesize}{1.5cm}
+%\newif\ifexpcriteria
+%\newcommand{\expcriteriamode}{\expcriteriatrue}
+%\newcommand{\expcriteriamodeoff}{\expcriteriafalse}
+%\newcommand{\expcriteriatablesize}{1.5cm}
 
 
 \newcommand{\exptitle}[1]{
@@ -19,7 +19,7 @@
 }
 
 \newcommand{\expequipment}[1]{
-    \textbf{Оборудование:} #1
+    \textbf{Оборудование:} {#1}.
 }
 
 
@@ -31,14 +31,6 @@
     \fi
 }
 
-\newcommand{\expcomment}[1]{
-    \ifexpcriteria
-    \else
-    \teacher{
-        \paragraph{Комментарии.} #1
-    }
-    \fi
-}
 
 \newcounter{expcriteriarow}
 \setcounter{expcriteriarow}{1}
@@ -127,7 +119,7 @@
       \makecell*[{{C{0.5cm}}}]{\centering \IfBooleanF{#2}{\arabic{expcriteriarow}}} &
                 \experimentcriteriacell{#4} &
                 \makecell*[{{C{\expcriteriatablesize}}}]{#5~ #6} &
-                                                                   \makecell*[{{C{1.5cm}}}]{} \\
+                \makecell*[{{C{1.5cm}}}]{} \\
     \end{tabularx}
 	\else
     \noindent

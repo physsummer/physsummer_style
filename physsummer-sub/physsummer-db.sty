@@ -4,6 +4,7 @@
 \RequirePackage{import}
 \RequirePackage{xspace}
 \RequirePackage{xargs}
+\RequirePackage{xparse}
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
@@ -98,7 +99,6 @@
 
 \newcommandx{\libexperimenttext}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
     \ifteacher{\texttt{[\libexperimentgroup/\libexperimentid]}}\fi
-    \message{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\libexperimentpath/#1}
     \subimport{\libexperimentpath/#1/}{#2}
 }
 
@@ -109,18 +109,31 @@
     }
 }
 
-\newcommand{\libexperiment}[3][default]{
-    \setcurrentexperiment{#2}{#3}
-    \IfFileExists{\libexperimentpath/#2/#3-#1} {
-        \subimport{\libexperimentpath/#2/}{#3-#1}
+\ExplSyntaxOn
+\NewDocumentCommand{\libexperiment}{o O{default}mm}{
+    \setcurrentexperiment{#3}{#4}
+    \IfFileExists{\libexperimentpath/#3/#4-#2} {
+        \subimport{\libexperimentpath/#3/}{#4-#2}
     }{ % file doesn't exist
         \exptask{
             \libexperimenttext
-        }
+                        
+        }\par
 
-        \libexperimentcriteria
+        \IfNoValueTF{#1}{
+            \vspace{0.1cm}
+            \IfFileExists{\libexperimentpath/#3/#4-crit}{
+                \libexperimentcriteria
+            }{
+                \message{Cannot find criteria file:\libexperimentpath/#3/#4-crit}
+            }
+        }{
+            #1
+        }
     }
 }
+
+\ExplSyntaxOff
 
 \newcommandx{\libproblemtask}{
     \toggletrue{unnumberedpic}
