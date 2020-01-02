@@ -13,6 +13,9 @@
 %\newcommand{\expcriteriamodeoff}{\expcriteriafalse}
 %\newcommand{\expcriteriatablesize}{1.5cm}
 
+\newcommand{\expbullet}[1][0.3cm]{
+    \hspace{#1} \textbullet~
+}
 
 \newcommand{\exptitle}[1]{
     \section{#1}
@@ -109,8 +112,6 @@
     }
 }
 
-
-
 \NewDocumentCommand{\criteria}{t*t^t+mmO{}}{
     \ifexpcriteria
     \noindent
@@ -134,6 +135,7 @@
     \IfBooleanF{#1}{\addtocounter{expcriteriarow}{1}}
     \vspace{-1pt}
 }
+
 
 \ExplSyntaxOff
 
