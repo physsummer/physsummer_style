@@ -136,6 +136,11 @@
     \vspace{-1pt}
 }
 
+\NewDocumentCommand{\subcriteria}{mO{}}{
+    \criteria*^+{\expbullet #1}{}[#2]
+}
+
+
 
 \ExplSyntaxOff
 
