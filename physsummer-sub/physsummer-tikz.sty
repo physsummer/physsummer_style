@@ -17,6 +17,7 @@
     calc,
     patterns,
     intersections,
+    backgrounds,
     decorations.pathreplacing,
     decorations.pathmorphing,
     decorations.text,
@@ -117,7 +118,28 @@
                 mark = at position #1 with \coordinate (#2);
             }
         }
-    }
+    },
+    tangent/.style = {
+        decoration = {
+            markings,
+            mark = at position #1 with {
+                \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number})
+                    at (0pt, 0pt); 
+                \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number})
+                    at (1, 0pt);
+                \coordinate
+                    (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence
+                        number}) at (0pt, 1);
+            }
+        },
+        postaction = decorate
+    },
+    use tangent/.style = {
+        shift = (tangent point-#1),
+        x = (tangent unit vector-#1),
+        y = (tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default = 1
 }
 
 

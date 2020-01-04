@@ -132,7 +132,7 @@
 }
 
 
-
+\newcommand{\deftext}[1]{\textit{#1}}
 \newcommand{\ruindex}[1]{_\textup{\scriptsize{#1}}}
 
 \newcommand{\textvtt}[1]{
@@ -142,6 +142,11 @@
 \newif\ifteacher
 \newcommand{\teachermode}{\teachertrue}
 \newcommand{\teachermodeoff}{\teacherfalse}
+
+\newif\ifexpcriteria
+\newcommand{\expcriteriamode}{\expcriteriatrue}
+\newcommand{\expcriteriamodeoff}{\expcriteriafalse}
+\newcommand{\expcriteriatablesize}{1.5cm}
 
 
 
@@ -177,14 +182,19 @@
         \else
         \par\noindent
         \ifteacher{
-            \todo[inline, size = \small, backgroundcolor = {#3}]{
-                \arabic{#1comment}:
-                {##1} --~\textbf{#2}
-            }
-            \addtocounter{#1comment}{1}
+            \ifexpcriteria
+            \else
+                \todo[inline, size = \small, backgroundcolor = {#3}]{
+                    \arabic{#1comment}:
+                    {##1} --~\textbf{#2}
+                }
+                \addtocounter{#1comment}{1}
+            \fi        
         }
         \fi
     }
 }
+
+\newauthor{exp}{Экспериментатор}{orange!10}
 
 \endinput

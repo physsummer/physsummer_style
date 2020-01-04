@@ -4,14 +4,22 @@
 \RequirePackage{import}
 \RequirePackage{xspace}
 \RequirePackage{xargs}
+\RequirePackage{xparse}
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
+\newcommand{\libexperimentgroup}{}
+\newcommand{\libexperimentid}{}
 
 
 \newcommand{\setcurrentproblem}[2]{
     \renewcommand{\libproblemgroup}{#1}
     \renewcommand{\libproblemid}{#2}
+}
+
+\newcommand{\setcurrentexperiment}[2]{
+    \renewcommand{\libexperimentgroup}{#1}
+    \renewcommand{\libexperimentid}{#2}
 }
 
 % где всё лежит
@@ -33,6 +41,25 @@
     }
   }
 
+
+\newcommand{\libexperimentpath}{experiments_db}
+% если этот перебор не работает, делай \renewcommand{\libexperimentpath}{правильный-путь}
+\IfFileExists{../experiments_db/db.exp.stamp}
+  {\renewcommand{\libexperimentpath}{../experiments_db}}
+  {\IfFileExists{../../experiments_db/db.exp.stamp}
+    {\renewcommand{\libexperimentpath}{../../experiments_db}}
+    {\IfFileExists{../../../experiments_db/db.exp.stamp}
+      {\renewcommand{\libexperimentpath}{../../../experiments_db}}
+      {\IfFileExists{../../../../experiments_db/db.exp.stamp}
+        {\renewcommand{\libexperimentpath}{../../../../experiments_db}}
+        {\IfFileExists{../../../../../experiments_db/db.exp.stamp}
+          {\renewcommand{\libexperimentpath}{../../../../../experiments_db}}
+          {}
+        }
+      }
+    }
+  }
+  
 \newtoggle{unnumberedpic}
 
 
@@ -68,6 +95,45 @@
         }
     }
 }
+
+
+\newcommandx{\libexperimenttext}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
+    \ifteacher{\texttt{[\libexperimentgroup/\libexperimentid]}}\fi
+    \subimport{\libexperimentpath/#1/}{#2}
+}
+
+
+\newcommandx{\libexperimentcriteria}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
+    \criteriainit{
+        \subimport{\libexperimentpath/#1/}{#2-crit}
+    }
+}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\libexperiment}{o O{default}mm}{
+    \setcurrentexperiment{#3}{#4}
+    \IfFileExists{\libexperimentpath/#3/#4-#2} {
+        \subimport{\libexperimentpath/#3/}{#4-#2}
+    }{ % file doesn't exist
+        \exptask{
+            \libexperimenttext
+                        
+        }\par
+
+        \IfNoValueTF{#1}{
+            \vspace{0.1cm}
+            \IfFileExists{\libexperimentpath/#3/#4-crit}{
+                \libexperimentcriteria
+            }{
+                \message{Cannot find criteria file:\libexperimentpath/#3/#4-crit}
+            }
+        }{
+            #1
+        }
+    }
+}
+
+\ExplSyntaxOff
 
 \newcommandx{\libproblemtask}{
     \toggletrue{unnumberedpic}
