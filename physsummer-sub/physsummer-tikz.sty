@@ -202,6 +202,48 @@
         \pgfpathlineto{\pgfqpoint{6pt}{3pt}}
         \pgfusepath{stroke}
     }
+%% pattern для отрисовки льда
+\pgfdeclarepatternformonly{ice} %% name
+    {\pgfqpoint{0pt}{0pt}} %% bottom  left
+    {\pgfqpoint{12pt}{12pt}} %% top right
+    {\pgfqpoint{8pt}{11pt}} %% bounding box size
+    {
+        %% fill white
+        \pgfsetfillcolor{white}
+        \pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+        \pgfpathlineto{\pgfqpoint{0pt}{12pt}}
+        \pgfpathlineto{\pgfqpoint{12pt}{12pt}}
+        \pgfpathlineto{\pgfqpoint{12pt}{0pt}}
+        \pgfpathlineto{\pgfqpoint{0pt}{0pt}}
+        \pgfusepath{fill}
+        \pgfpathclose %
+        %% ice pattern
+        \pgfsetlinewidth{0.3pt}
+        %% first segment
+        %% main ice line
+        \pgfpathmoveto{\pgfqpoint{2pt}{2pt}}
+        \pgfpathlineto{\pgfqpoint{4pt}{4pt}} 
+        %% top line
+        \pgfpathmoveto{\pgfqpoint{2pt}{3pt}}
+        \pgfpathlineto{\pgfqpoint{3pt}{4pt}}
+        %% bottom line
+        \pgfpathmoveto{\pgfqpoint{3pt}{2pt}}
+        \pgfpathlineto{\pgfqpoint{4pt}{3pt}}
+        \pgfusepath{stroke}
+        \pgfsetlinewidth{0.3pt}
+        %% first segment
+        %% main ice line
+        \pgfpathmoveto{\pgfqpoint{5pt}{7pt}}
+        \pgfpathlineto{\pgfqpoint{7pt}{9pt}} 
+        %% top line
+        \pgfpathmoveto{\pgfqpoint{5pt}{8pt}}
+        \pgfpathlineto{\pgfqpoint{6pt}{9pt}}
+        %% bottom line
+        \pgfpathmoveto{\pgfqpoint{6pt}{7pt}}
+        \pgfpathlineto{\pgfqpoint{7pt}{8pt}}
+        \pgfusepath{stroke}
+    }
+
 
 % формат чисел в графиках \begin{axis}...\end{axis}
 \tikzset{/pgf/number format/use comma}
