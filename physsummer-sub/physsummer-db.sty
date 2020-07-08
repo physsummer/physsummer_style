@@ -85,8 +85,11 @@
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
     \setcurrentproblem{#2}{#3}
-    \IfFileExists{\libproblempath/#2/#3-#1} {
+    \IfFileExists{\libproblempath/#2/#3-#1}{
+        % видимо баг в subimport и это сейчас не работает, замените у себя на input (следующая строка), если это так. Ждем,
+        % когда пофиксят, если пофиксят.
         \subimport{\libproblempath/#2/}{#3-#1}
+        %\input{\libproblempath/#2/#3-#1}
     }{ % file doesn't exist
         \IfFileExists{\libproblempath/#2/#3-fig} { % default behavior, figure present
             \libproblemtaskpic

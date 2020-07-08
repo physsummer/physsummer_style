@@ -1,7 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer-fonts}
 
-% for different compilers
 \RequirePackage{ifpdf}
 \RequirePackage{ifluatex}
 \RequirePackage{mathtools}
@@ -12,7 +11,11 @@
         \RequirePackage{polyglossia}  
         \setdefaultlanguage{russian}
         \usepackage[unicode]{hyperref}
-    \else % if pdflatex, then
+        \else % if pdflatex, then
+        \DeclareOption*{
+            \message{pdflatex, font options will be ignored.}
+        }
+        \ProcessOptions
         \RequirePackage[T2A]{fontenc}
         \RequirePackage[russian]{babel}
         \RequirePackage[utf8]{inputenc}
@@ -31,26 +34,50 @@
     \setdefaultlanguage[spelling = modern]{russian}
 \fi
 
-\let\mathbbtemp\mathbb % кроме, как все испортить, не вижу примуществ пока что.
+\let\mathbbtemp\mathbb
 \RequirePackage{unicode-math}
 \let\mathbb\mathbbtemp
 
 \defaultfontfeatures{Renderer = Basic, Ligatures = TeX} % для работы лигатур
 \setotherlanguage{english}
 
-\newfontfamily\cyrillicfont{Linux Libertine}
-\setmainfont{Linux Libertine}
-\IfFontExistsTF{Consolas}{
-    \setmonofont{Consolas}
-}{
-}
-\newfontfamily{\cyrillicfonttt}{Linux Biolinum O}
+\setmainfont{Linux Libertine O}
+\newfontfamily{\cyrillicfont}{Linux Libertine O}
 \setsansfont{Linux Biolinum O}
-\IfFontExistsTF{Cambria Math}{
+
+\IfFontExistsTF{CMU Typewriter Text}{
+    \setmonofont{CMU Typewriter Text}
+    \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
+}{}
+
+\DeclareOption{mathfont=lmodern}{
+    \IfFontExistsTF{Latin Modern Math}{
+        \setmathfont[colon = literal]{Latin Modern Math}
+        \IfFontExistsTF{Asana Math}{
+            \setmathfont[range = \setminus]{Asana Math}
+        }{}
+    }{
+        \setmathfont{Cambria Math}
+    }
+}
+
+
+\DeclareOption{mathfont=libertinus}{
+    \setmathfont{Libertinus Math}
+    \IfFontExistsTF{Asana Math}{
+        \setmathfont[range = \setminus]{Asana Math}
+    }{}
+}
+
+\DeclareOption{mathfont=cambria}{
     \setmathfont{Cambria Math}
     \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
-}{
-    %Тут надо бы какой-то шрифт попроще.
+    \IfFontExistsTF{Asana Math}{
+        \setmathfont[range = \setminus]{Asana Math}
+    }{}
 }
+
+\ExecuteOptions{mathfont=lmodern}
+\ProcessOptions
 
 \endinput
