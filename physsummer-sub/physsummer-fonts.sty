@@ -11,7 +11,11 @@
         \RequirePackage{polyglossia}  
         \setdefaultlanguage{russian}
         \usepackage[unicode]{hyperref}
-    \else % if pdflatex, then
+        \else % if pdflatex, then
+        \DeclareOption*{
+            \message{pdflatex, font options will be ignored.}
+        }
+        \ProcessOptions
         \RequirePackage[T2A]{fontenc}
         \RequirePackage[russian]{babel}
         \RequirePackage[utf8]{inputenc}
@@ -46,20 +50,34 @@
     \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
 }{}
 
-\IfFontExistsTF{Libertinus Math}{
-    \setmathfont{Libertinus Math}
+\DeclareOption{mathfont=lmodern}{
     \IfFontExistsTF{Latin Modern Math}{
         \setmathfont[colon = literal]{Latin Modern Math}
-    }{}
-    \IfFontExistsTF{Asana Math}{
-        \setmathfont[range = \setminus]{Asana Math}
-    }{}
-}{
-    \setmathfont{Cambria Math}
-    \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
+        \IfFontExistsTF{Asana Math}{
+            \setmathfont[range = \setminus]{Asana Math}
+        }{}
+    }{
+        \setmathfont{Cambria Math}
+    }
 }
 
 
+\DeclareOption{mathfont=libertinus}{
+    \setmathfont{Libertinus Math}
+    \IfFontExistsTF{Asana Math}{
+        \setmathfont[range = \setminus]{Asana Math}
+    }{}
+}
 
+\DeclareOption{mathfont=cambria}{
+    \setmathfont{Cambria Math}
+    \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
+    \IfFontExistsTF{Asana Math}{
+        \setmathfont[range = \setminus]{Asana Math}
+    }{}
+}
+
+\ExecuteOptions{mathfont=lmodern}
+\ProcessOptions
 
 \endinput

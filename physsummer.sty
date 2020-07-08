@@ -2,6 +2,11 @@
 \ProvidesPackage{physsummer}
 
 % подключение шрифтов
+\DeclareOption*{
+    \PassOptionsToPackage{\CurrentOption}{physsummer-fonts}
+}
+\ExecuteOptions{mathfont=lmodern}
+\ProcessOptions\relax
 \RequirePackage{physsummer-fonts}
 % подключение библиотек для рисования картинок в tikz
 \RequirePackage{physsummer-tikz}
