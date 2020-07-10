@@ -43,12 +43,20 @@
 
 \setmainfont{Linux Libertine O}
 \newfontfamily{\cyrillicfont}{Linux Libertine O}
-\setsansfont{Linux Biolinum O}
+\IfFontExistsTF{Linux Biolinum O}{
+    \setsansfont{Linux Biolinum O}
+}{
+    \message{Установите Linux Biolinum O для корректной работы шрифтов.}
+}
+
 
 \IfFontExistsTF{CMU Typewriter Text}{
     \setmonofont{CMU Typewriter Text}
     \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
-}{}
+}{
+    \message{Установите CMU Typewriter Text для корректной работы шрифтов.}
+    \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+}
 
 \DeclareOption{mathfont=lmodern}{
     \IfFontExistsTF{Latin Modern Math}{
@@ -57,7 +65,8 @@
             \setmathfont[range = \setminus]{Asana Math}
         }{}
     }{
-        \setmathfont{Cambria Math}
+        \message{Установите Latin Modern Math, Asana Math для корректной работы шрифтов.}
+        \setmathfont{Linux Libertine O}
     }
 }
 
@@ -66,7 +75,10 @@
     \setmathfont{Libertinus Math}
     \IfFontExistsTF{Asana Math}{
         \setmathfont[range = \setminus]{Asana Math}
-    }{}
+    }{
+        \message{Установите Libertinus Math, Asana Math для корректной работы шрифтов.}
+        \setmathfont{Linux Libertine O}
+    }
 }
 
 \DeclareOption{mathfont=cambria}{
@@ -74,7 +86,10 @@
     \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
     \IfFontExistsTF{Asana Math}{
         \setmathfont[range = \setminus]{Asana Math}
-    }{}
+    }{
+        \message{Установите Cambria Math, Latin Modern Math, Asana Math для корректной работы шрифтов.}
+        \setmathfont{Linux Libertine O}
+    }
 }
 
 \ExecuteOptions{mathfont=lmodern}
