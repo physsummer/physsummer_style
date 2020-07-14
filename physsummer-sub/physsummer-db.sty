@@ -8,8 +8,6 @@
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
-\newcommand{\libexperimentgroup}{}
-\newcommand{\libexperimentid}{}
 
 
 \newcommand{\setcurrentproblem}[2]{
@@ -17,10 +15,6 @@
     \renewcommand{\libproblemid}{#2}
 }
 
-\newcommand{\setcurrentexperiment}[2]{
-    \renewcommand{\libexperimentgroup}{#1}
-    \renewcommand{\libexperimentid}{#2}
-}
 
 % где всё лежит
 \newcommand{\libproblempath}{problems_db}
@@ -41,43 +35,32 @@
     }
   }
 
-
-\newcommand{\libexperimentpath}{experiments_db}
-% если этот перебор не работает, делай \renewcommand{\libexperimentpath}{правильный-путь}
-\IfFileExists{../experiments_db/db.exp.stamp}
-  {\renewcommand{\libexperimentpath}{../experiments_db}}
-  {\IfFileExists{../../experiments_db/db.exp.stamp}
-    {\renewcommand{\libexperimentpath}{../../experiments_db}}
-    {\IfFileExists{../../../experiments_db/db.exp.stamp}
-      {\renewcommand{\libexperimentpath}{../../../experiments_db}}
-      {\IfFileExists{../../../../experiments_db/db.exp.stamp}
-        {\renewcommand{\libexperimentpath}{../../../../experiments_db}}
-        {\IfFileExists{../../../../../experiments_db/db.exp.stamp}
-          {\renewcommand{\libexperimentpath}{../../../../../experiments_db}}
-          {}
-        }
-      }
-    }
-  }
   
 \newtoggle{unnumberedpic}
 
+% извлечение текста задачи
+% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
+% \getlibproblemtext[region][2013-10-2]
+\newcommandx{\getlibproblemtext}[2][1 = \libproblemgroup, 2 = \libproblemid]{
+    \libproblemtext[\libproblempath/#1/][#2]
+}
 
 % извлечение текста задачи
 % по умолчанию извлекается из текущей, иначе надо вызывать в формате:
-% \libproblemtext[region][2013-10-2]
-\newcommandx{\libproblemtext}[2][1=\libproblemgroup,2=\libproblemid]{
-    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi%
-    \subimport{\libproblempath/#1/}{#2}
+% \getlibproblemfig[region][2013-10-2]
+\newcommandx{\getlibproblemtfig}[2][1 = \libproblemgroup, 2 = \libproblemid]{
+    \libproblemfig[\libproblempath/#1/][#2]
 }
 
 
-% извлечение рисунка задачи
-% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
-% \libproblemfig[region][2013-10-2]
-% сюда можно добавить параметр на случай, если рисунков несколько
-\newcommandx{\libproblemfig}[2][1=\libproblemgroup, 2=\libproblemid]{
-    \subimport{\libproblempath/#1/}{#2-fig}
+\newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{
+    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi%
+    \subimport{#1/}{#2}
+}
+
+
+\newcommandx{\libproblemfig}[2][1 = ., 2=\libproblemid]{
+    \subimport{#1/}{#2-fig}
 }
 
 
@@ -86,72 +69,33 @@
 \newcommand{\libproblem}[3][default]{
     \setcurrentproblem{#2}{#3}
     \IfFileExists{\libproblempath/#2/#3-#1}{
-        % видимо баг в subimport и это сейчас не работает, замените у себя на input (следующая строка), если это так. Ждем,
-        % когда пофиксят, если пофиксят.
         \subimport{\libproblempath/#2/}{#3-#1}
-        %\input{\libproblempath/#2/#3-#1}
     }{ % file doesn't exist
-        \IfFileExists{\libproblempath/#2/#3-fig} { % default behavior, figure present
-            \libproblemtaskpic
+        \IfFileExists{\libproblempath/#2/#3-fig}{ % default behavior, figure present
+            \libproblemtaskpic[4cm][\libproblempath/\libproblemgroup/]
         } { % default behavior, no figure
-            \libproblemtask
+            \libproblemtask[\libproblempath/\libproblemgroup/]
         }
     }
 }
 
 
-\newcommandx{\libexperimenttext}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
-    \ifteacher{\texttt{[\libexperimentgroup/\libexperimentid]}}\fi
-    \subimport{\libexperimentpath/#1/}{#2}
-}
 
 
-\newcommandx{\libexperimentcriteria}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
-    \criteriainit{
-        \subimport{\libexperimentpath/#1/}{#2-crit}
-    }
-}
-
-\ExplSyntaxOn
-\NewDocumentCommand{\libexperiment}{o O{default}mm}{
-    \setcurrentexperiment{#3}{#4}
-    \IfFileExists{\libexperimentpath/#3/#4-#2} {
-        \subimport{\libexperimentpath/#3/}{#4-#2}
-    }{ % file doesn't exist
-        \exptask{
-            \libexperimenttext
-                        
-        }\par
-
-        \IfNoValueTF{#1}{
-            \vspace{0.1cm}
-            \IfFileExists{\libexperimentpath/#3/#4-crit}{
-                \libexperimentcriteria
-            }{
-                \message{Cannot find criteria file:\libexperimentpath/#3/#4-crit}
-            }
-        }{
-            #1
-        }
-    }
-}
-
-\ExplSyntaxOff
-
-\newcommandx{\libproblemtask}{
+\newcommandx{\libproblemtask}[1][1 = .]{
     \toggletrue{unnumberedpic}
     \task{
-        \libproblemtext
+        \libproblemtext[#1]
     }
     \togglefalse{unnumberedpic}
 }
 
-\newcommand{\libproblemtaskpic}[1][4cm]{
+\newcommandx{\libproblemtaskpic}[2][1 = 4cm, 2 = .]{
     \toggletrue{unnumberedpic}
     \taskpic[#1]{
-        \libproblemtext
+        \libproblemtext[#2]
     }{
-        \libproblemfig
+        \libproblemfig[#2]
     }
     \togglefalse{unnumberedpic}
 }
@@ -169,7 +113,7 @@
     \toggletrue{unnumberedpic}
     \libproblemtaskpic
     \begin{center}
-        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
+        \subimport{./}{\libproblemid-fig2}
     \end{center}
     \toggletrue{unnumberedpic}
 }
@@ -183,7 +127,7 @@
     \drawsidebyside{\figrefname{1}}{
         \libproblemfig
     }{\figrefname{2}}{
-        \subimport{\libproblempath/\libproblemgroup/}{\libproblemid-fig2}
+        \subimport{./}{\libproblemid-fig2}
     }
 }
 
