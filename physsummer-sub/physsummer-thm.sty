@@ -2,13 +2,21 @@
 \ProvidesPackage{physsummer-thm}
 
 \RequirePackage{xifthen}
-\RequirePackage[skins, many]{tcolorbox}
+\RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
-\tcbuselibrary{theorems}
+\tcbuselibrary{skins, many, theorems}
 
 
-\tcbset{%
-    theo/.style={%
+\newcommand{\testemptinessthm}[1]{%
+    \ifthenelse{\isempty{#1}}{%
+        \kern-5pt%
+    }{%
+        [{#1}]%
+    }%
+}
+
+\tcbset{
+    theo/.style = {
         enhanced,
         colframe = #1!80!black,
         colback = #1!2,
@@ -21,16 +29,16 @@
         coltitle = black,
         fonttitle = \bfseries,
         boxed title style = {arc = 0pt}
+    },
+    numtheo/.style n args = {3}{
+        theo = {#1},
+        title = {#2 \thetcbcounter\ \testemptinessthm{#3}},
+        before upper = {\protected@edef\@currentlabel{\csname p@theorem\endcsname\csname thetcbcounter\endcsname}}
+    },
+    startheo/.style n args = {3}{
+        theo = {#1},
+        title = {#2 \testemptinessthm{#3}}
     }
-}
-
-% % --- это важно
-\newcommand{\testemptinessthm}[1]{%
-    \ifthenelse{\isempty{#1}}{%
-        \kern-5pt%
-    }{%
-        [{#1}]%
-    }%
 }
 
 
@@ -40,6 +48,7 @@
 \newtheorem{definition*}{Определение}[section]
 \newtheorem{conjecture}{Гипотеза}[section]
 \newtheorem{lemma}{Лемма}[section]
+\newtheorem{lemma*}{Лемма}[section]
 \newtheorem{corollary}{Следствие}[section]
 \newtheorem{proposition}{Утверждение}[section]
 \newtheorem{exercise}{Упражнение}[section]
@@ -50,104 +59,79 @@
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{theorem}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Теорема \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@theorem\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Теорема}{#1}
 }
 \makeatother
 
 \makeatletter
 \renewtcolorbox{theorem*}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Теорема \testemptinessthm{#1}}
+    startheo = {blue}{Теорема}{#1}
 }
 \makeatother
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{definition}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Определение \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@definition\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Определение}{#1}
 }
 \makeatother
 
 \makeatletter
 \renewtcolorbox{definition*}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Определение \testemptinessthm{#1}},
+    startheo = {blue}{Определение}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{conjecture}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Гипотеза \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@conjecture\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Гипотеза}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{lemma}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Лемма \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@lemma\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Лемма}{#1}
+}
+\makeatother
+
+\makeatletter
+\renewtcolorbox[use counter = theorem, number within = section]{lemma*}[1][]{
+    startheo = {blue}{Лемма}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{corollary}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Следствие \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@corollary\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Следствие}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{proposition}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Утверждение \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@proposition\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Утверждение}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{exercise}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Упражнение \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@exercise\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Упражнение}{#1}
 }
 \makeatother
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{example}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Пример \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@example\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Пример}{#1}
 }
 \makeatother
 
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{remark}[1][]{
-    enhanced,
-    theo = {blue},
-    title = {Замечание \thetcbcounter\ \testemptinessthm{#1}},
-    before upper = {\protected@edef\@currentlabel{\csname p@remark\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Замечание}{#1}
 }
 \makeatother
 
@@ -155,10 +139,7 @@
 
 \makeatletter
 \renewtcolorbox[use counter = theorem, number within = section]{remark_lect}[1][]{
-  enhanced,
-  theo = {blue},
-  title = {Замечание (для преподавателя) \thetcbcounter\ \testemptinessthm{#1}},
-  before upper = {\protected@edef\@currentlabel{\csname p@remark_lect\endcsname\csname thetcbcounter\endcsname}}
+    numtheo = {blue}{Замечание (для преподавателя)}{#1}
 }
 \makeatother
 
