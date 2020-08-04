@@ -277,6 +277,40 @@
 		%% Привязка и граница картинки
 %		\fill[red] (0, 0) circle(0.01); 
 %		\draw[red] (-0.38, 0) rectangle ++(0.76, 0.38);
+	},
+	%% Пассажирский реактивный самолёт by Тима
+	%% Что-то типа Airbus A340, но пожирнее
+	%% (0,0) на носу. Длина фюзеляжа 3.6
+	tikzart-plane/.pic={
+		\pgfgettransformentries{\a}{\b}{\c}{\d}{\s}{\p}
+		\def\sca{sqrt(\a*\d-\b*\c)}
+		%% Правое крыло
+		\draw[fill=white] (1.2,.15) to[rounded corners=\sca*4] ++ (1,.3) to[rounded corners=\sca*2] ++ (.4,0) to ++ (-.7,-.3);
+		%% Правое горизонтальное оперение
+		\draw[fill=white] (3.1,.25) ++ (.3,.09) to[rounded corners=\sca*3] ++ (.2,.06) to[rounded corners=\sca*1] ++ (.2,0) to ++ (-.3,-.15);
+		%% Фюзеляж и вертикальное оперение
+		\draw[fill=white] (.6,-.15) to[rounded corners=\sca*7] ++ (2,0) to ++ (1,.3) to ++ (0,.1) to ++ (-.1,.01) ++(-.5,.05) coordinate (A) ++(.5,-.05) to[rounded corners=\sca*1] ++ (.3,.4) to[rounded corners=\sca*3] ++ (-.2,0) to (A) to[rounded corners=\sca*4] ++ (-.4,.04) to ++ (-2,0) arc (90:180:.6 and .35) arc (180:270:.6 and .15);
+		%% Кабина
+		\path (.6,.35) arc (90:145:.6 and .35) coordinate (B) ++ (.18,0) coordinate (C);
+		\fill (B) arc (145:160:.6 and .35) to ++ (.14,0) coordinate (D) |- cycle;
+		\fill (D) ++ (.02,0) rectangle (C);
+		%% Турбины
+		\begin{scope}[shift={(1.4,-.3)}, scale=.25]
+			\draw[fill=white] (0,.5) to[rounded corners=\sca*4] ++ (.7,0) to ++ (.8,-.2) arc (90:-90:.1 and .3) to[rounded corners=\sca*4] ++ (-.8,-.2) to ++ (-.7,0);
+			\draw[fill=white] circle (.2 and .5);
+			\fill (0,.4) arc (90:270:.12 and .4) arc (270:450:.08 and .4);
+		\end{scope}
+		\begin{scope}[shift={(1.6,-.4)}, scale=.25]
+			\draw[fill=white] (0,.5) to[rounded corners=\sca*4] ++ (.7,0) to ++ (.8,-.2) arc (90:-90:.1 and .3) to[rounded corners=\sca*4] ++ (-.8,-.2) to ++ (-.7,0);
+			\draw[fill=white] circle (.2 and .5);
+			\fill (0,.4) arc (90:270:.12 and .4) arc (270:450:.08 and .4);
+		\end{scope}
+		%% Левое крыло
+		\draw[fill=white] (1.2,-.05) to[rounded corners=\sca*4] ++ (1,-.5) to[rounded corners=\sca*2] ++ (.4,0) to ++ (-.7,.5);
+		%% Левое горизонтальное оперение
+		\draw[fill=white] (3.1,.15) to[rounded corners=\sca*3] ++ (.5,-.25) to[rounded corners=\sca*1] ++ (.2,0) to ++ (-.3,.25);
+		%% Иллюминаторы
+		\foreach \x in {0,...,20} \fill ({.1*\x+.6},.1) ellipse (.025 and .035);
 	}
 }
 
