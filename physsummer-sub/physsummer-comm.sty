@@ -6,6 +6,7 @@
 \RequirePackage{physics}
 \RequirePackage{todonotes}
 \RequirePackage{pgfpages} 
+\RequirePackage{tcolorbox} %% его уже в physsummer-thm просили
 
 % колонтитул
 \setlength{\headheight}{15pt}
@@ -143,6 +144,27 @@
 \newif\ifteacher
 \newcommand{\teachermode}{\teachertrue}
 \newcommand{\teachermodeoff}{\teacherfalse}
+
+\newif\ifsol
+\newcommand{\solmode}{\soltrue}
+\newcommand{\solmodeoff}{\solfalse}
+
+\newcommand{\solution}[2][]{ 
+\ifsol
+    \begin{tcolorbox}[
+                breakable, 
+                title=Решение #1, 
+                enhanced jigsaw,
+                colback=white,
+                colframe=black,
+                width =\linewidth,
+                sharp corners = north,
+                fonttitle=\bfseries]
+        #2
+    \end{tcolorbox}
+\fi
+}
+
 
 \newif\ifexpcriteria
 \newcommand{\expcriteriamode}{\expcriteriatrue}

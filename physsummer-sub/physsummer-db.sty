@@ -45,7 +45,7 @@
     \libproblemtext[\libproblempath/#1/][#2]
 }
 
-% извлечение текста задачи
+% извлечение картинки задачи
 % по умолчанию извлекается из текущей, иначе надо вызывать в формате:
 % \getlibproblemfig[region][2013-10-2]
 \newcommandx{\getlibproblemtfig}[2][1 = \libproblemgroup, 2 = \libproblemid]{
@@ -63,7 +63,10 @@
     \subimport{#1/}{#2-fig}
 }
 
-
+\newcommandx{\libproblemsol}[2][1 = ., 2=\libproblemid]{
+    \solution[ \texttt{[\libproblemgroup/\libproblemid]\,} ]
+    { \subimport{#1/}{#2-sol} }
+}
 
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
@@ -77,6 +80,9 @@
             \libproblemtask[\libproblempath/\libproblemgroup/]
         }
     }
+    \IfFileExists{\libproblempath/#2/#3-sol}{
+        \libproblemsol[\libproblempath/\libproblemgroup/]
+    }{}
 }
 
 
