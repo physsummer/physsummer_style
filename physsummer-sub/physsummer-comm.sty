@@ -184,17 +184,25 @@
 %% команда для печати
 \newif\ifprint
 \printfalse
+\newcounter{pnotask}
+\newcounter{pfigure}
+
 \newcommand{\printtask}[1]{
   \ifteacher\printfalse\fi
+
   \ifprint
+    \setcounter{pnotask}{\value{notask}}
+    \setcounter{pfigure}{\value{figure}}
+
     \pgfpagesuselayout{2 on 1}[a4paper,landscape,border shrink=5mm]
     \large
     #1 \clearpage 
-    \setcounter{notask}{1}  \setcounter{figure}{0} 
+    \setcounter{notask}{\value{pnotask}}  
+    \setcounter{figure}{\value{figure}} 
     #1 \clearpage
   \else
     #1 \clearpage
-	\fi
+  \fi
 }
 
 \newif\iftags
