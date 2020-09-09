@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer-db}
 
+\RequirePackage{chngcntr}
 \RequirePackage{import}
 \RequirePackage{xspace}
 \RequirePackage{xargs}
@@ -40,15 +41,17 @@
 
 % извлечение текста задачи
 % по умолчанию извлекается из текущей, иначе надо вызывать в формате:
-% \getlibproblemtext[region][2013-10-2]
-\newcommandx{\getlibproblemtext}[2][1 = \libproblemgroup, 2 = \libproblemid]{
+% \getlibproblemtext{region}{2013-10-2}
+\newcommandx{\getlibproblemtext}[2]{
+    \setcurrentproblem{#1}{#2}
     \libproblemtext[\libproblempath/#1/][#2]
 }
 
 % извлечение картинки задачи
 % по умолчанию извлекается из текущей, иначе надо вызывать в формате:
-% \getlibproblemfig[region][2013-10-2]
-\newcommandx{\getlibproblemtfig}[2][1 = \libproblemgroup, 2 = \libproblemid]{
+% \getlibproblemfig{region}{2013-10-2}
+\newcommandx{\getlibproblemfig}[2]{
+    \setcurrentproblem{#1}{#2}
     \libproblemfig[\libproblempath/#1/][#2]
 }
 
@@ -64,10 +67,12 @@
 }
 
 \newcommandx{\libproblemsol}[2][1 = ., 2=\libproblemid]{
-    \solution[ \texttt{[\libproblemgroup/\libproblemid]\,} ]
+    \solution[ \ifteacher\texttt{[\libproblemgroup/\libproblemid]\,}\fi ]
     { \subimport{#1/}{#2-sol} }
 }
 
+\newcounter{sequation}
+\newcounter{sfigure}
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
     \setcurrentproblem{#2}{#3}
@@ -81,7 +86,27 @@
         }
     }
     \IfFileExists{\libproblempath/#2/#3-sol}{
+    \addtocounter{notask}{-1}
+
+    \counterwithin{equation}{notask}
+    \counterwithin{figure}{notask}
+    
+    \setcounter{sequation}{\value{equation}}
+    \setcounter{sfigure}{\value{figure}}
+    
+    \setcounter{equation}{0}
+    \setcounter{figure}{0}
+
         \libproblemsol[\libproblempath/\libproblemgroup/]
+    
+
+    \setcounter{equation}{\value{sequation}}  
+    \setcounter{figure}{\value{sfigure}} 
+
+    \counterwithout{equation}{notask}
+    \counterwithout{figure}{notask}
+    
+    \addtocounter{notask}{1}
     }{}
 }
 

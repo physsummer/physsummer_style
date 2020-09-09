@@ -7,6 +7,7 @@
 \RequirePackage{todonotes}
 \RequirePackage{pgfpages} 
 \RequirePackage{tcolorbox} %% его уже в physsummer-thm просили
+\RequirePackage{xfrac} %% для красивых дробей
 
 % колонтитул
 \setlength{\headheight}{15pt}
@@ -197,6 +198,7 @@
     \pgfpagesuselayout{2 on 1}[a4paper,landscape,border shrink=5mm]
     \large
     #1 \clearpage 
+    
     \setcounter{notask}{\value{pnotask}}  
     \setcounter{figure}{\value{figure}} 
     #1 \clearpage
