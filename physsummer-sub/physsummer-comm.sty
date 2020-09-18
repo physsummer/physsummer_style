@@ -8,6 +8,7 @@
 \RequirePackage{pgfpages} 
 \RequirePackage{tcolorbox} %% его уже в physsummer-thm просили
 \RequirePackage{xfrac} %% для красивых дробей
+\RequirePackage{capt-of}
 
 % колонтитул
 \setlength{\headheight}{15pt}
@@ -110,7 +111,8 @@
     \end{figure}
 }
 
-\newcommandx{\drawsidebyside}[6][5 = 0.48, 6 = 0.48]{
+\newcommandx{\drawsidebyside}[7][5 = 0.48, 6 = 0.48, 7=f]{
+\ifthenelse{\equal{#7}{f}}{
     \begin{figure}[htb]
         \begin{minipage}{#5\textwidth}
             \centering
@@ -132,6 +134,29 @@
             \label{fig:#3}
         \end{minipage}
     \end{figure}
+}{
+\begin{center}
+        \begin{minipage}{#5\textwidth}
+            \centering
+            #2
+        \end{minipage}%
+        \begin{minipage}{#6\textwidth}
+            \centering
+            #4
+        \end{minipage}
+        \hfill%
+        \begin{minipage}[t]{#5\textwidth}
+            \centering
+            \captionof{figure}{}
+            \label{fig:#1}
+        \end{minipage}%
+        \begin{minipage}[t]{#6\textwidth}
+            \centering
+            \captionof{figure}{}
+            \label{fig:#3}
+        \end{minipage}
+\end{center}
+}
 }
 
 
