@@ -116,29 +116,35 @@
     \end{lstlisting}
 \end{minipage}
 
-
-Следующий паттерн для отрисовки воды может быть полезен, если обычная заливка плохо отображается на печати.
+Следующие паттерны для отрисовки воды и льда могут быть полезны, если обычная заливка плохо отображается на печати.
 
 \begin{minipage}{0.28\linewidth}
-    \begin{tikzpicture}[mstyle]
-        \node at (0, 1) {};
-        \fill[pattern = water] (0, 0) {[rounded corners = 3pt] -- (0, -2.5) -- (2, -2.5)} -- (2, 0)
-            decorate[water edge]{-- cycle};
-        \draw[very thin, water edge] (2, 0) -- (0, 0);
-        
-        \draw[very thick, rounded corners = 3pt] (0, 0.5) -- (0, -2.5) -- (2, -2.5) -- (2, 0.5);
-    \end{tikzpicture}
+	\begin{tikzpicture}[mstyle]
+		\node at (0, 1) {};
+		\fill[pattern = water] (0, 0) -- (0, -2) -- (2, -2) -- (2, 0)
+			decorate[water edge]{-- cycle};
+		\fill[pattern = ice] (0, -2) {[rounded corners = 3pt]
+			-- (0, -2.5) -- (2, -2.5)} -- (2, -2) -- cycle;
+		\draw[very thin, water edge] (2, 0) -- (0, 0);
+		\draw[very thin] (2, -2) -- (0, -2);
+
+		\draw[very thick, rounded corners = 3pt] (0, 0.5) -- (0, -2.5) -- (2, -2.5) -- (2, 0.5);
+	\end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.72\linewidth}
     \begin{lstlisting}[gobble = 7]
         \begin{tikzpicture}
             \fill[pattern = water] (0, 0)
-                {[rounded corners = 3pt] -- (0, -2.5) -- (2, -2.5)}
-                -- (2, 0) decorate[water edge]{-- cycle};
+                -- (0, -2) -- (2, -2) -- (2, 0)
+                decorate[water edge]{-- cycle};
+            \fill[pattern = ice] (0, -2)
+                {[rounded corners = 3pt] -- (0, -2.5)
+                -- (2, -2.5)} -- (2, -2) -- cycle;
             \draw[very thin, water edge] (2, 0) -- (0, 0);
+            \draw[very thin] (2, -2) -- (0, -2);
 
-            \draw[very thick, rounded corners = 3pt] (0, 0.5) --
-                (0, -2.5) -- (2, -2.5) -- (2, 0.5);
+            \draw[very thick, rounded corners = 3pt] (0, 0.5)
+                -- (0, -2.5) -- (2, -2.5) -- (2, 0.5);
         \end{tikzpicture}
     \end{lstlisting}
 \end{minipage}
