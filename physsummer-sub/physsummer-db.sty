@@ -39,25 +39,21 @@
   
 \newtoggle{unnumberedpic}
 
-% извлечение текста задачи
-% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
+% извлечение только текста задачи в формате
 % \getlibproblemtext{region}{2013-10-2}
-\newcommandx{\getlibproblemtext}[2]{
-    \setcurrentproblem{#1}{#2}
-    \libproblemtext[\libproblempath/#1/][#2]
+\newcommandx{\getlibproblemtext}[2][1 = \libproblemgroup, 2 = \libproblemid]{
+    \subimport{\libproblempath/#1/}{#2}
 }
 
 % извлечение картинки задачи
-% по умолчанию извлекается из текущей, иначе надо вызывать в формате:
 % \getlibproblemfig{region}{2013-10-2}
-\newcommandx{\getlibproblemfig}[2]{
-    \setcurrentproblem{#1}{#2}
+\newcommandx{\getlibproblemfig}[2][1 = \libproblemgroup, 2 = \libproblemid]{
     \libproblemfig[\libproblempath/#1/][#2]
 }
 
 
-\newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{
-    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi%
+\newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{%
+    \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi
     \subimport{#1/}{#2}
 }
 
