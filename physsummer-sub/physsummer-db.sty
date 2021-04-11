@@ -6,6 +6,8 @@
 \RequirePackage{xspace}
 \RequirePackage{xargs}
 \RequirePackage{xparse}
+\RequirePackage{catchfile,catchfilebetweentags}
+
 
 \newcommand{\libproblemgroup}{}
 \newcommand{\libproblemid}{}
@@ -39,17 +41,17 @@
   
 \newtoggle{unnumberedpic}
 
-% извлечение только текста задачи в формате
-% \getlibproblemtext{region}{2013-10-2}
-\newcommandx{\getlibproblemtext}[2][1 = \libproblemgroup, 2 = \libproblemid]{
-    \subimport{\libproblempath/#1/}{#2}
+% достать исходник например
+% \getlibproblemsrc{russia}{2018-10-3}
+\NewDocumentCommand{\getlibproblemsrc}{ o m m}{
+    \IfNoValueTF{#1}{
+        \subimport{\libproblempath/#2/}{#3}
+    }{
+        \ExecuteMetaData[\libproblempath/#2/#3.tex]{#1}
+    }
 }
 
-% извлечение картинки задачи
-% \getlibproblemfig{region}{2013-10-2}
-\newcommandx{\getlibproblemfig}[2][1 = \libproblemgroup, 2 = \libproblemid]{
-    \libproblemfig[\libproblempath/#1/][#2]
-}
+
 
 
 \newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{%
@@ -69,6 +71,7 @@
 
 \newcounter{sequation}
 \newcounter{sfigure}
+
 % вставка отформатированной задачи
 \newcommand{\libproblem}[3][default]{
     \setcurrentproblem{#2}{#3}
@@ -81,6 +84,7 @@
             \libproblemtask[\libproblempath/\libproblemgroup/]
         }
     }
+
     \IfFileExists{\libproblempath/#2/#3-sol}{
     \addtocounter{notask}{-1}
 
@@ -107,8 +111,6 @@
 }
 
 
-
-
 \newcommandx{\libproblemtask}[1][1 = .]{
     \toggletrue{unnumberedpic}
     \task{
@@ -122,6 +124,21 @@
     \taskpic[#1]{
         \libproblemtext[#2]
     }{
+        \libproblemfig[#2]
+    }
+    \togglefalse{unnumberedpic}
+}
+
+\newcommandx{\libproblemtaskpicsplit}[2][1 = 4cm, 2 = .]{
+    \toggletrue{unnumberedpic}
+    \taskpic[#1]{
+        \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi
+        \getlibproblemsrc[p1]{\libproblemgroup}{\libproblemid}
+    }
+    [
+        \getlibproblemsrc[p2]{\libproblemgroup}{\libproblemid}
+    ]
+    {
         \libproblemfig[#2]
     }
     \togglefalse{unnumberedpic}
