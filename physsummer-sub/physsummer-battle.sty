@@ -63,6 +63,8 @@
     \def\callrl{<-}
     \def\calllor{->|}
     \def\callrol{|<-}
+    \def\callrlrefuse{<-x}
+    \def\calllrrefuse{x->}
     \begingroup
     \def\tmp{#1}%
     \ifx\tmp\calllr
@@ -76,6 +78,21 @@
             \else
                 \ifx\tmp\callrol
                     \draw[call, *->, rounded corners = 0.1cm] (\b.160) -- (\a.20) -- (\a.340) -- (\b.200);
+                 \else
+                    \ifx\tmp\callrlrefuse
+                        \draw [call, *->] 
+                            (\b.west) -- ($(\a.east)!.5!(\b.west)$);
+                        \draw [black!60]
+                            ($(\a.east)!.75!(\b.west)$) 
+                                node {$\mathrm{X}$};
+                    \fi
+                    \ifx\tmp\calllrrefuse
+                        \draw [call, *->] 
+                            (\a.east) -- ($(\a.east)!.5!(\b.west)$);
+                        \draw [black!60]
+                            ($(\a.east)!.25!(\b.west)$) 
+                                node {$\mathrm{X}$};
+                    \fi   
                 \fi
             \fi
         \fi
