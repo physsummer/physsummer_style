@@ -11,6 +11,16 @@
 \newcounter{jury}
 \setcounter{jury}{12}
 
+% баллы команд
+\newcounter{battle-left}
+\setcounter{battle-left}{0}
+
+\newcounter{battle-right}
+\setcounter{battle-right}{0}
+
+\newcounter{battle-jury}
+\setcounter{battle-jury}{72}
+
 % двойной физбой: заголовок протокола
 % \pdtitle{название команды 1}{название команды 2}
 \newcommand{\pdtitle}[2]{%
@@ -44,6 +54,9 @@
 % |<- --- команда 2 вызывала команду 1, но получила проверку корректности
 \newcommand{\pdcall}[6]{
     \addtocounter{newN}{1};
+    % баллы команд
+    \addtocounter{battle-left}{#3}
+    \addtocounter{battle-right}{#4}
     % баллы жюри
     \addtocounter{jury}{-#3}
     \addtocounter{jury}{-#4}
@@ -111,16 +124,29 @@
     \node[below = of t1-\arabic{oldN}, yshift = -0.5cm] (t1sum) {\LARGE{#1}}; 
     \node[below = of t2-\arabic{oldN}, yshift = -0.5cm] (t2sum) {\LARGE{#2}}; 
     \node[below = of j\arabic{oldN}, yshift = -0.5cm] (jsum) {\LARGE{#3}};
-	% рамка
+    % рамка
     \draw[very thick] (n0.north west) -- (sum.north west -| n0.west) -- (sum.north west -| j0.east) -- (j0.north east);
     \draw[very thick] (n0.north east) -- (n0.north east |- sum.north);
     \draw[very thick] (j0.north west) -- (j0.north west |- sum.north);
     % пунктир
     \draw[gray, loosely dashed] (t1-0.north east) -- (t1-0.east |- t1sum.north);
-	% установка счётчиков в исходное состояние
+    % установка счётчиков в исходное состояние
     \setcounter{oldN}{0}
     \setcounter{newN}{0}
     \setcounter{jury}{12}
+
+    \setcounter{battle-left}{0}
+    \setcounter{battle-right}{0}
+}
+
+% двойной физбой: автоматическое подведение итогов
+% \pdsumA[количество задач].
+\newcommand{\pdsumA}[1][6]{%
+    \setcounter{battle-jury}{12}
+    \multiply\value{battle-jury} by #1
+    \addtocounter{battle-jury}{-\value{battle-left}}
+    \addtocounter{battle-jury}{-\value{battle-right}}
+    \pdsum{\arabic{battle-left}}{\arabic{battle-right}}{\arabic{battle-jury}}
 }
 
 
