@@ -200,11 +200,11 @@
 
 
 \newcommand{\teacher}[1]{\ifteacher#1\fi}
-\newcommand{\answer}[1]{
+\newcommand{\answer}[1]{%
     \teacher{
         
-        Ответ: #1
-    }
+        Ответ: #1%
+    }%
 }
 
 %% команда для печати
@@ -239,11 +239,11 @@
 
 
 \newcommand{\checktags}[1]{\iftags#1\fi}
-\newcommand{\tags}[1]{
+\newcommand{\tags}[1]{%
     \checktags{
         \vspace{0.2cm}
-        \textbf{Ключевые слова: #1}
-    }
+        \textbf{Ключевые слова: #1}%
+    }%
 }
 
 \newcommand{\newauthor}[3]{

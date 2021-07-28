@@ -52,11 +52,9 @@
 }
 
 
-
-
 \newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{%
     \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi
-    \subimport{#1/}{#2}
+    \subimport{#1/}{#2}%
 }
 
 
@@ -81,7 +79,7 @@
         \IfFileExists{\libproblempath/#2/#3-fig}{ % default behavior, figure present
             \libproblemtaskpic[4cm][\libproblempath/\libproblemgroup/]
         } { % default behavior, no figure
-            \libproblemtask[\libproblempath/\libproblemgroup/]
+            \libproblemtask[\libproblempath/\libproblemgroup/]%
         }
     }
 
@@ -114,7 +112,7 @@
 \newcommandx{\libproblemtask}[1][1 = .]{
     \toggletrue{unnumberedpic}
     \task{
-        \libproblemtext[#1]
+        \libproblemtext[#1]\unskip
     }
     \togglefalse{unnumberedpic}
 }
