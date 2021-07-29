@@ -54,7 +54,7 @@
 
 \newcommandx{\libproblemtext}[2][1 = ., 2 = \libproblemid]{%
     \ifteacher{\texttt{[\libproblemgroup/\libproblemid]\,}}\fi
-    \subimport{#1/}{#2}%
+    \subimport{#1/}{#2}\unskip
 }
 
 
@@ -112,7 +112,7 @@
 \newcommandx{\libproblemtask}[1][1 = .]{
     \toggletrue{unnumberedpic}
     \task{
-        \libproblemtext[#1]\unskip
+        \libproblemtext[#1]%
     }
     \togglefalse{unnumberedpic}
 }

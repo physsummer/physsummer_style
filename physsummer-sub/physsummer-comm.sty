@@ -199,7 +199,7 @@
 
 
 
-\newcommand{\teacher}[1]{\ifteacher#1\fi}
+\newcommand{\teacher}[1]{\ifteacher#1\else\unskip\fi}
 \newcommand{\answer}[1]{%
     \teacher{
         
@@ -238,7 +238,7 @@
 
 
 
-\newcommand{\checktags}[1]{\iftags#1\fi}
+\newcommand{\checktags}[1]{\iftags#1\else\unskip\fi}
 \newcommand{\tags}[1]{%
     \checktags{
         \vspace{0.2cm}
