@@ -207,6 +207,43 @@
     }%
 }
 
+
+\newcommand{\difficulty}[1]{
+    \ifteacher
+        \xdef\problemdifficultyArray{0}
+        \xdef\problemdifficultyCounter{0}
+        \foreach \i in {#1} {
+            \xdef\problemdifficultyArray{\problemdifficultyArray+\i}
+            \xdef\problemdifficultyCounter{\problemdifficultyCounter+1}
+        }
+        \pgfmathsetmacro{\problemDifficulty}
+                {   (\problemdifficultyArray)/(\problemdifficultyCounter)}
+        %
+        \texttt{Сложность:}
+        \begin{tikzpicture}
+        \pgfmathsetmacro{\l}{1}
+        \draw [rounded corners = 2pt]
+            (0,0) rectangle ++ (\l, 6pt);
+        \clip [rounded corners = 2pt]
+            (0,0) rectangle ++ (\l, 6pt);
+        %
+        \ifdim\problemDifficulty pt < 5 pt
+            \draw  [rounded corners = 2pt, fill = black]
+                (\problemDifficulty*\l/5,0) to (0,0) to ++ (0, 6pt) to ++ (\problemDifficulty*\l/5,0);
+        \else
+            \draw  [rounded corners = 2pt, fill = black]
+                (0,0) rectangle ++ (\l,6pt);
+        \fi
+        %
+        \end{tikzpicture}
+        \texttt{
+            \pgfmathprintnumber[assume math mode=true,fixed, precision=2]
+                {\problemDifficulty}/5
+        }
+        \\
+    \fi
+}
+
 %% команда для печати
 \newif\ifprint
 \printfalse
