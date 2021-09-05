@@ -43,11 +43,24 @@
 
 % достать исходник например
 % \getlibproblemsrc{russia}{2018-10-3}
-\NewDocumentCommand{\getlibproblemsrc}{ o m m}{
+% если в задаче есть две части то можно вытащить их отдельно
+% \getlibproblemsrc[p1]{russia}{2018-10-3} -- первая часть
+% \getlibproblemsrc[p2]{russia}{2018-10-3} -- вторая часть
+% в обычной ситуации опциональный параметр не нужен
+\NewDocumentCommand{\getlibproblemsrc}{ o m m }{
     \IfNoValueTF{#1}{
         \subimport{\libproblempath/#2/}{#3}
     }{
         \ExecuteMetaData[\libproblempath/#2/#3.tex]{#1}
+    }
+}
+
+\NewDocumentCommand{\libproblemduplsrc}{ m m o }{
+    \IfNoValueTF{#3}{
+       \ifteacher \texttt{-> [#1/#2]}  \fi
+        \subimport{../#1/}{#2.tex}
+    }{
+        \subimport{../#1/}{#2-#3.tex}
     }
 }
 
