@@ -55,13 +55,13 @@
     }
 }
 
-\NewDocumentCommand{\libproblemduplsrc}{ m m o }{
-    \IfNoValueTF{#3}{
-       \ifteacher \texttt{-> [#1/#2]}  \fi
-        \subimport{../#1/}{#2.tex}
-    }{
-        \subimport{../#1/}{#2-#3.tex}
-    }
+\NewDocumentCommand{\libproblemduplsrc}{ m m o }{%
+    \IfNoValueTF{#3}{%
+       \ifteacher{\texttt{->[#1/#2] }}\fi%
+       \subimport{../#1/}{#2.tex}%
+    }{%
+        \subimport{../#1/}{#2-#3.tex}%
+    }%
 }
 
 
