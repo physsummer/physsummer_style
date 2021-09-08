@@ -1,100 +1,108 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{physsummer-fonts}
 
-\RequirePackage{ifpdf}
-\RequirePackage{ifluatex}
+\RequirePackage{iftex}
+
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
 \RequirePackage{mathtools}
+\RequirePackage{metalogo} % (Xe/Lua)LaTeX macro
 
-\ifpdf
-    \ifluatex % if LuaLaTex, then 
-        \RequirePackage{luatextra} % LuaLaTeX fontspec и макросы
-        \RequirePackage{polyglossia}  
-        \setdefaultlanguage{russian}
-        \usepackage[unicode]{hyperref}
-        \else % if pdflatex, then
-        \DeclareOption*{
-            \message{pdflatex, font options will be ignored.}
-        }
-        \ProcessOptions
-        \RequirePackage[T2A]{fontenc}
-        \RequirePackage[russian]{babel}
-        \RequirePackage[utf8]{inputenc}
+
+\ifPDFTeX
+    \DeclareOption*{
+        \message{pdflatex, font options will be ignored.}
+    }
+    \ProcessOptions
+    \RequirePackage[T2A]{fontenc}
+    \RequirePackage[utf8]{inputenc}
+    \RequirePackage[english, russian]{babel}
+    \RequirePackage{libertine} %% Libertine fonts
+    \RequirePackage[unicode]{hyperref}
+    \RequirePackage{mathrsfs} %% script fonts
+    % костыль
+    \newcommand{\symbf}[1]{\mathbf{#1}}
+
+\else
+
+    \RequirePackage{fontspec}
+    \RequirePackage{polyglossia}
+
+    \ifLuaTeX
+        \RequirePackage{lualatex-math}
         \RequirePackage[unicode]{hyperref}
-        \RequirePackage[pdftex]{graphicx}
-        \RequirePackage{cmlgc}
-        %% это сраный костыль
-        \newcommand{\symbf}[1]{\mathbf{#1}}
-        \endinput
+        \defaultfontfeatures{Renderer = Basic, Ligatures=TeX}
     \fi
-\else % if xelatex, then
-    % xelatex specific packages
-    \RequirePackage[xetex]{hyperref}
-    \RequirePackage{xltxtra} % \XeLaTeX macro
-    \RequirePackage{xunicode} % some extra unicode support
-    \defaultfontfeatures{Mapping = tex-text}
-    \RequirePackage{polyglossia} % instead of babel in xelatex
+
+    \ifXeTeX
+        \RequirePackage{xunicode}
+        \RequirePackage[xetex]{hyperref}
+        \defaultfontfeatures{Ligatures=TeX}
+    \fi
+
     \setdefaultlanguage[spelling = modern]{russian}
+    \setotherlanguage{english}
+
+    \let\mathbbtemp\mathbb
+        \RequirePackage{unicode-math}
+    \let\mathbb\mathbbtemp
+
+    \setmainfont{Linux Libertine O}
+    \newfontfamily{\cyrillicfont}{Linux Libertine O}
+    \IfFontExistsTF{Linux Biolinum O}{
+        \setsansfont{Linux Biolinum O}
+    }{
+        \message{Установите Linux Biolinum O для корректной работы шрифтов.}
+    }
+
+
+    \IfFontExistsTF{CMU Typewriter Text}{
+        \setmonofont{CMU Typewriter Text}
+        \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
+    }{
+        \message{Установите CMU Typewriter Text для корректной работы шрифтов.}
+        \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+    }
+
+    \DeclareOption{mathfont=lmodern}{
+        \IfFontExistsTF{Latin Modern Math}{
+            \setmathfont[colon = literal]{Latin Modern Math}
+            \IfFontExistsTF{XITS Math}{
+                \setmathfont[range = \setminus]{XITS Math}
+                \setmathfont[range={\mathscr,\mathscr},StylisticSet=2]{XITS Math}
+            }{}
+        }{
+            \message{Установите Latin Modern Math, XITS Math для корректной работы шрифтов.}
+            \setmathfont{Linux Libertine O}
+        }
+    }
+
+
+    \DeclareOption{mathfont=libertinus}{
+        \setmathfont{Libertinus Math}
+        \IfFontExistsTF{XITS Math}{
+            \setmathfont[range = \setminus]{XITS Math}
+            \setmathfont[range={\mathscr,\mathscr},StylisticSet=2]{XITS Math}
+        }{
+            \message{Установите Libertinus Math, XITS Math для корректной работы шрифтов.}
+            \setmathfont{Linux Libertine O}
+        }
+    }
+
+    \DeclareOption{mathfont=cambria}{
+        \setmathfont{Cambria Math}
+        \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
+        \IfFontExistsTF{XITS Math}{
+            \setmathfont[range = \setminus]{XITS Math}
+            \setmathfont[range={\mathscr,\mathscr},StylisticSet=2]{XITS Math}
+        }{
+            \message{Установите Cambria Math, Latin Modern Math, XITS Math для корректной работы шрифтов.}
+            \setmathfont{Linux Libertine O}
+        }
+    }
+
+    \ExecuteOptions{mathfont=lmodern}
+    \ProcessOptions
 \fi
-
-\let\mathbbtemp\mathbb
-\RequirePackage{unicode-math}
-\let\mathbb\mathbbtemp
-
-\defaultfontfeatures{Renderer = Basic, Ligatures = TeX} % для работы лигатур
-\setotherlanguage{english}
-
-\setmainfont{Linux Libertine O}
-\newfontfamily{\cyrillicfont}{Linux Libertine O}
-\IfFontExistsTF{Linux Biolinum O}{
-    \setsansfont{Linux Biolinum O}
-}{
-    \message{Установите Linux Biolinum O для корректной работы шрифтов.}
-}
-
-
-\IfFontExistsTF{CMU Typewriter Text}{
-    \setmonofont{CMU Typewriter Text}
-    \newfontfamily{\cyrillicfonttt}{CMU Typewriter Text}
-}{
-    \message{Установите CMU Typewriter Text для корректной работы шрифтов.}
-    \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
-}
-
-\DeclareOption{mathfont=lmodern}{
-    \IfFontExistsTF{Latin Modern Math}{
-        \setmathfont[colon = literal]{Latin Modern Math}
-        \IfFontExistsTF{Asana Math}{
-            \setmathfont[range = \setminus]{Asana Math}
-        }{}
-    }{
-        \message{Установите Latin Modern Math, Asana Math для корректной работы шрифтов.}
-        \setmathfont{Linux Libertine O}
-    }
-}
-
-
-\DeclareOption{mathfont=libertinus}{
-    \setmathfont{Libertinus Math}
-    \IfFontExistsTF{Asana Math}{
-        \setmathfont[range = \setminus]{Asana Math}
-    }{
-        \message{Установите Libertinus Math, Asana Math для корректной работы шрифтов.}
-        \setmathfont{Linux Libertine O}
-    }
-}
-
-\DeclareOption{mathfont=cambria}{
-    \setmathfont{Cambria Math}
-    \setmathfont[range = {\leqslant, \geqslant}]{Latin Modern Math}
-    \IfFontExistsTF{Asana Math}{
-        \setmathfont[range = \setminus]{Asana Math}
-    }{
-        \message{Установите Cambria Math, Latin Modern Math, Asana Math для корректной работы шрифтов.}
-        \setmathfont{Linux Libertine O}
-    }
-}
-
-\ExecuteOptions{mathfont=lmodern}
-\ProcessOptions
 
 \endinput
