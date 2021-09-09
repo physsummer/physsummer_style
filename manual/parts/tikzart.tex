@@ -1,0 +1,184 @@
+\subsection{Зоопарк картинок \texttt{(physsummer-tikzart)}}
+
+В картинках некоторых задач бывает необходимо нарисовать что-то более сложное.
+К счастью, скорее всего это кто-то уже сделал за вас.
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+    \pic {tikzart-bunny};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+\begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \pic {tikzart-bunny};
+            % pic по умолчанию рисует в точке (0, 0)
+        \end{tikzpicture}
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+    	\draw[platform] (1.5, 0) -- (-2, 0);
+        \pic[scale = 0.1] at (0.5, 0) {tikzart-cat};
+        \pic[gray, scale = 0.125, xscale = -1] at (-1, 0) {tikzart-cat};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \draw[platform] (1.5, 0) -- (-2, 0);
+            \pic[scale = 0.1] at (0.5, 0) {tikzart-cat};
+            % кошка в координатах (0.5, 0)
+            \pic[gray, scale = 0.125, xscale = -1] at (-1, 0)
+                {tikzart-cat};
+                % рисуем серую кошку
+                % размера 0.125 от исходного,
+                % отражённую по горизонтали,
+                % в точке (-1, 0)
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \draw[platform] (2, 0) -- (-1, 0);
+        \pic[scale = 0.65] {tikzart-dog};
+        \begin{scope}[shift = {(0, -2)}]
+            \draw[platform] (2, 0) -- (-2, 0);
+            \pic[scale = 0.3, xscale = -1] {tikzart-frog};
+            \pic[shift = {(0.5, 0)}, scale = 0.3] {tikzart-mouse};
+        \end{scope}
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+	\begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \draw[platform] (2, 0) -- (-1, 0);
+            \pic[scale = 0.65] {tikzart-dog}; % собака
+            
+            \begin{scope}[shift = {(0, -2)}] % сдвигаемся на (0, -1.5)
+                \draw[platform] (2, 0) -- (-2, 0);
+                \pic[scale = 0.3, xscale = -1] {tikzart-frog};
+                % лягушка
+
+                \pic[scale = 0.3] at (0.5, 0) {tikzart-mouse}; % мышь
+            \end{scope}
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \draw[platform] (3, 0) coordinate(A)
+            -| ++(-3, 3) coordinate (B);
+        \coordinate (O) at ($(A-|B)$);
+        \draw (B) ++(0, -0.5) pic[yscale = -1, rotate = -90] {tikzart-ladybug};
+        \pic at ($(O)!0.75!(A)$) {tikzart-ant};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \draw[platform] (3, 0) coordinate(A)
+                -| ++(-3, 3) coordinate (B);
+            \coordinate (O) at ($(A-|B)$);
+            % коордниата (O) по горизонтали как (B) и вертикали как (A)
+
+            \draw (B) ++(0, -0.5)
+            % отступаем от координаты (B) на (0, -0.5)
+                pic[yscale = -1, rotate = -90] {tikzart-ladybug};
+                % рисуем божью коровку,
+                % отражённую по вертикали
+
+            \pic at ($(O)!0.75!(A)$) {tikzart-ant};
+            % рисуем муравья на отрезке OA,
+            % отступив на 0.75 длины от точки O
+        \end{tikzpicture}
+     \end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \pic[rotate = 90] {tikzart-cutter};
+        \pic[rotate = 90] at (0, 1) {tikzart-car};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \pic[rotate = 90] {tikzart-cutter};
+            % катер, повёрнутый на 90 градусов
+            
+            \pic[rotate = 90] at (0, 1) {tikzart-car}; % машина
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \draw[platform] (3, 0) -- (-2, 0);
+        
+        \draw[thick] (1.5, 0.1) -- (-1.5, 0.1);
+        \foreach \x in {0, 1, 2}{
+            \draw (-1.5 + \x, 0) pic[scale = 2] {tikzart-train};	
+        }
+        \pic[scale = 2] at (1.5, 0) {tikzart-trainhead};
+        
+        \draw (-1, 2) pic[scale = 0.75] {tikzart-plane};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \draw[platform] (3, 0) -- (-2, 0);
+        
+            \draw[thick] (1.5, 0.1) -- (-1.5, 0.1);
+            \foreach \x in {0, 1, 2}{ % рисуем вагоны в цикле
+                \draw (-1.5 + \x, 0) pic[scale = 2] {tikzart-train};
+            }
+            \pic[scale = 2] at (1.5, 0) {tikzart-trainhead};
+            % рисуем паровоз
+        
+            \draw (-1, 2) pic[scale = 0.75] {tikzart-plane}; % самолёт
+        \end{tikzpicture}
+\end{lstlisting}
+\end{minipage}
+
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \draw[platform] (2, 0) -- (-1, 0);
+        \pic[scale = 0.75, color = red, fill = red!50] {tikzart-fire};
+        \pic[scale = 2] at (1.5, 1) {tikzart-dwarf};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \draw[platform] (2, 0) -- (-1, 0);
+            \pic[scale = 0.75, color = red, fill = red!50] {tikzart-fire};
+            % огонь
+            
+            \pic[scale = 2] at (1.5, 1) {tikzart-dwarf}; % гном
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{0.28\linewidth}
+    \begin{tikzpicture}[mstyle]
+        \pic[scale = 0.6] at (-3.5, -5) {tikzart-gun};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.72\linewidth}
+    \begin{lstlisting}[gobble = 7]
+        \begin{tikzpicture}
+            \pic[scale = 0.6] at (-3.5, -5) {tikzart-gun}; % ружьё
+        \end{tikzpicture}
+    \end{lstlisting}
+\end{minipage}

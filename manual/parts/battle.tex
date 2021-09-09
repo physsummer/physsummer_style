@@ -6,17 +6,22 @@
 
 Пакетом предоставляется следующий набор команд.
 
+Заголовок
 \begin{lstlisting}[gobble = 3]
     \pdtitle{название команды I}{название команды II}
 \end{lstlisting}
-
+Команда для вызова
 \begin{lstlisting}[gobble = 3]
     \pdcall{тип вызова}{номер задачи}{баллы команды I}{баллы команды II}
         {игрок I}{игрок II}
 \end{lstlisting}
-
+Команда для подведения итогов вручную
 \begin{lstlisting}[gobble = 3]
     \pdsum{результат команды I}{результат команды II}{результат жюри}
+\end{lstlisting}
+и автоматически
+\begin{lstlisting}[gobble = 3]
+    \pdsumA
 \end{lstlisting}
 
 
@@ -59,7 +64,7 @@
         \pdcall{->}{5}{0}{12}{Елфимова}{Люлина}
         \pdcall{<-}{2}{0}{6}{Вронская}{Болотовский}
         \pdcall{->}{1}{3}{5}{Сахно}{Хмылёв}
-        \pdsum{6}{46}{20}
+        \pdsumA
     \end{tikzpicture}
 \end{lstlisting}
 
@@ -72,7 +77,8 @@
     \pdcall{->}{5}{0}{12}{Елфимова}{Люлина}
     \pdcall{<-}{2}{0}{6}{Вронская}{Болотовский}
     \pdcall{->}{1}{3}{5}{Сахно}{Хмылёв}
-    \pdsum{6}{46}{20}
+    \pdsumA
+    %\pdsum{6}{46}{20}
 \end{tikzpicture}
 
 
