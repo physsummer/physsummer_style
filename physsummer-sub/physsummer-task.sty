@@ -15,6 +15,7 @@
 
 
 \def\taskColSep{6pt} %% Отступ в таблицах с task
+\def\defaultColSep{6pt} %% Дефолтный отступ в окружении tabular
 
 % \task{УСЛОВИЕ ЗАДАЧИ}
 % задача без картинки
@@ -63,8 +64,9 @@
                     { X|p{ #1 + 2 \dimexpr \taskColSep } }
       \makecell*[{{p{\hsize}}}]{
         \begin{minipage}[t]{ \hsize - \taskColSep }
+          \setlength{ \tabcolsep }{\defaultColSep}%
           { #2 }
-        \end{minipage}  
+        \end{minipage}
       }
       & \makecell*[{{p{#1+2\dimexpr\taskColSep }}}]{ \centering #4 }
     \IfNoValueF{#3}{
