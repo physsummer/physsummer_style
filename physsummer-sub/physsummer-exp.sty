@@ -18,7 +18,11 @@
 }
 
 \newcommand{\exptitle}[1]{
+    \ifexpnumbered
     \section{#1}
+    \else
+    \section*{#1}
+	\fi
 }
 
 \newcommand{\expequipment}[1]{
