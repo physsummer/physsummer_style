@@ -171,7 +171,7 @@
     % Пёсель
     % Нижняя левая точка (0, 0), смотрит налево, размеры (2.56, 2.01)
     tikzart-dog/.pic = {
-	    \filldraw[thin, scale = 0.25] (4.34, 5.55) ++(120 : 0.15) -- ++(120 : 2.35)
+        \filldraw[thin, scale = 0.25] (4.34, 5.55) ++(120 : 0.15) -- ++(120 : 2.35)
             to[out = 120, in = 0] ++(-0.3, 0.3) to[out = 180, in = 60] ++(-0.3, -0.6)
             to[out = 150, in = 0] ++(-0.3, 0.2) to[out = 180, in = 80] ++(-0.4, -0.8)
             arc (90 : 180 : 0.75) -- ++(210 : 1)
@@ -187,79 +187,57 @@
     % Катер вид сверху
     % Привязка (0,0) к середине кормы
     % Размер 1 * 3 
-    tikzart-cutter/.pic={
-    	\fill 
-    		(0,0) to (.5,0) to [out = 80, in = -90] ++ (.1, 1)
-    			to [out = 90, in = -60] (0, 3)
-    		(0,0) to (- .5,0) to [out = 100, in = -90] ++ (-.1, 1)
-    			to [out = 90, in = -120] (0, 3);
-    	\fill [white]
-    		(.45, .4) to 
-    		(.45, 1.2) to [out = 90, in = -50] 
-    		(0, 2.4) to [out = -130, in = 90] 
-    		(-.45, 1.2) to (-.45, .4) to  
-    		(-.4, 1.2) to [out = 90, in =180] 
-    		(0,1.6) to [out = 0, in = 90] (.4, 1.2);
-    	\fill [white, rounded corners = 1pt]
-    		(-.28, 1.2) rectangle ++ (.25, .25)
-    		(.28, 1.2) rectangle ++ (-.25, .25)
-    		(-.28, .7) rectangle ++ (.25, .25)
-    		(.28, .7) rectangle ++ (-.25, .25)
-    		(-.4, .2) rectangle (.4, .4);
+    tikzart-cutter/.pic = {
+        \fill (0, 0) -- (0.5, 0) to[out = 80, in = -90] ++(0.1, 1) to[out = 90, in = -60] (0, 3);
+        \fill (0, 0) -- (-0.5, 0) to[out = 100, in = -90] ++(-0.1, 1) to[out = 90, in = -120] (0, 3); 
+    	\fill[white] (0.45, 0.4) -- (0.45, 1.2) to[out = 90, in = -50] (0, 2.4)
+            to[out = -130, in = 90] (-0.45, 1.2) -- (-0.45, 0.4) -- (-0.4, 1.2)
+            to[out = 90, in = 180] (0, 1.6) to[out = 0, in = 90] (0.4, 1.2);
+        \fill[white, rounded corners = 1pt]	(-0.28, 1.2) rectangle ++(0.25, 0.25);
+        \fill[white, rounded corners = 1pt] (0.28, 1.2) rectangle ++(-0.25, 0.25);
+        \fill[white, rounded corners = 1pt] (-0.28, 0.7) rectangle ++(0.25, 0.25);
+        \fill[white, rounded corners = 1pt] (0.28, 0.7) rectangle ++(-0.25, 0.25);
+        \fill[white, rounded corners = 1pt] (-0.4, 0.2) rectangle (0.4, 0.4);
     },
-	%% Машина вид сверху
-	%% (0, 0) -- нижний левый угол
-	%% Размер 1.36 * 2.5
-	tikzart-car/.pic={
-		\def\dl{0.34}
-		\def\ds{0.16}
-		\def\dhf{0.4}
-		\def\dhb{0.88}
-		\def\rat{0.15}
-		\def\s{1};
-		\def\l{2.5};
-		%% Колёса
-		\filldraw (0.12 - \ds * \rat, \dhb - \dl) rectangle ++ (\ds, \dl)
-			({0.12 + \s - \ds * ( 1 - \rat)}, \dhb - \dl) rectangle ++ (\ds, \dl)
-			(0.12 - \ds * \rat, \l - \dhf - \dl) rectangle ++ (\ds, \dl)
-			({0.12 + \s - \ds * ( 1 - \rat)}, \l - \dhf - \dl) rectangle ++ (\ds, \dl);
+    %% Машина вид сверху
+    %% (0, 0) -- нижний левый угол
+    %% Размер 1.36 * 2.5
+    tikzart-car/.pic = {
+        \def\dl{0.34}
+        \def\ds{0.16}
+        \def\dhf{0.4}
+        \def\dhb{0.88}
+        \def\rat{0.15}
+        \def\s{1}
+        \def\l{2.5}
+
+        %% Колёса
+        \filldraw (0.12 - \ds * \rat, \dhb - \dl) rectangle ++(\ds, \dl);
+        \filldraw ({0.12 + \s - \ds * ( 1 - \rat)}, \dhb - \dl) rectangle ++ (\ds, \dl);
+        \filldraw (0.12 - \ds * \rat, \l - \dhf - \dl) rectangle ++(\ds, \dl);
+        \filldraw ({0.12 + \s - \ds * ( 1 - \rat)}, \l - \dhf - \dl) rectangle ++(\ds, \dl);
 		%% Машина
-		\filldraw[color = black, fill = white]
-			(0.18, \s / 4) to ++(0, \l - \s / 2)
-			to[out = 90, in = 180] ++(\s / 4, \s / 4)
-			to ++(\s / 2 - 0.12, 0)
-			to[out = 0, in = 90] ++(\s / 4, -\s / 4)
-			to ++(0, -\l + \s / 2)
-			to[out = -90, in = 0] ++(-\s / 4, - \s / 4)
-			to ++(-\s / 2 + 0.12, 0)
-			to[out = -180, in = -90] ++(-\s / 4, \s / 4) -- cycle;
-		%% Стекла
-		\filldraw 
-			(0.12 + \s / 6, 0.7 * \l)
-			to[out = 20, in = 160] ++(2 * \s / 3, 0)
-			to++(-\s / 12, -\l / 5)
-			to[out = 170, in = 10] ++(- 3 * \s / 6, 0);
-		\filldraw 
-			(0.12 + \s / 6, \l / 5) 
-			to[out = -20, in = -160] ++(2 * \s / 3, 0) 
-			to++(-\s / 18, \l / 8) 
-			to[out = -175, in = -5]++(- 10 * \s / 18, 0);
-		%% Окна
-		\filldraw[color = black, fill = white]
-			(0.12 + \s / 12, 0.65 * \l)
-			to[out = 210, in = 90] ++ (- 0.2, -0.15)
-			to [out = -90, in = -170] ++(0 : 0.2);
-		\filldraw[color = black, fill = white, xscale = -1]
-			(-0.12 - 11 * \s / 12, 0.65 * \l)
-			to[out = 210, in = 90] ++ (- 0.2, -0.15)
-			to [out = -90, in = -170] ++(0 : 0.2);
-	},
-	%% Муравей, вид сбоку
-	%% (0, 0) -- середина нижней границы
-	%% Размеры муравья 0.76 x 0.38
-	%% Смотрит направо
-	%% Пример rayon 2010-08-4
-	tikzart-ant/.pic = {
+        \draw[fill = white] (0.18, \s / 4) -- ++(0, \l - \s / 2) to[out = 90, in = 180]
+            ++(\s / 4, \s / 4) -- ++(\s / 2 - 0.12, 0) to[out = 0, in = 90] ++(\s / 4, -\s / 4)
+            -- ++(0, -\l + \s / 2) to[out = -90, in = 0] ++(-\s / 4, - \s / 4) -- ++(-\s / 2 + 0.12, 0)
+            to[out = -180, in = -90] ++(-\s / 4, \s / 4) -- cycle;
+        %% Стекла
+        \filldraw (0.12 + \s / 6, 0.7 * \l) to[out = 20, in = 160] ++(2 * \s / 3, 0) --
+            ++(-\s / 12, -\l / 5) to[out = 170, in = 10] ++(-3 * \s / 6, 0);
+		\filldraw  (0.12 + \s / 6, \l / 5) to[out = -20, in = -160] ++(2 * \s / 3, 0) --
+            ++(-\s / 18, \l / 8) to[out = -175, in = -5] ++(-10 * \s / 18, 0);
+        %% Окна
+        \draw[fill = white] (0.12 + \s / 12, 0.65 * \l) to[out = 210, in = 90] ++(-0.2, -0.15)
+            to[out = -90, in = -170] ++(0 : 0.2);
+        \draw[fill = white, xscale = -1] (-0.12 - 11 * \s / 12, 0.65 * \l)to[out = 210, in = 90]
+            ++(-0.2, -0.15) to[out = -90, in = -170] ++(0 : 0.2);
+    },
+    %% Муравей, вид сбоку
+    %% (0, 0) -- середина нижней границы
+    %% Размеры муравья 0.76 x 0.38
+    %% Смотрит направо
+    %% Пример rayon 2010-08-4
+    tikzart-ant/.pic = {
 		\def\r{0.08}
 		\begin{scope}[shift = {(0.02, 0.2)}]
 			\def\a{10}
@@ -282,56 +260,45 @@
     %% высота 1, привязка к центру
     %% rayon/2017-08-3
     tikzart-dwarf/.pic = {
-       \draw 
         %% шапка
-        (-.1, 0) to [out = 90, in = -105] (0, .5) 
-                         to [out = -75, in = 90] (.1, 0)
-                         to cycle
+        \draw (-0.1, 0) to[out = 90, in = -105] (0, 0.5) to[out = -75, in = 90] (0.1, 0) -- cycle;
         %% границы лица
-        (-.1, 0) to [out = -80] (-.05, -.1) 
-                         to [out = 30, in = 150] (.05, -.1)
-                         to [in = -100] (.1, 0)
+        \draw (-0.1, 0) to[out = -80] (-0.05, -0.1) to[out = 30, in = 150] (0.05, -0.1) to[in = -100]
+            (0.1, 0);
         %% контур бороды
-        (-.1, 0) to [out = -120, in = 140] (0, -.25)
-                         to [in = -60, out = 40] (.1, 0)
+        \draw (-0.1, 0) to[out = -120, in = 140] (0, -0.25) to[in = -60, out = 40] (0.1, 0);
         %% тело
-        (-.12, -.12) 
-            to [out = -150, in = 125] coordinate [pos=.9] (L) (-.12, -.4) 
-            to (.12, -.4)
-            to [out = 55, in = -30] coordinate [pos=.1] (R)  (.12, -.12)
+        \draw (-0.12, -0.12) to[out = -150, in = 125] coordinate[pos = 0.9] (l) (-0.12, -0.4) --
+            (0.12, -0.4) to[out = 55, in = -30] coordinate[pos = 0.1] (r) (0.12, -0.12);
         %% ноги
-        (-.07, -.4) to (-.04, -.47)
-                to [out = 180, in = 90] (-.09, -.5 ) 
-                to (0, -.5) to (0, -.4)
-        (.07, -.4) to (.04, -.47)
-                to [out = 0, in = 90] (.09, -.5 ) 
-                to (0, -.5) to (0, -.4)
+        \draw (-0.07, -0.4) -- (-0.04, -0.47) to[out = 180, in = 90] (-0.09, -0.5) --
+            (0, -0.5) -- (0, -0.4);
+        \draw (0.07, -0.4) -- (0.04, -0.47) to[out = 0, in = 90] (0.09, -0.5) --
+            (0, -0.5) -- (0, -0.4);
         %% пояc
-        (L) to (R)
+        \draw (l) -- (r);
         %% куртка
-        ($(L)!.5!(R)$) to (0, -.25)
+        \draw ($(l)!.5!(r)$) -- (0, -0.25);
         %% руки
-        (-.11, -.17) to [out = -100, in = 105]  (-.1, -.35)
-        (.11, -.17) to [out = -80, in = 75]  (.1, -.35)
-        ;
-    \fill
+        \draw (-0.11, -0.17) to[out = -100, in = 105] (-0.1, -0.35);
+        \draw (0.11, -0.17) to[out = -80, in = 75] (0.1, -0.35);
         %% глаза
-        (-.04, -.04) circle (.012)
-        (.04, -.04) circle (.012)
+        \fill (-0.04, -0.04) circle (0.012);
+        \fill (0.04, -0.04) circle (0.012);
         %% рот
-        (-.02, -.12) rectangle (.02, -.11)
-        ;
+        \fill (-0.02, -0.12) rectangle (0.02, -0.11);
     },
 	%% Пассажирский реактивный самолёт by Тима
 	%% Что-то типа Airbus A340, но пожирнее
 	%% (0,0) на носу. Длина фюзеляжа 3.6
-	tikzart-plane/.pic={
-		\pgfgettransformentries{\a}{\b}{\c}{\d}{\s}{\p}
-		\def\sca{sqrt(\a*\d-\b*\c)}
-		%% Правое крыло
-		\draw[fill=white] (1.2,.15) to[rounded corners=\sca*4] ++ (1,.3) to[rounded corners=\sca*2] ++ (.4,0) to ++ (-.7,-.3);
-		%% Правое горизонтальное оперение
-		\draw[fill=white] (3.1,.25) ++ (.3,.09) to[rounded corners=\sca*3] ++ (.2,.06) to[rounded corners=\sca*1] ++ (.2,0) to ++ (-.3,-.15);
+    tikzart-plane/.pic = {
+        \pgfgettransformentries{\a}{\b}{\c}{\d}{\s}{\p}
+        \def\sca{sqrt(\a*\d-\b*\c)}
+        %% Правое крыло
+        \draw[fill = white] (1.2, 0.15) to[rounded corners = \sca * 4] ++(1, 0.3)
+            to[rounded corners = \sca * 2] ++(0.4, 0) -- ++(-0.7, -0.3);
+        %% Правое горизонтальное оперение
+		\draw[fill = white] (3.1,.25) ++ (.3,.09) to[rounded corners=\sca*3] ++ (.2,.06) to[rounded corners=\sca*1] ++ (.2,0) to ++ (-.3,-.15);
 		%% Фюзеляж и вертикальное оперение
 		\draw[fill=white] (.6,-.15) to[rounded corners=\sca*7] ++ (2,0) to ++ (1,.3) to ++ (0,.1) to ++ (-.1,.01) ++(-.5,.05) coordinate (A) ++(.5,-.05) to[rounded corners=\sca*1] ++ (.3,.4) to[rounded corners=\sca*3] ++ (-.2,0) to (A) to[rounded corners=\sca*4] ++ (-.4,.04) to ++ (-2,0) arc (90:180:.6 and .35) arc (180:270:.6 and .15);
 		%% Кабина
