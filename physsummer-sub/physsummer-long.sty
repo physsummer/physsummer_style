@@ -1,0 +1,175 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{physsummer-long}
+
+\RequirePackage{tabularx}
+\RequirePackage{makecell}
+\RequirePackage{etoolbox}
+
+% отдельный счётчик внутри длинных задач
+\newcounter{nolongtask}
+\setcounter{nolongtask}{1}
+
+\newenvironment{longtask} { \setcounter{nolongtask}{1} } { \setcounter{nolongtask}{1} }
+
+\newcommand{\longtitle}[1]{
+    \section{#1}
+	\setcounter{nolongtask}{1}
+}
+
+\newcommand{\longsubtitle}[1]{
+    \subsection{#1}
+	\setcounter{nolongtask}{1}
+}
+
+% \subtask{УСЛОВИЕ ЗАДАЧИ}
+% задача без картинки
+% оформлена как таблица с двумя колонками
+% ширина первой колонки (номер столбца) фиксирована, 0.5cm
+% ширина второй колонки автоматически рассчитывается из ширины
+% страницы (с учётом всевозможных отступов)
+% нумерация: section.nolongtask
+
+\NewDocumentCommand{\subtask}{ m }{
+    \setlength{ \tabcolsep }{\taskColSep}
+    \begin{tabularx}{\textwidth}{|c|X|}
+        \cline{1-2}
+		\makecell*[{{p{0.5cm}}}]{\centering \arabic{section}.\arabic{nolongtask}} &
+                \makecell*[{{p{\hsize}}}]{
+                    \begin{minipage}[t]{\hsize}
+                        {#1}
+                        \vspace{2pt}
+                    \end{minipage}
+                } \\
+        \cline{1-2}
+    \end{tabularx}
+    
+    \vspace{-1pt}
+    \addtocounter{nolongtask}{1}
+}
+
+% \subsubtask{УСЛОВИЕ ЗАДАЧИ}
+% задача без картинки
+% оформлена как таблица с двумя колонками
+% ширина первой колонки (номер столбца) фиксирована, 0.85cm
+% ширина второй колонки автоматически рассчитывается из ширины
+% страницы (с учётом всевозможных отступов)
+% нумерация: section.subsection.nolongtask
+
+\NewDocumentCommand{\subsubtask}{ m }{
+    \setlength{ \tabcolsep }{\taskColSep}
+    \begin{tabularx}{\textwidth}{|c|X|}
+        \cline{1-2}
+		\makecell*[{{p{0.85cm}}}]{\centering \arabic{section}.\arabic{subsection}.\arabic{nolongtask}} &
+                \makecell*[{{p{\hsize}}}]{
+                    \begin{minipage}[t]{\hsize}
+                        {#1}
+                        \vspace{2pt}
+                    \end{minipage}
+                } \\
+        \cline{1-2}
+    \end{tabularx}
+    
+    \vspace{-1pt}
+    \addtocounter{nolongtask}{1}
+}
+
+% \subtaskpic[ШИРИНА КАРТИНКИ]{УСЛОВИЕ ЗАДАЧИ 1}[УСЛОВИН ЗАДАЧИ 2]{КАРТИНКА}
+% задача с картинкой
+% первый аргумент - необязательный, по умолчанию ширина картинки равна
+% 4cm, но можно выставить свою
+% третий аргумент - для длинных задач
+% ширина второй колонки (условие задачи) рассчитывается из ширины
+% страницы и ширины картинки
+% нумерация: section.nolongtask
+
+\NewDocumentCommand{ \subtaskpic }{ O{4cm} m o m}{
+  \setlength{ \tabcolsep }{\taskColSep} 
+  
+  \begin{tabularx}{ \textwidth }
+                  { |p{.5cm}|X| } 
+  \cline{1-2}
+  \makecell*[{{p{0.5cm}}}]{ \centering \arabic{section}.\arabic{nolongtask} }  
+  & 
+  {
+    \setlength{ \tabcolsep }{0pt} 
+    \begin{tabularx}{ \hsize + \taskColSep }
+                    { X|p{ #1 + 2 \dimexpr \taskColSep } }
+      \makecell*[{{p{\hsize}}}]{
+        \begin{minipage}[t]{ \hsize - \taskColSep }
+          \setlength{ \tabcolsep }{\defaultColSep}%
+          { #2 }
+        \end{minipage}
+      }
+      & \makecell*[{{p{#1+2\dimexpr\taskColSep }}}]{ \centering #4 }
+    \IfNoValueF{#3}{
+      \\ \cline{2-2}
+      \multicolumn{2}{>{\hsize=\dimexpr\linewidth + #1}X}{
+        \makecell*[{{p{\hsize}}}]{
+          \begin{minipage}[t]{\hsize-\taskColSep}
+            { #3 } 
+          \end{minipage}  
+        }
+      }
+    }
+    \end{tabularx}
+  }
+\\ 
+\cline{1-2}
+\end{tabularx}
+
+\vspace{-1pt}
+\addtocounter{nolongtask}{1}
+
+}
+
+% \subsubtaskpic[ШИРИНА КАРТИНКИ]{УСЛОВИЕ ЗАДАЧИ 1}[УСЛОВИН ЗАДАЧИ 2]{КАРТИНКА}
+% задача с картинкой
+% первый аргумент - необязательный, по умолчанию ширина картинки равна
+% 4cm, но можно выставить свою
+% третий аргумент - для длинных задач
+% ширина второй колонки (условие задачи) рассчитывается из ширины
+% страницы и ширины картинки
+% нумерация: section.subsection.nolongtask
+
+\NewDocumentCommand{ \subsubtaskpic }{ O{4cm} m o m}{
+  \setlength{ \tabcolsep }{\taskColSep} 
+  
+  \begin{tabularx}{ \textwidth }
+                  { |p{.85cm}|X| } 
+  \cline{1-2}
+  \makecell*[{{p{0.85cm}}}]{ \centering \arabic{section}.\arabic{subsection}.\arabic{nolongtask} }  
+  & 
+  {
+    \setlength{ \tabcolsep }{0pt} 
+    \begin{tabularx}{ \hsize + \taskColSep }
+                    { X|p{ #1 + 2 \dimexpr \taskColSep } }
+      \makecell*[{{p{\hsize}}}]{
+        \begin{minipage}[t]{ \hsize - \taskColSep }
+          \setlength{ \tabcolsep }{\defaultColSep}%
+          { #2 }
+        \end{minipage}
+      }
+      & \makecell*[{{p{#1+2\dimexpr\taskColSep }}}]{ \centering #4 }
+    \IfNoValueF{#3}{
+      \\ \cline{2-2}
+      \multicolumn{2}{>{\hsize=\dimexpr\linewidth + #1}X}{
+        \makecell*[{{p{\hsize}}}]{
+          \begin{minipage}[t]{\hsize-\taskColSep}
+            { #3 } 
+          \end{minipage}  
+        }
+      }
+    }
+    \end{tabularx}
+  }
+\\ 
+\cline{1-2}
+\end{tabularx}
+
+\vspace{-1pt}
+\addtocounter{nolongtask}{1}
+
+}
+
+
+\endinput
