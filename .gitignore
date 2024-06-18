@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+*.pgf-plot.gnuplot
+*.gnuplot
+*.fls
+*.fdb_latexmk
+utils/aux/
+*.swp
+*.djvu
+*.bcf
+*.run.xml
