@@ -251,6 +251,7 @@
 \printfalse
 \newcounter{pnotask}
 \newcounter{pfigure}
+\newcounter{pequation}
 
 \newcommand{\printtask}[1]{
   \ifteacher\printfalse\fi
@@ -258,6 +259,7 @@
   \ifprint
     \setcounter{pnotask}{\value{notask}}
     \setcounter{pfigure}{\value{figure}}
+    \setcounter{pequation}{\value{equation}}
 
     \pgfpagesuselayout{2 on 1}[a4paper,landscape,border shrink=5mm]
     \large
@@ -265,6 +267,7 @@
     
     \setcounter{notask}{\value{pnotask}}  
     \setcounter{figure}{\value{figure}} 
+    \setcounter{equation}{\value{pequation}}
     #1 \clearpage
   \else
     #1 \clearpage
