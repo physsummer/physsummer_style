@@ -50,6 +50,11 @@
     }
 }
 
+\newcommandx{\libexperimentsol}[2][1 = \libexperimentgroup, 2 = \libexperimentid]{
+    \solution[ \ifteacher\texttt{[\libexperimentgroup/\libexperimentid]\,}\fi ]
+    { \subimport{#1/}{#2-sol} }
+}
+
 \ExplSyntaxOn
 \NewDocumentCommand{\libexperiment}{o O{default}mm}{
     \setcurrentexperiment{#3}{#4}
@@ -60,18 +65,36 @@
             \libexperimenttext
                         
         }\par
-
-        \IfNoValueTF{#1}{
-            \vspace{0.1cm}
-            \IfFileExists{\libexperimentpath/#3/#4-crit}{
-                \libexperimentcriteria
-            }{
-                \message{Cannot find criteria file:\libexperimentpath/#3/#4-crit}
-            }
-        }{
-            #1
-        }
     }
+    \IfFileExists{\libexperimentpath/#3/#4-sol}{
+		\counterwithin{equation}{section}
+		\counterwithin{figure}{section}
+		
+		\setcounter{sequation}{\value{equation}}
+		\setcounter{sfigure}{\value{figure}}
+		
+		\setcounter{equation}{0}
+		\setcounter{figure}{0}
+
+			\libexperimentsol[\libexperimentpath/\libexperimentgroup/]
+
+		\setcounter{equation}{\value{sequation}}  
+		\setcounter{figure}{\value{sfigure}} 
+
+		\counterwithout{equation}{section}
+		\counterwithout{figure}{section}
+	}{}
+
+	\IfNoValueTF{#1}{
+		\vspace{0.1cm}
+		\IfFileExists{\libexperimentpath/#3/#4-crit}{
+			\libexperimentcriteria
+		}{
+			\message{Cannot find criteria file:\libexperimentpath/#3/#4-crit}
+		}
+	}{
+		#1
+	}
 }
 
 \ExplSyntaxOff
