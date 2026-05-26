@@ -48,7 +48,7 @@
 вручную задать значение данной переменной при помощи следующей команды.
 
 \begin{lstlisting}[gobble = 3]
-    \renewcommand{\libproblempath}{правильный путь}
+    \renewcommand{\libproblempath}{`правильный путь`}
 \end{lstlisting}
 
 Ниже приведен пример использования задач из базы. Использована база из примера в разделе
@@ -74,51 +74,56 @@
 
 В базовых случаях данный файл должен содержать одну единственную строку с одной из следующих команд.
 
+\smallskip
+
 \noindent
 \begin{tabular}{S{0.48\linewidth} S{0.485\linewidth}}
     Изменение ширины картинки &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemtaskpic[ширина картинки]
         \end{lstlisting} \\
     Отрисовка картинки под задачей &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemtaskfigbelow
         \end{lstlisting} \\
     Расположение первой картинки на стандартном месте, а второй под задачей &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemtaskdoublepic
         \end{lstlisting} \\
     Расположение двух картинок под задачей &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemtasktwobelow
         \end{lstlisting}
 \end{tabular}
 
+\smallskip
 
 В более сложных случаях может оказаться полезной одна из следующих команд.
+
+\smallskip
 
 \noindent
 \begin{tabular}{S{0.48\linewidth} S{0.485\linewidth}}
     Извлечение картинки задачи &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemfig[задачник][задача]
             % по умолчанию текущая задача
         \end{lstlisting} \\
     Извлечение текста задачи &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemtext[задачник][задача]
             % по умолчанию текущая задача
         \end{lstlisting} \\
     Текущий задачник &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemgroup
         \end{lstlisting} \\
     Текущая задача &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \libproblemid
         \end{lstlisting} \\
     Создание метки для рисунка &
-        \begin{lstlisting}[style = listtable, gobble = 10]
+        \begin{lstlisting}[gobble = 11]
             \figrefname{#1}
             % сокращение для следующей команды
             \libproblemgroup:\libproblemid:#1
@@ -127,7 +132,7 @@
 
 Ниже приведён пример файла \texttt{default} со сложной нестандартной компоновкой.
 
-\begin{lstlisting}
+\begin{lstlisting}[gobble = 3]
     \libproblemtaskpic % вставить текст задачи с первой картинкой
         % на стандартном месте
     \drawsidebyside{\figrefname{2}}{ % нарисовать две картинки на одном уровне

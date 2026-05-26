@@ -8,16 +8,16 @@
 
 Заголовок
 \begin{lstlisting}[gobble = 3]
-    \pdtitle{название команды I}{название команды II}
+    \pdtitle{`название команды I`}{`название команды II`}
 \end{lstlisting}
 Команда для вызова
 \begin{lstlisting}[gobble = 3]
-    \pdcall{тип вызова}{номер задачи}{баллы команды I}{баллы команды II}
-        {игрок I}{игрок II}
+    \pdcall{`тип вызова`}{`номер задачи`}{`баллы команды I`}{`баллы команды II`}
+        {`игрок I`}{`игрок II`}
 \end{lstlisting}
 Команда для подведения итогов вручную
 \begin{lstlisting}[gobble = 3]
-    \pdsum{результат команды I}{результат команды II}{результат жюри}
+    \pdsum{`результат команды I`}{`результат команды II`}{`результат жюри`}
 \end{lstlisting}
 и автоматически
 \begin{lstlisting}[gobble = 3]
@@ -33,19 +33,19 @@
 \noindent
 \begin{tabular}{S{0.82\linewidth} S{0.145\linewidth}}
     команда I вызывает команду II &
-        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+        \begin{lstlisting}[gobble = 7, keepspaces = \false]
             $->$
         \end{lstlisting} \\
     команда II вызывает команду I &
-        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+        \begin{lstlisting}[gobble = 7, keepspaces = \false]
             $<-$
         \end{lstlisting} \\
     команда I вызывает команду II, но получила проверку корректности &
-        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+        \begin{lstlisting}[gobble = 7, keepspaces = \false]
             $->|$
         \end{lstlisting} \\
     команда II вызывает команду I, но получила проверку корректности &
-        \begin{lstlisting}[style = listtable, gobble = 7, keepspaces = \false]
+        \begin{lstlisting}[gobble = 7, keepspaces = \false]
             $|<-$
         \end{lstlisting}
 \end{tabular}
@@ -57,13 +57,13 @@
 %что-то не так
 \begin{lstlisting}[gobble = 3]
     \begin{tikzpicture}
-        \pdtitle{Аполлон}{7921}
-        \pdcall{|<-}{4}{0}{4}{Смирных}{Грудинин}
-        \pdcall{->}{3}{1}{9}{Жмудь}{Нагавкина}
-        \pdcall{|<-}{6}{2}{10}{Захаров}{Грудинин}
-        \pdcall{->}{5}{0}{12}{Елфимова}{Люлина}
-        \pdcall{<-}{2}{0}{6}{Вронская}{Болотовский}
-        \pdcall{->}{1}{3}{5}{Сахно}{Хмылёв}
+        \pdtitle{`Аполлон`}{7921}
+        \pdcall{|<-}{4}{0}{4}{`Смирных`}{`Грудинин`}
+        \pdcall{->}{3}{1}{9}{`Жмудь`}{`Нагавкина`}
+        \pdcall{|<-}{6}{2}{10}{`Захаров`}{`Грудинин`}
+        \pdcall{->}{5}{0}{12}{`Елфимова`}{`Люлина`}
+        \pdcall{<-}{2}{0}{6}{`Вронская`}{`Болотовский`}
+        \pdcall{->}{1}{3}{5}{`Сахно`}{`Хмылёв`}
         \pdsumA
     \end{tikzpicture}
 \end{lstlisting}
@@ -87,16 +87,16 @@
 Лог тройного физбоя можно вести похожим способом.
 
 \begin{lstlisting}[gobble = 3]
-    \pttitle{название команды I}{название команды II}{название команды III}
+    \pttitle{`название команды I`}{`название команды II`}{`название команды III`}
 \end{lstlisting}
 
 \begin{lstlisting}[gobble = 3]
-    \ptcall{#1}{номер задачи}{баллы команды I}{баллы команды II}{баллы команды III}
-        {игрок I}{игрок II}{игрок III}
+    \ptcall{#1}{`номер задачи`}{`баллы команды I`}{`баллы команды II`}{`баллы команды III`}
+        {`игрок I`}{`игрок II`}{`игрок III`}
 \end{lstlisting}
 
 \begin{lstlisting}[gobble = 3]
-    \ptsum{результат команды I}{результат команды II}{результат команды III}{результат жюри}
+    \ptsum{`результат команды I`}{`результат команды II`}{`результат команды III`}{`результат жюри`}
 \end{lstlisting}
 
 Вместо типа вызова (поскольку в тройном физбое порядок определён после конкурса капитанов) <<\#1>>

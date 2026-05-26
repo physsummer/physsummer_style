@@ -37,20 +37,20 @@
 
 При помощи команды:
 \begin{lstlisting}[gobble = 3]
-    \newauthor{сокращенное имя}{подпись}{цвет фона комментариев}
+    \newauthor{`сокращенное имя`}{`подпись`}{`цвет фона комментариев`}
 \end{lstlisting}
 
 После вызова данной команды пользователю открывается возможность комментирования при помощи команды:
 
 \begin{lstlisting}[gobble = 3]
-    \#1comment{текст комментария}
+    \#1comment{`текст комментария`}
 \end{lstlisting}
 
 При этом в качестве параметра \#1 используется сокращённое имя комментатора.
 
 
 \begin{lstlisting}[gobble = 3]
-    \newauthor{dov}{Довлатов}{red!15}
+    \newauthor{dov}{`Довлатов`}{red!15}
 
     \dovcomment{
         Всю жизнь я дул в подзорную трубу и удивлялся, что нету музыки.
@@ -131,7 +131,7 @@
         \hlinewd{2pt}
         & текст по центру & текст справа \\
         \hline
-        & $\frac{a}{b}$ & $\pdv{P}{x}$ \\
+        & $\frac{a}{b}$ & $\pdv{P}{x}$ \\[1mm]
         \hlinewd{2pt}
     \end{tabular}
 
@@ -155,8 +155,8 @@
     \hlinewd{2pt}
         & текст по центру & текст справа \\
     \hline
-        & $\frac{a}{b}$ & $\pdv{P}{x}$ \\
-    \hlinewd{2pt}
+		& $\frac{a}{b}$ & $\pdv{P}{x}$ \\[1mm]
+	\hlinewd{2pt}
 \end{tabular}
 
 \vspace{0.5cm}
@@ -169,5 +169,3 @@
    $\vec{F} = m \vec{a}$ & $\var{Q} = c m \Delta T$ &  $U = I R$ \\
     \hline
 \end{tabularx}
-
-\def\arraystretch{-500}
